@@ -1,5 +1,5 @@
 <?php
-
+//TODO: dodělat komentáře
 namespace App\Model;
 
 use Nette;
@@ -9,70 +9,38 @@ use Nette\Security\Passwords;
 /**
  * Users management.
  */
-class UserManager extends Nette\Object implements Nette\Security\IAuthenticator
+class UserManager extends BaseManager
 {
-	const
-		TABLE_NAME = 'users',
-		COLUMN_ID = 'id',
-		COLUMN_NAME = 'username',
-		COLUMN_PASSWORD_HASH = 'password',
-		COLUMN_ROLE = 'role';
-
-
-	/** @var Nette\Database\Context */
+	/** @var $database Nette\Database\Context */
 	private $database;
 
-
-	public function __construct(Nette\Database\Context $database)
-	{
+	public function __construct(Nette\Database\Context $database){
 		$this->database = $database;
 	}
 
-
 	/**
-	 * Performs an authentication.
-	 * @return Nette\Security\Identity
-	 * @throws Nette\Security\AuthenticationException
+	 * @param $values
+	 * @throws DuplicateNameException
 	 */
-	public function authenticate(array $credentials)
+	public function add($values)
 	{
-		list($username, $password) = $credentials;
-
-		$row = $this->database->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
-
-		if (!$row) {
-			throw new Nette\Security\AuthenticationException('The username is incorrect.', self::IDENTITY_NOT_FOUND);
-
-		} elseif (!Passwords::verify($password, $row[self::COLUMN_PASSWORD_HASH])) {
-			throw new Nette\Security\AuthenticationException('The password is incorrect.', self::INVALID_CREDENTIAL);
-
-		} elseif (Passwords::needsRehash($row[self::COLUMN_PASSWORD_HASH])) {
-			$row->update(array(
-				self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
-			));
+		$array= array();
+		foreach($values as $value){
+			$array[] = $value;
 		}
+		list($username, $password, $firstName, $lastName, $sex) = $array;
 
-		$arr = $row->toArray();
-		unset($arr[self::COLUMN_PASSWORD_HASH]);
-		return new Nette\Security\Identity($row[self::COLUMN_ID], $row[self::COLUMN_ROLE], $arr);
-	}
-
-
-	/**
-	 * Adds new user.
-	 * @param  string
-	 * @param  string
-	 * @return void
-	 */
-	public function add($username, $password)
-	{
 		try {
-			$this->database->table(self::TABLE_NAME)->insert(array(
-				self::COLUMN_NAME => $username,
-				self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
+			$this->database->table(self::TABLE_USER)->insert(array(
+				self::USER_COLUMN_NAME => $username,
+				self::USER_COLUMN_PASSWORD => Passwords::hash($password),
+				self::USER_COLUMN_FIRST_NAME => $firstName,
+				self::USER_COLUMN_LAST_NAME => $lastName,
+				self::USER_COLUMN_SEX => $sex,
+				self::USER_COLUMN_ROLE => 1,
 			));
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
-			throw new DuplicateNameException;
+			throw new DuplicateNameException('Uživatel s touto přezdívkou již existuje!');
 		}
 	}
 

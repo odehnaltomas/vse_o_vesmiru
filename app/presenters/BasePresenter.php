@@ -2,14 +2,14 @@
 
 namespace App\Presenters;
 
-use Nette;
-use App\Model;
+use Nette\Application\UI\Presenter;
 
 
 /**
- * Base presenter for all application presenters.
+ * Základní presenter pro všechny presentery.
+ * @package App\Presenters
  */
-abstract class BasePresenter extends Nette\Application\UI\Presenter
+abstract class BasePresenter extends Presenter
 {
 
 }
