@@ -14,6 +14,8 @@ application:
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
+extensions:
+    translation: Kdyby\Translation\DI\TranslationExtension
 
 session:
 	expiration: 14 days

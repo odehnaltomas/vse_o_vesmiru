@@ -35,10 +35,10 @@ class Authenticator extends BaseManager implements IAuthenticator
         $row = $this->database->table(self::TABLE_USER)->where(self::USER_COLUMN_NAME, $username)->fetch();
 
         if (!$row) {
-            throw new Nette\Security\AuthenticationException('Nesprávné uživatelské jméno!', self::IDENTITY_NOT_FOUND);
+            throw new Nette\Security\AuthenticationException("messages.exceptions.wrongUsername", self::IDENTITY_NOT_FOUND);
 
         } elseif (!Passwords::verify($password, $row[self::USER_COLUMN_PASSWORD])) {
-            throw new Nette\Security\AuthenticationException('Nesprávné heslo!', self::INVALID_CREDENTIAL);
+            throw new Nette\Security\AuthenticationException("messages.exceptions.wrongPassword", self::INVALID_CREDENTIAL);
 
         } elseif (Passwords::needsRehash($row[self::USER_COLUMN_PASSWORD])) {
             $row->update(array(
@@ -46,8 +46,16 @@ class Authenticator extends BaseManager implements IAuthenticator
             ));
         }
 
-        $arr = $row->toArray();
-        unset($arr[self::USER_COLUMN_PASSWORD]);
-        return new Nette\Security\Identity($row[self::USER_COLUMN_ID], $row->role[self::ROLE_COLUMN_NAME], $arr);
+        $data = array(
+            'id' => $row->id,
+            'username' => $row->username,
+            'first_name' => $row->first_name,
+            'last_name' => $row->last_name,
+            'cs_role' => $row->role[self::ROLE_COLUMN_NAME_CS],
+            'en_role' => $row->role[self::ROLE_COLUMN_NAME_EN],
+            'cs_sex' => $row->sex[self::SEX_COLUMN_NAME_CS],
+            'en_sex' => $row->sex[self::SEX_COLUMN_NAME_EN]
+        );
+        return new Nette\Security\Identity($row[self::USER_COLUMN_ID], $row->role[self::ROLE_COLUMN_NAME_EN], $data);
     }
 }

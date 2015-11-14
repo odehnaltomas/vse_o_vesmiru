@@ -1,0 +1,11 @@
+sign:
+    username: "Login:"
+    requiredUsername: "Vyplňte své uživatelské jméno!"
+    password: "Heslo:"
+    requiredPassword: "Vyplňte své uživatelské jméno!"
+    remember: "Zapamatovat"
+    signIn: "Přihlásit"
+    first_name: "Jméno:"
+    last_name: "Příjmení:"
+    sex: "Pohlaví:"
+    signUp: "Registrovat"

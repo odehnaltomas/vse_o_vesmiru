@@ -37,11 +37,26 @@ class UserManager extends BaseManager
 				self::USER_COLUMN_FIRST_NAME => $firstName,
 				self::USER_COLUMN_LAST_NAME => $lastName,
 				self::USER_COLUMN_SEX => $sex,
-				self::USER_COLUMN_ROLE => 1,
+				self::USER_COLUMN_ROLE => 1
 			));
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
-			throw new DuplicateNameException('Uživatel s touto přezdívkou již existuje!');
+			throw new DuplicateNameException("messages.excetions.duplicateUsername");
 		}
+	}
+
+	public function getSex($locale){
+		$male = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COMLUMN_ID, '1')->fetch();
+		$female = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COMLUMN_ID, '2')->fetch();
+		if($locale === 'en') {
+			return $sex = array(
+				1 => $male[self::SEX_COLUMN_NAME_EN],
+				2 => $female[self::SEX_COLUMN_NAME_EN]
+			);
+		}
+		return $sex = array(
+				1 => $male[self::SEX_COLUMN_NAME_CS],
+				2 => $female[self::SEX_COLUMN_NAME_CS]
+		);
 	}
 
 }

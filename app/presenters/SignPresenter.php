@@ -19,10 +19,7 @@ class SignPresenter extends BasePresenter
 	/**
 	 * @var array $sex - Pole pro radio button
 	 */
-	private $sex = array(
-		'muž'=>'muž',
-		'žena'=>'žena'
-	);
+	private $sex = array();
 
 
 	public function __construct(User $user, UserManager $userManager){
@@ -37,15 +34,16 @@ class SignPresenter extends BasePresenter
 	public function createComponentSignInForm()
 	{
 		$form = new Form;
-		$form->addText('username', 'Username:')
-			->setRequired('Please enter your username.');
+		$form->setTranslator($this->translator);
+		$form->addText('username', 'forms.sign.username')
+			->setRequired('forms.sign.requiredUsername');
 
-		$form->addPassword('password', 'Password:')
-			->setRequired('Please enter your password.');
+		$form->addPassword('password', 'forms.sign.password')
+			->setRequired('forms.sign.requiredPassword');
 
-		$form->addCheckbox('remember', 'Keep me signed in');
+		$form->addCheckbox('remember', 'forms.sign.remember');
 
-		$form->addSubmit('send', 'Sign in');
+		$form->addSubmit('send', 'forms.sign.signIn');
 
 		$form->onSuccess[] = array($this, 'signInFormSucceeded');
 		return $form;
@@ -68,7 +66,7 @@ class SignPresenter extends BasePresenter
 			$this->user->login($values->username, $values->password);
 			$form->getPresenter()->redirect('Homepage:');
 		} catch (Nette\Security\AuthenticationException $e) {
-			$form->addError($e->getMessage());
+			$form->addError($this->translator->translate($e->getMessage()));
 		}
 	}
 
@@ -86,20 +84,21 @@ class SignPresenter extends BasePresenter
 	 */
 	protected function createComponentSignUpForm(){
 		$form = new Form;
-		$form->addText('username', 'Login:')
-			->setRequired('Please enter your username.');
+		$form->setTranslator($this->translator);
+		$form->addText('username', 'forms.sign.username')
+			->setRequired('forms.sign.requiredUsername');
 
-		$form->addPassword('password', 'Heslo:')
-			->setRequired('Please enter your password.');
+		$form->addPassword('password', 'forms.sign.password')
+			->setRequired('forms.sign.requiredPassword');
 
-		$form->addText('first_name', 'Jméno:');
+		$form->addText('first_name', 'forms.sign.first_name');
 
-		$form->addText('last_name', 'Příjmení:');
+		$form->addText('last_name', 'forms.sign.last_name');
 
-		$form->addRadioList('sex', 'Pohlaví:', $this->sex)
+		$form->addRadioList('sex', 'forms.sign.sex', $this->userManager->getSex($this->locale))
 			->getSeparatorPrototype()->setName(NULL);
 
-		$form->addSubmit('send', 'Sign in');
+		$form->addSubmit('send', 'forms.sign.signUp');
 
 		$form->onSuccess[] = array($this, 'signUpFormSucceeded');
 		return $form;
