@@ -9,3 +9,14 @@ sign:
     last_name: "Last name:"
     sex: "Sex:"
     signUp: "Sign Up"
+
+article:
+    czech: "Czech"
+    english: "English"
+    selectLanguage: "Choose language:"
+    title: "Title:"
+    requiredTitle: "Title of article must be filled!"
+    content: "Content:"
+    requiredContent: "The content of article must be filled!"
+    save: "Save"
+

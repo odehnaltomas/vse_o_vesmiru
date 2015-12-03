@@ -9,3 +9,13 @@ sign:
     last_name: "Příjmení:"
     sex: "Pohlaví:"
     signUp: "Registrovat"
+
+article:
+    czech: "Česky"
+    english: "Anglicky"
+    selectLanguage: "Vyber jazyk:"
+    title: "Titulek:"
+    requiredTitle: "Titulek článku musí být vyplněn!"
+    content: "Obsah:"
+    requiredContent: "Obsah článku musí být vyplněn!"
+    save: "Uložit"
