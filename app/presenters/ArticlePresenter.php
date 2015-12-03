@@ -47,7 +47,8 @@ class ArticlePresenter extends BasePresenter
 
         //TODO: Přidat TinyMCE
         $form->addTextArea('content', 'forms.article.content')
-            ->setRequired('forms.article.requiredContent');
+            ->setRequired('forms.article.requiredContent')
+            ->setAttribute('class', 'mceEditor_' . $this->locale);
 
         $form->addSubmit('submit', 'forms.article.save');
 
