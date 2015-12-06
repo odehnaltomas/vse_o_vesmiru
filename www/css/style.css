@@ -107,6 +107,14 @@ a[href^="#error:"] {
 	background: red;
 	color: white;
 }
+/*======================================================*/
+form {
+	width: 100%;
+}
+
+form table {
+
+}
 
 form th, form td {
 	vertical-align: top;
@@ -124,4 +132,30 @@ form .required label {
 form .error {
 	color: #D00;
 	font-weight: bold;
+}
+/*======================================================*/
+
+.form {
+	width: 100%;
+	margin: auto;
+}
+
+.form .component {
+	width: auto;
+}
+
+.form #labelLanguage {
+	float: left;
+}
+
+.form #inputLanguage {
+	float: left;
+}
+
+.form #labelTitle {
+	float: left;
+}
+
+.form #inputTitle {
+	float: left;
 }

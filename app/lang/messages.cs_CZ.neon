@@ -1,4 +1,4 @@
 exceptions:
-    wrongUsername: "Zadané uživatelské jméno neexistuje!"
-    wrongPassword: "Špatné uživatelské jméno nebo heslo!"
-    duplicateUsername: "Uživatelské jméno již existuje!"
+    wrongUsername: "Zadaný login neexistuje!"
+    wrongPassword: "Špatný login nebo heslo!"
+    duplicateUsername: "Zadaný login již existuje!"

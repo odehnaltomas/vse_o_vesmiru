@@ -1,4 +1,4 @@
-exceptons:
-    wrongUsername: "Username doesn't exist!"
-    wrongPassword: "Wrong password or username!"
-    duplicateUsername: "Username already exist!"
+exceptions:
+    wrongUsername: "Login doesn't exist!"
+    wrongPassword: "Wrong login or password!"
+    duplicateUsername: "Login already exist!"

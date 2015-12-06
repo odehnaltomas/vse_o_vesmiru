@@ -15,8 +15,47 @@
         </div>
 
         <div id="content">
-        {control addArticleForm}
 
+        <div class="form">
+        {form addArticleForm}
+
+            <div class="component">
+                <div id="labelLanguage" class="label">
+                    {label language /}
+                </div>
+                <div id="inputLanguage" class="input" >
+                    {input language}
+                </div>
+                <div class="cleaner"></div>
+            </div>
+
+            <div class="component">
+                <div id="labelTitle" class="label">
+                    {label title /}
+                </div>
+                <div id="inputTitle" class="input">
+                    {input title}
+                </div>
+                <div class="cleaner" />
+            </div>
+
+            <div class="component">
+                <div class="label">
+                    {label content /}
+                </div>
+                <div class="input">
+                    {input content}
+                </div>
+            </div>
+
+            <div class="component">
+                <div class="input">
+                    {input submit}
+                </div>
+            </div>
+
+        {/form}
+        </div>
         </div>
         <div id="footer">
 

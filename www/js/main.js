@@ -8,10 +8,11 @@ $(function(){
  */
 tinyMCE.init({
     selector: ".mceEditor_cs",
-    theme: 'advanced',
     plugins: 'autoresize',
-    width: '100%',
-    height: 500,
+    autoresize_min_width: '100%',
+    autoresize_min_height: 600,
+    autoresize_max_height: 1000,
+    max_height: 1000,
     language: "cs"
 });
 
