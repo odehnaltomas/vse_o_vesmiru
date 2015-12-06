@@ -8,6 +8,10 @@ $(function(){
  */
 tinyMCE.init({
     selector: ".mceEditor_cs",
+    theme: 'advanced',
+    plugins: 'autoresize',
+    width: '100%',
+    height: 500,
     language: "cs"
 });
 
