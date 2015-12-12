@@ -40,7 +40,7 @@ class UserManager extends BaseManager
 				self::USER_COLUMN_ROLE => 1
 			));
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
-			throw new DuplicateNameException("messages.excetions.duplicateUsername");
+			throw new DuplicateNameException("messages.exceptions.duplicateUsername");
 		}
 	}
 
