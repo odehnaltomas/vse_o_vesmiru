@@ -23,5 +23,8 @@ session:
 
 services:
 	- App\Model\UserManager
+	- App\Model\ArticleManager
+	- App\Model\LanguageManager
+
 	authenticator: App\Model\Authenticator
 	router: App\RouterFactory::createRouter

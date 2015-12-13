@@ -2,3 +2,4 @@ exceptions:
     wrongUsername: "Zadaný login neexistuje!"
     wrongPassword: "Špatný login nebo heslo!"
     duplicateUsername: "Zadaný login již existuje!"
+    duplicateTitle: "Článek se zadaným titulkem již existuje!"

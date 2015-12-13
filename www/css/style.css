@@ -70,7 +70,6 @@ body {
 	background: white;
 	width: 930px;
 	padding: 10px 15px;
-	border-radius: 4px;
 }
 
 #footer {
@@ -78,7 +77,6 @@ body {
 	height: 100px;
 	margin: 20px 0 0 0;
 	background: white;
-	border-radius: 4px 4px 0 0;
 }
 
 h1 {
@@ -129,19 +127,26 @@ form .required label {
 	font-weight: bold;
 }
 
-form .error {
+form .errors {
 	color: #D00;
 	font-weight: bold;
+	background: mistyrose;
+	border: 2px solid darkred;
 }
 /*======================================================*/
 
 .form {
 	width: 100%;
-	margin: auto;
+	line-height: 45px;
 }
 
 .form .component {
 	width: auto;
+}
+
+.form .component .label {
+	margin-right: 10px;
+	font-family: x360;
 }
 
 .form #labelLanguage {
@@ -150,6 +155,11 @@ form .error {
 
 .form #inputLanguage {
 	float: left;
+}
+
+.form .input label {
+	margin-right: 4px;
+	line-height: inherit;
 }
 
 .form #labelTitle {

@@ -16,8 +16,15 @@
 
         <div id="content">
 
+        <h1 n:block="title">{_ templates.article.titleAdd}</h1>
         <div class="form">
         {form addArticleForm}
+
+            <div class="errors" n:if="$form->hasErrors()">
+                <ul>
+                    <li n:foreach="$form->errors as $error">{$error}</li>
+                </ul>
+            </div>
 
             <div class="component">
                 <div id="labelLanguage" class="label">

@@ -2,3 +2,4 @@ exceptions:
     wrongUsername: "Login doesn't exist!"
     wrongPassword: "Wrong login or password!"
     duplicateUsername: "Login already exist!"
+    duplicateTitle: "There's an article with given title!"

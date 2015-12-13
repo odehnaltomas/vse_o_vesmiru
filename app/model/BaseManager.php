@@ -34,8 +34,22 @@ abstract class BaseManager extends Object
         ROLE_COLUMN_NAME_EN = 'en_role',
 
     TABLE_USER_SEX = 'user_sex',
-        SEX_COMLUMN_ID = 'id',
+        SEX_COLUMN_ID = 'id',
         SEX_COLUMN_NAME_CS = 'cs_sex',
-        SEX_COLUMN_NAME_EN = 'en_sex';
+        SEX_COLUMN_NAME_EN = 'en_sex',
+
+    TABLE_ARTICLE = 'article',
+        ARTICLE_COLUMN_ID = 'id',
+        ARTICLE_COLUMN_TRANSLATION_ID = 'translation_id',
+        ARTICLE_COLUMN_LANGUAGE_ID = 'language_id',
+        ARTICLE_COLUMN_TITLE = 'title',
+        ARTICLE_COLUMN_CONTENT = 'content',
+        ARTICLE_COLUMN_CREATED = 'created',
+        ARTICLE_COLUMN_USER_ID = 'user_id',
+        ARTICLE_COLUMN_ARTICLE_RATING = 'article_rating_id',
+
+    TABLE_LANGUAGE = 'language',
+        LANGUAGE_COLUMN_ID = 'id',
+        LANGUAGE_COLUMN_LANGUAGE = 'language';
 
 }

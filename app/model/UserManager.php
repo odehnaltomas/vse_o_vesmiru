@@ -45,8 +45,8 @@ class UserManager extends BaseManager
 	}
 
 	public function getSex($locale){
-		$male = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COMLUMN_ID, '1')->fetch();
-		$female = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COMLUMN_ID, '2')->fetch();
+		$male = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COLUMN_ID, '1')->fetch();
+		$female = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COLUMN_ID, '2')->fetch();
 		if($locale === 'en') {
 			return $sex = array(
 				1 => $male[self::SEX_COLUMN_NAME_EN],
@@ -63,5 +63,4 @@ class UserManager extends BaseManager
 
 
 
-class DuplicateNameException extends \Exception
-{}
+

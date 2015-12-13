@@ -10,11 +10,21 @@ namespace App\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\Model\ArticleManager;
+use Nette\Security\User;
+use App;
 
 class ArticlePresenter extends BasePresenter
 {
-    /** @var Nette\Database\Context */
-    private $database;
+    /**
+     * @var User
+     */
+    private $user;
+
+    /**
+     * @var ArticleManager
+     */
+    private $articleManager;
 
     /** @var array */
     private $language = array(
@@ -26,9 +36,10 @@ class ArticlePresenter extends BasePresenter
      * ArticlePresenter constructor.
      * @param Nette\Database\Context $database
      */
-    public function __construct(Nette\Database\Context $database)
+    public function __construct(ArticleManager $articleManager, User $user)
     {
-        $this->database = $database;
+        $this->articleManager = $articleManager;
+        $this->user = $user;
     }
 
     /**
@@ -40,12 +51,12 @@ class ArticlePresenter extends BasePresenter
         $form->setTranslator($this->translator);
 
         $form->addRadioList('language', 'forms.article.selectLanguage', $this->language)
-            ->setValue($this->locale);
+            ->setValue($this->locale)
+            ->getSeparatorPrototype()->setName(null);
 
         $form->addText('title', 'forms.article.title')
             ->setRequired('forms.article.requiredTitle');
 
-        //TODO: Přidat TinyMCE
         $form->addTextArea('content', 'forms.article.content')
             ->setRequired('forms.article.requiredContent')
             ->setAttribute('class', 'mceEditor_' . $this->locale);
@@ -56,8 +67,17 @@ class ArticlePresenter extends BasePresenter
         return $form;
     }
 
+    /**
+     * @param Form $form
+     * @param $values
+     */
     public function addArticleFormSucceeded(Form $form, $values)
     {
+        try {
+            $this->articleManager->addArticle($this->user->getId(), $values);
+        } catch(App\Model\DuplicateNameException $e) {
+            $form->addError($this->translator->translate($e->getMessage()));
+        }
 
     }
 }
