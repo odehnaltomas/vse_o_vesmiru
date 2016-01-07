@@ -168,3 +168,14 @@ form .error {
 .form #inputTitle {
 	float: left;
 }
+
+.article {
+	width: 100%;
+	border-bottom: dashed black 2px;
+	transition: 0.2s linear;
+}
+
+.article:hover {
+	background-color: whitesmoke;
+	transition: 0.2s linear;
+}

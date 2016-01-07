@@ -42,6 +42,11 @@ class ArticleManager extends BaseManager
 
     }
 
+    public function getArticles($locale){
+        return $this->database->table(self::TABLE_ARTICLE)
+                    ->order('created DESC');
+    }
+
     /**
      * @param $id
      * @param $values

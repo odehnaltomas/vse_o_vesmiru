@@ -135,5 +135,4 @@ class SignPresenter extends BasePresenter
 			$form->addError($this->translator->translate($e->getMessage()));
 		}
 	}
-
 }

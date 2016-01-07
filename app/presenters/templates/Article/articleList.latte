@@ -1,0 +1,8 @@
+{block content}
+
+<h1 n:block="title">Články</h1>
+
+<div n:foreach="$articles as $article" class="article">
+        <h2>{$article->title}</h2>
+        <div class="date">{$article->created|date:'j.n. Y'}</div>
+</div>

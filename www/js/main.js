@@ -22,3 +22,4 @@ tinyMCE.init({
 tinyMCE.init({
     selector: ".mceEditor_en"
 });
+
