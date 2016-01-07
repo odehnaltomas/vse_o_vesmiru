@@ -9,6 +9,7 @@ sign:
     last_name: "Příjmení:"
     sex: "Pohlaví:"
     signUp: "Registrovat"
+    signOut: "Odhlásit"
 
 article:
     czech: "Česky"

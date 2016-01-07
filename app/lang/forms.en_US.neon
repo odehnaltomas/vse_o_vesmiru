@@ -9,6 +9,7 @@ sign:
     last_name: "Last name:"
     sex: "Sex:"
     signUp: "Sign Up"
+    signOut: "Logout"
 
 article:
     czech: "Czech"
