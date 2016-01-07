@@ -1,5 +1,5 @@
 <?php
-//TODO: dodělat komentáře
+
 namespace App\Model;
 
 use Nette;
@@ -7,20 +7,28 @@ use Nette\Security\Passwords;
 
 
 /**
- * Users management.
+ * Model, který se doplňuje třídu User (Nette\Secourity\User).
+ * Metody:
+ * 		add (registrace uživatelů)
+ * 		getSex (zíkání pohlaví z databáze)
  */
 class UserManager extends BaseManager
 {
 	/** @var $database Nette\Database\Context */
 	private $database;
 
+
 	public function __construct(Nette\Database\Context $database){
 		$this->database = $database;
 	}
 
+
 	/**
-	 * @param $values
-	 * @throws DuplicateNameException
+	 * Registruje uživatele
+	 *
+	 * @param $values - Hodnoty získané z odeslaného formuláře SignUpForm
+	 *
+	 * @throws DuplicateNameException - Vyhodí chybu pokud je již předané uživatelské jméno v datbázi (uřivatelské jméno je v databázi unikátní)
 	 */
 	public function add($values)
 	{
@@ -44,6 +52,13 @@ class UserManager extends BaseManager
 		}
 	}
 
+
+	/**
+	 * Metoda vrací pohlaví podle předaného jazyka.
+	 *
+	 * @param $locale - Předaný jazyk, závisí na aktuální lokalizaci webových stránek (cz, en).
+	 * @return array - Vrací pole, ve kterém jsou pohlaví v daném jazyce.
+	 */
 	public function getSex($locale){
 		$male = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COLUMN_ID, '1')->fetch();
 		$female = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COLUMN_ID, '2')->fetch();

@@ -98,7 +98,6 @@ div.flash {
 	background: #FFF9D7;
 	border: 1px solid #E2C822;
 	padding: 1em;
-	margin: 1em 0;
 }
 
 a[href^="#error:"] {
@@ -127,7 +126,7 @@ form .required label {
 	font-weight: bold;
 }
 
-form .errors {
+form .error {
 	color: #D00;
 	font-weight: bold;
 	background: mistyrose;

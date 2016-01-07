@@ -11,6 +11,7 @@ use Nette\Security\User;
 class SignPresenter extends BasePresenter
 {
 
+	/** @var UserManager */
 	private $userManager;
 
 	/** @var User */
@@ -22,6 +23,13 @@ class SignPresenter extends BasePresenter
 	private $sex = array();
 
 
+	/**
+	 * Konstruktor presenteru SignPresenter
+	 *
+	 * @param User $user Instance třídy User, kde jsou informace o přihlášeném uživateli.
+	 *
+	 * @param UserManager $userManager Instance třídy UserManager, která obsahuje metody týkající se uživatele.
+	 */
 	public function __construct(User $user, UserManager $userManager){
 		$this->user = $user;
 		$this->userManager = $userManager;
@@ -29,6 +37,8 @@ class SignPresenter extends BasePresenter
 
 
 	/**
+	 * Komponenta pro vytvoření formuláře na přihlášení uživatelů.
+	 * 
 	 * @return Nette\Application\UI\Form
 	 */
 	public function createComponentSignInForm()
@@ -59,7 +69,7 @@ class SignPresenter extends BasePresenter
 		if ($values->remember) {
 			$this->user->setExpiration('14 days', FALSE);
 		} else {
-			$this->user->setExpiration('20 minutes', TRUE);
+			$this->user->setExpiration('0', TRUE);
 		}
 
 		try {
@@ -74,12 +84,13 @@ class SignPresenter extends BasePresenter
 	public function actionOut()
 	{
 		$this->user->logout(TRUE);
-		$this->flashMessage('You have been signed out.');
+		$this->flashMessage($this->translator->translate('messages.flash.signedOut'));
 		$this->redirect('in');
 	}
 
 
 	/**
+	 *
 	 * @return Form
 	 */
 	protected function createComponentSignUpForm(){
@@ -106,8 +117,11 @@ class SignPresenter extends BasePresenter
 
 
 	/**
-	 * @param $form
-	 * @param $values
+	 * Volá se při úspěšném odeslání formuláře SignUpForm.
+	 * Přes instanci třídy UserManager se pokouší registrovat uživatele.
+	 *
+	 * @param $form -
+	 * @param $values - Hodnoty z úspěšné odeslaného formuláře
 	 */
 	public function signUpFormSucceeded(Form $form, $values){
 

@@ -17,7 +17,21 @@
 </head>
 
 <body>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	<div id="header">
+            <div id="header_content" class="center">
+                <a n:href="Homepage:"><div id="logo"></div></a>
+                {if $user->isLoggedIn()}
+                    <a n:href="Sign:out" class="list">{_ forms.sign.signOut}</a>
+                {/if}
+                {if !$user->isLoggedIn()}
+                    <a n:href="Sign:in" class="list">{_ forms.sign.signIn}</a>
+                    <a n:href="Sign:up" class="list">{_ forms.sign.signUp}</a>
+                {/if}
+                <div class="cleaner"></div>
+            </div>
+    </div>
+
+    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
 	{include content}
 

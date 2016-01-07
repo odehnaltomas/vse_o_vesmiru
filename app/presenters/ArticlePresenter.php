@@ -80,4 +80,8 @@ class ArticlePresenter extends BasePresenter
         }
 
     }
+
+    public function renderShowArticleList(){
+        
+    }
 }
