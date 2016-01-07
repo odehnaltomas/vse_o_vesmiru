@@ -75,7 +75,7 @@ class ArticlePresenter extends BasePresenter
     {
         try {
             $this->articleManager->addArticle($this->user->getId(), $values);
-        } catch(App\Model\DuplicateNameException $e) {
+        } catch(App\DuplicateNameException $e) {
             $form->addError($this->translator->translate($e->getMessage()));
         }
 

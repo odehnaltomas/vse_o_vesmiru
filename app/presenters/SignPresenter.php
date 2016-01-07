@@ -128,7 +128,7 @@ class SignPresenter extends BasePresenter
 		try {
 			$this->userManager->add($values);
 			$form->getPresenter()->redirect('Homepage:');
-		} catch(\App\Model\DuplicateNameException $e){
+		} catch(\App\DuplicateNameException $e){
 			$form->addError($this->translator->translate($e->getMessage()));
 		}
 	}
