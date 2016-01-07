@@ -20,7 +20,10 @@ class SignPresenter extends BasePresenter
 	/**
 	 * @var array $sex - Pole pro radio button
 	 */
-	private $sex = array();
+	private $sex = array(
+		1 => "forms.sign.male",
+		2 => "forms.sign.female"
+	);
 
 
 	/**
@@ -106,7 +109,7 @@ class SignPresenter extends BasePresenter
 
 		$form->addText('last_name', 'forms.sign.last_name');
 
-		$form->addRadioList('sex', 'forms.sign.sex', $this->userManager->getSex($this->locale))
+		$form->addRadioList('sex', 'forms.sign.sex', $this->sex)
 			->getSeparatorPrototype()->setName(NULL);
 
 		$form->addSubmit('send', 'forms.sign.signUp');

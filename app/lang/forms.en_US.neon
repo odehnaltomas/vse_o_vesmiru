@@ -10,6 +10,8 @@ sign:
     sex: "Sex:"
     signUp: "Sign Up"
     signOut: "Logout"
+    male: "male"
+    female: "female"
 
 article:
     czech: "Czech"

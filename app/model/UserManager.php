@@ -51,29 +51,6 @@ class UserManager extends BaseManager
 			throw new DuplicateNameException("messages.exceptions.duplicateUsername");
 		}
 	}
-
-
-	/**
-	 * Metoda vrací pohlaví podle předaného jazyka.
-	 *
-	 * @param $locale - Předaný jazyk, závisí na aktuální lokalizaci webových stránek (cz, en).
-	 * @return array - Vrací pole, ve kterém jsou pohlaví v daném jazyce.
-	 */
-	public function getSex($locale){
-		$male = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COLUMN_ID, '1')->fetch();
-		$female = $this->database->table(self::TABLE_USER_SEX)->where(self::SEX_COLUMN_ID, '2')->fetch();
-		if($locale === 'en') {
-			return $sex = array(
-				1 => $male[self::SEX_COLUMN_NAME_EN],
-				2 => $female[self::SEX_COLUMN_NAME_EN]
-			);
-		}
-		return $sex = array(
-				1 => $male[self::SEX_COLUMN_NAME_CS],
-				2 => $female[self::SEX_COLUMN_NAME_CS]
-		);
-	}
-
 }
 
 
