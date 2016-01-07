@@ -1,18 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Tom�
- * Date: 7. 11. 2015
- * Time: 21:49
- */
-//TODO: dodělat komentáře
 namespace App\Model;
 
 use Nette;
 use Nette\Security\IAuthenticator;
 use Nette\Security\Passwords;
 
-
+/**
+ * Třída Authenticator slouží pro autentizaci přihlašovaného uživatele. Je volána třídou User (Nette\Secourity\User).
+ * @package App\Model
+ */
 class Authenticator extends BaseManager implements IAuthenticator
 {
     /** @var Nette\Database\Context */
@@ -24,9 +20,14 @@ class Authenticator extends BaseManager implements IAuthenticator
     }
 
     /**
-     * @param array $credentials
-     * @return Nette\Security\Identity
-     * @throws Nette\Security\AuthenticationException
+     * Metoda, která se volá při autentizaci uživatele (př. třída User při přihlášení).
+     * Pokud proběhne autentizace bez problému, vezmou se data o daném uživateli z databáze
+     * a vytvoří se instance třídy Identity, do které se vloží data o uživateli -> přihlášení uživatele.
+     *
+     * @param array $credentials - Pole, které obsahuje hodnoty (uživ. jméno a heslo) získané z odeslaného formuláře SignInForm
+     * @return Nette\Security\Identity - Vrací instanci třídy Identity, do které se vloží data o přihlašovaném uživateli (v případé úspěšného přihlášení)
+     * @throws Nette\Security\AuthenticationException - Vyhodí výjimku, pokud předané uživ. jméno v datbázi neexistuje
+     *                                                  nebo pokud je předné heslo nesprávné
      */
     public function authenticate(array $credentials)
     {
@@ -35,10 +36,10 @@ class Authenticator extends BaseManager implements IAuthenticator
         $row = $this->database->table(self::TABLE_USER)->where(self::USER_COLUMN_NAME, $username)->fetch();
 
         if (!$row) {
-            throw new Nette\Security\AuthenticationException("messages.exceptions.wrongUsername", self::IDENTITY_NOT_FOUND);
+            throw new Nette\Security\AuthenticationException("messages.exceptions.wrongLogin", self::IDENTITY_NOT_FOUND);
 
         } elseif (!Passwords::verify($password, $row[self::USER_COLUMN_PASSWORD])) {
-            throw new Nette\Security\AuthenticationException("messages.exceptions.wrongPassword", self::INVALID_CREDENTIAL);
+            throw new Nette\Security\AuthenticationException("messages.exceptions.wrongLogin", self::INVALID_CREDENTIAL);
 
         } elseif (Passwords::needsRehash($row[self::USER_COLUMN_PASSWORD])) {
             $row->update(array(
@@ -56,6 +57,11 @@ class Authenticator extends BaseManager implements IAuthenticator
             'cs_sex' => $row->sex[self::SEX_COLUMN_NAME_CS],
             'en_sex' => $row->sex[self::SEX_COLUMN_NAME_EN]
         );
-        return new Nette\Security\Identity($row[self::USER_COLUMN_ID], $row->role[self::ROLE_COLUMN_NAME_EN], $data);
+
+        $roles = array('User');
+        if($row->role[self::ROLE_COLUMN_ID] === 2) $roles[] = 'Moderator';
+        if($row->role[self::ROLE_COLUMN_ID] === 3) $roles[] = 'Admin';
+
+        return new Nette\Security\Identity($row[self::USER_COLUMN_ID], $roles, $data);
     }
 }
