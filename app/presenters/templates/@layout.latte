@@ -31,9 +31,22 @@
             </div>
     </div>
 
-    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+    <div class="center">
+            <div id="middle">
 
-	{include content}
+            </div>
+
+            <div id="content">
+                    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	                {include content}
+
+	        </div>
+
+            <div id="footer">
+
+            </div>
+    </div>
 
 	{block scripts}
 	<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>

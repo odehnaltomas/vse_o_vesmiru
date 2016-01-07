@@ -1,61 +1,49 @@
 {block content}
 
-    <div class="center">
-        <div id="middle">
+<h1 n:block="title">{_ templates.article.titleAdd}</h1>
+<div class="form">
+{form addArticleForm}
 
+    <div class="error" n:if="$form->hasErrors()">
+        <ul>
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+
+    <div class="component">
+        <div id="labelLanguage" class="label">
+            {label language /}
         </div>
-
-        <div id="content">
-
-        <h1 n:block="title">{_ templates.article.titleAdd}</h1>
-        <div class="form">
-        {form addArticleForm}
-
-            <div class="error" n:if="$form->hasErrors()">
-                <ul>
-                    <li n:foreach="$form->errors as $error">{$error}</li>
-                </ul>
-            </div>
-
-            <div class="component">
-                <div id="labelLanguage" class="label">
-                    {label language /}
-                </div>
-                <div id="inputLanguage" class="input" >
-                    {input language}
-                </div>
-                <div class="cleaner"></div>
-            </div>
-
-            <div class="component">
-                <div id="labelTitle" class="label">
-                    {label title /}
-                </div>
-                <div id="inputTitle" class="input">
-                    {input title}
-                </div>
-                <div class="cleaner" />
-            </div>
-
-            <div class="component">
-                <div class="label">
-                    {label content /}
-                </div>
-                <div class="input">
-                    {input content}
-                </div>
-            </div>
-
-            <div class="component">
-                <div class="input">
-                    {input submit}
-                </div>
-            </div>
-
-        {/form}
+        <div id="inputLanguage" class="input" >
+            {input language}
         </div>
-        </div>
-        <div id="footer">
+        <div class="cleaner"></div>
+    </div>
 
+    <div class="component">
+        <div id="labelTitle" class="label">
+            {label title /}
+        </div>
+        <div id="inputTitle" class="input">
+            {input title}
+        </div>
+        <div class="cleaner" />
+    </div>
+
+    <div class="component">
+        <div class="label">
+            {label content /}
+        </div>
+        <div class="input">
+            {input content}
         </div>
     </div>
+
+    <div class="component">
+        <div class="input">
+            {input submit}
+        </div>
+    </div>
+
+{/form}
+</div>

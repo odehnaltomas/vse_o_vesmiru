@@ -1,19 +1,8 @@
 {block content}
 
-    <div class="center">
-        <div id="middle">
+<h1 n:block="title">{_ templates.sign.title}</h1>
 
-        </div>
+{control signInForm}
 
-        <div id="content">
-        <h1 n:block="title">{_ templates.sign.title}</h1>
-
-        {control signInForm}
-
-        <a n:href="in locale=>en">en</a>
-        <a n:href="in locale=>cs">cs</a>
-        </div>
-        <div id="footer">
-
-        </div>
-    </div>
+<a n:href="in locale=>en">en</a>
+<a n:href="in locale=>cs">cs</a>
