@@ -43,6 +43,7 @@ abstract class BaseManager extends Object
         ARTICLE_COLUMN_TRANSLATION_ID = 'translation_id',
         ARTICLE_COLUMN_LANGUAGE_ID = 'language_id',
         ARTICLE_COLUMN_TITLE = 'title',
+        ARTICLE_COLUMN_CAPTION = 'caption',
         ARTICLE_COLUMN_CONTENT = 'content',
         ARTICLE_COLUMN_CREATED = 'created',
         ARTICLE_COLUMN_USER_ID = 'user_id',

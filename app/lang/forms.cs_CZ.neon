@@ -22,3 +22,5 @@ article:
     content: "Obsah:"
     requiredContent: "Obsah článku musí být vyplněn!"
     save: "Uložit"
+    caption: "Popisek:"
+    requiredCaption: "Popisek musí být vyplněn!"

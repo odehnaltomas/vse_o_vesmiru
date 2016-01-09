@@ -22,4 +22,6 @@ article:
     content: "Content:"
     requiredContent: "The content of article must be filled!"
     save: "Save"
+    caption: "Caption:"
+    requiredCaption: "The caption must be filled!"
 

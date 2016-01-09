@@ -57,6 +57,9 @@ class ArticlePresenter extends BasePresenter
         $form->addText('title', 'forms.article.title')
             ->setRequired('forms.article.requiredTitle');
 
+        $form->addTextArea('caption', 'forms.article.caption')
+            ->setRequired('forms.article.requiredCaption');
+
         $form->addTextArea('content', 'forms.article.content')
             ->setRequired('forms.article.requiredContent')
             ->setAttribute('class', 'mceEditor_' . $this->locale);

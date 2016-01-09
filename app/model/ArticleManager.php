@@ -43,7 +43,9 @@ class ArticleManager extends BaseManager
     }
 
     public function getArticles($locale){
+        $languageId = $this->languageManager->getLanguageId($locale);
         return $this->database->table(self::TABLE_ARTICLE)
+                    ->where(self::ARTICLE_COLUMN_LANGUAGE_ID ,$languageId)
                     ->order('created DESC');
     }
 
@@ -59,7 +61,7 @@ class ArticleManager extends BaseManager
             $data[] = $value;
         }
 
-        list($language, $title, $content) = $data;
+        list($language, $title, $caption, $content) = $data;
 
         $languageId = $this->languageManager->getLanguageId($language);
 
@@ -67,6 +69,7 @@ class ArticleManager extends BaseManager
             $this->database->table(self::TABLE_ARTICLE)->insert(array(
                 self::ARTICLE_COLUMN_LANGUAGE_ID => $languageId,
                 self::ARTICLE_COLUMN_TITLE => $title,
+                self::ARTICLE_COLUMN_CAPTION => $caption,
                 self::ARTICLE_COLUMN_CONTENT => $content,
                 self::ARTICLE_COLUMN_USER_ID => $id,
                 self::ARTICLE_COLUMN_ARTICLE_RATING => 0
