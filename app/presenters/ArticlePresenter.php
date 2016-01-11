@@ -14,6 +14,7 @@ use App\Model\ArticleManager;
 use Nette\Security\User;
 use App;
 
+
 class ArticlePresenter extends BasePresenter
 {
     /**
@@ -76,9 +77,13 @@ class ArticlePresenter extends BasePresenter
      */
     public function addArticleFormSucceeded(Form $form, $values)
     {
+        $paginator = new Nette\Utils\Paginator;
+        $paginator->setItemCount($this->articleManager->getLangArticleSum($this->locale));
+        $paginator->setItemsPerPage(2);
+        $paginator->setPage(1);
         try {
             $this->articleManager->addArticle($this->user->getId(), $values);
-        } catch(App\DuplicateNameException $e) {
+        } catch(App\Exceptions\DuplicateNameException $e) {
             $form->addError($this->translator->translate($e->getMessage()));
         }
 

@@ -29,7 +29,7 @@ class UserManager extends BaseManager
 	 *
 	 * @param $values - Hodnoty získané z odeslaného formuláře SignUpForm
 	 *
-	 * @throws DuplicateNameException - Vyhodí chybu pokud je již předané uživatelské jméno v datbázi (uřivatelské jméno je v databázi unikátní)
+	 * @throws App\Exceptions\DuplicateNameException - Vyhodí chybu pokud je již předané uživatelské jméno v datbázi (uřivatelské jméno je v databázi unikátní)
 	 */
 	public function add($values)
 	{
@@ -49,7 +49,7 @@ class UserManager extends BaseManager
 				self::USER_COLUMN_ROLE => 1
 			));
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
-			throw new DuplicateNameException("messages.exceptions.duplicateUsername");
+			throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateUsername");
 		}
 	}
 }

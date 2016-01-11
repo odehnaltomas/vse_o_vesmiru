@@ -10,6 +10,7 @@ namespace App\Model;
 
 
 use Nette;
+use App;
 
 class ArticleManager extends BaseManager
 {
@@ -49,10 +50,18 @@ class ArticleManager extends BaseManager
                     ->order('created DESC');
     }
 
+    public function getLangArticleSum($locale){
+        $languageId = $this->languageManager->getLanguageId($locale);
+        return $this->database->table(self::TABLE_ARTICLE)
+                    ->where(self::ARTICLE_COLUMN_LANGUAGE_ID, $languageId)
+                    ->count("id");
+
+    }
+
     /**
      * @param $id
      * @param $values
-     * @throws DuplicateNameException
+     * @throws App\Exceptions\DuplicateNameException
      */
     public function addArticle($id, $values) {
 
@@ -75,7 +84,7 @@ class ArticleManager extends BaseManager
                 self::ARTICLE_COLUMN_ARTICLE_RATING => 0
             ));
         } catch(Nette\Database\UniqueConstraintViolationException $e) {
-            throw new DuplicateNameException("messages.exceptions.duplicateTitle");
+            throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateTitle");
         }
     }
 }

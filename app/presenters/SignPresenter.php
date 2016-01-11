@@ -6,6 +6,7 @@ use App\Model\UserManager;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Security\User;
+use App;
 
 
 class SignPresenter extends BasePresenter
@@ -131,7 +132,7 @@ class SignPresenter extends BasePresenter
 		try {
 			$this->userManager->add($values);
 			$form->getPresenter()->redirect('Homepage:');
-		} catch(DuplicateNameException $e){
+		} catch(App\Exceptions\DuplicateNameException $e){
 			$form->addError($this->translator->translate($e->getMessage()));
 		}
 	}

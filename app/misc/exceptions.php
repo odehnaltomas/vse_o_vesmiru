@@ -6,7 +6,7 @@
  * Time: 20:35
  */
 
-namespace App\Model;
+namespace App\Exceptions;
 
 
 /**
