@@ -1,5 +1,9 @@
 sign:
-    title: Sign In
+    title: "Sign In"
 
 article:
-    titleAdd: Add an article
+    titleAdd: "Add an article"
+
+visualPaginator:
+    next: "Next"
+    previous: "Previous"

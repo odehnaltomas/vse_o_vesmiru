@@ -1,5 +1,9 @@
 sign:
-    title: Přihlášení
+    title: "Přihlášení"
 
 article:
-    titleAdd: Přidat článek
+    titleAdd: "Přidat článek"
+
+visualPaginator:
+    next: "Další"
+    previous: "Předchozí"

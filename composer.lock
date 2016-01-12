@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "df69dbca8a2a5582076f2f86b83225ae",
-    "content-hash": "a1e96ca34d2f62ca73833df4fdf8e2f9",
+    "hash": "8ddacda3075ed45aae02e389fb45d824",
+    "content-hash": "c558da221335b249fcd0ec2ddd106d15",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -25,6 +25,72 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "Customization for the best database management tool written in PHP, Adminer",
             "time": "2015-09-07 07:29:02"
+        },
+        {
+            "name": "ipub/visual-paginator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iPublikuj/visual-paginator.git",
+                "reference": "9854c5b22670a3a335efdc6b5a6d9189f7e8e58e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iPublikuj/visual-paginator/zipball/9854c5b22670a3a335efdc6b5a6d9189f7e8e58e",
+                "reference": "9854c5b22670a3a335efdc6b5a6d9189f7e8e58e",
+                "shasum": ""
+            },
+            "require": {
+                "latte/latte": "~2.2",
+                "nette/application": "~2.2",
+                "nette/di": "~2.2",
+                "nette/utils": "~2.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "janmarek/mockista": "@dev",
+                "nette/bootstrap": "~2.2",
+                "nette/forms": "~2.2",
+                "nette/mail": "~2.2",
+                "nette/robot-loader": "~2.2",
+                "nette/safe-stream": "~2.2",
+                "nette/tester": "@dev",
+                "tracy/tracy": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "IPub\\VisualPaginator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "email": "david@grudl.com"
+                },
+                {
+                    "name": "iPublikuj:cms",
+                    "email": "info@ipublikuj.eu",
+                    "homepage": "http://www.ipublikuj.eu/"
+                }
+            ],
+            "description": "Visual paginator for Nette Framework",
+            "homepage": "https://github.com/iPublikuj/visual-paginator",
+            "keywords": [
+                "ipub",
+                "ipublikuj",
+                "nette",
+                "paginator",
+                "paging",
+                "tools"
+            ],
+            "time": "2015-12-06 21:28:44"
         },
         {
             "name": "kdyby/translation",
@@ -1363,7 +1429,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "ipub/visual-paginator": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

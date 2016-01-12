@@ -32,7 +32,8 @@
 		"latte/latte": "~2.3.0",
 		"tracy/tracy": "~2.3.0",
 		"dg/adminer-custom": "~1.6",
-		"kdyby/translation": "^2.2"
+		"kdyby/translation": "^2.2",
+		"ipub/visual-paginator": "@dev"
 	},
 	"require-dev": {
 		"nette/tester": "~1.3"
