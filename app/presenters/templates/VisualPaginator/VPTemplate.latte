@@ -1,9 +1,9 @@
 {if $paginator->pageCount > 1}
 <ul class="pagination">
 	{if $paginator->isFirst()}
-	<li class="disabled"><a>« Previous</a></li>
+	<li class="disabled"><a>« {_ templates.visualPaginator.previous}</a></li>
 	{else}
-	<li><a href="{link $handle, 'page' => $paginator->page - 1}" rel="prev" n:class="$useAjax ? ajax">« Previous</a><li>
+	<li><a href="{link $handle, 'page' => $paginator->page - 1}" rel="prev" n:class="$useAjax ? ajax">« {_ templates.visualPaginator.previous}</a><li>
 	{/if}
 
 	{foreach $steps as $step}
@@ -16,9 +16,9 @@
 	{/foreach}
 
 	{if $paginator->isLast()}
-	<li class="disabled"><a >Next »</a></li>
+	<li class="disabled"><a >{_ templates.visualPaginator.next} »</a></li>
 	{else}
-	<li><a href="{link $handle, 'page' => $paginator->page + 1}" rel="next" n:class="$useAjax ? ajax">Next »</a></li>
+	<li><a href="{link $handle, 'page' => $paginator->page + 1}" rel="next" n:class="$useAjax ? ajax">{_ templates.visualPaginator.next} »</a></li>
 	{/if}
 </ul>
 {/if}

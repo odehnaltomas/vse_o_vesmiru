@@ -88,7 +88,7 @@ class ArticlePresenter extends BasePresenter
     protected function createComponentVisualPaginator()
     {
         $control = new VisualPaginator\Control;
-        $control->setTemplateFile('bootstrap.latte');
+        $control->setTemplateFile(__DIR__.'\templates\VisualPaginator\VPTemplate.latte');
         $control->disableAjax();
         return $control;
     }
