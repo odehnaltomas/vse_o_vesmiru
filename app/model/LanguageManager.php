@@ -22,8 +22,10 @@ class LanguageManager extends BaseManager
         $this->database = $database;
     }
 
-    public function getLanguageId($language) {
-        return $this->database->table(self::TABLE_LANGUAGE)->where(self::LANGUAGE_COLUMN_LANGUAGE, $language)->fetch();
+    public function getLanguageId($locale) {
+        return $this->database->table(self::TABLE_LANGUAGE)
+                    ->select(self::LANGUAGE_COLUMN_ID)
+                    ->where(self::LANGUAGE_COLUMN_LANGUAGE, $locale);
     }
 
 }

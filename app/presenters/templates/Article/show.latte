@@ -1,0 +1,6 @@
+{block content}
+{ifset $article->title}
+<h1 n:block="title">{$article->title}</h1>
+
+{!$article->content}
+{/ifset}

@@ -105,4 +105,8 @@ class ArticlePresenter extends BasePresenter
 
         $this->template->articles = $articles;
     }
+
+    public function renderShow($articleId){
+        $this->template->article = $this->articleManager->getArticle($articleId, $this->locale);
+    }
 }

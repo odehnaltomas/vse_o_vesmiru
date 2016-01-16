@@ -35,12 +35,18 @@ class ArticleManager extends BaseManager
     }
 
     /**
-     * @param $id
-     * @param $locale
+     * @param $articleId
+     * @return Nette\Database\Table\Selection
      */
-    public function getArticle($id, $locale)
-    {
+    public function getArticle($articleId, $locale){
+        $localeIdNow = $this->languageManager->getLanguageId($locale);
+        $article = $this->database->table('article')->get($articleId);
 
+        if($article->language_id === $localeIdNow) {
+            return $article;
+        } else {
+            return $this->database->table('article')->get($article->translation_id);
+        }
     }
 
     public function getArticles($locale){

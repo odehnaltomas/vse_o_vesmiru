@@ -4,10 +4,12 @@
 
 {control visualPaginator}
 
-<div n:foreach="$articles as $article" class="article">
-        <h2>{$article->title}</h2>
-        <div class="date">{$article->created|date:'j.n. Y'}</div>
-        <div class="caption">{$article->caption}</div>
-</div>
+<a n:foreach="$articles as $article" n:href="Article:show $article->id">
+        <div  class="article">
+                <h2>{$article->title}</h2>
+                <div class="date">{$article->created|date:'j.n. Y'}</div>
+                <div class="caption">{$article->caption}</div>
+        </div>
+</a>
 
 {control visualPaginator}
