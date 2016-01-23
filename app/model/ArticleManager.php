@@ -42,11 +42,16 @@ class ArticleManager extends BaseManager
         $localeIdNow = $this->languageManager->getLanguageId($locale);
         $article = $this->database->table('article')->get($articleId);
 
-        if($article->language_id === $localeIdNow) {
+        if($localeIdNow == $article->language_id) {
             return $article;
         } else {
-            return $this->database->table('article')->get($article->translation_id);
+            return $this->database->table('article')->where(self::ARTICLE_COLUMN_ID, $article->translation_id)->fetch();
         }
+    }
+
+    public function getComments($articleId, $locale){
+        $article = $this->getArticle(articleId, $locale);
+        return $this->database->table(self::TABLE_COMMENT)->where(self::COMMENT_ARTICLE_ID, $article->id)->fetchAll();
     }
 
     public function getArticles($locale){

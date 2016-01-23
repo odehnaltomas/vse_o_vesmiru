@@ -5,3 +5,4 @@ exceptions:
 
 flash:
     signedOut: "Byl jste odhlášen!"
+    permissionAddArticle: "Nemáte povolení přidávat články!"

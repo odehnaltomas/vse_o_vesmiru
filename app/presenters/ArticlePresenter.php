@@ -14,6 +14,7 @@ use App\Model\ArticleManager;
 use Nette\Security\User;
 use App;
 use IPub\VisualPaginator\Components as VisualPaginator;
+use Tester\Environment;
 
 
 class ArticlePresenter extends BasePresenter
@@ -36,12 +37,22 @@ class ArticlePresenter extends BasePresenter
 
     /**
      * ArticlePresenter constructor.
-     * @param Nette\Database\Context $database
+     * @param ArticleManager $articleManager
+     * @param User $user
      */
     public function __construct(ArticleManager $articleManager, User $user)
     {
         $this->articleManager = $articleManager;
         $this->user = $user;
+    }
+
+
+    public function actionAdd()
+    {
+        if(!$this->user->isAllowed('article', 'add')){
+            $this->flashMessage($this->translator->translate('messages.flash.permissionAddArticle'), 'error');
+            $this->redirect('Homepage:');
+        }
     }
 
     /**
@@ -108,5 +119,6 @@ class ArticlePresenter extends BasePresenter
 
     public function renderShow($articleId){
         $this->template->article = $this->articleManager->getArticle($articleId, $this->locale);
+        $this->template->comments = $this->articleManager->getComments($articleId, $this->locale);
     }
 }

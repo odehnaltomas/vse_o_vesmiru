@@ -100,6 +100,13 @@ div.flash {
 	padding: 1em;
 }
 
+div.flash.error {
+	color: white;
+	background: rgba(190, 0, 8, 1);
+	border: 1px solid #680700;
+	padding: 1em;
+}
+
 a[href^="#error:"] {
 	background: red;
 	color: white;

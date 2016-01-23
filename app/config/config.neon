@@ -26,5 +26,9 @@ services:
 	- App\Model\ArticleManager
 	- App\Model\LanguageManager
 
+	authorizatorFactory: App\AuthorizatorFactory
+	authorizator: @authorizatorFactory::create
+
 	authenticator: App\Model\Authenticator
+
 	router: App\RouterFactory::createRouter

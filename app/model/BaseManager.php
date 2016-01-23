@@ -30,6 +30,7 @@ abstract class BaseManager extends Object
 
     TABLE_USER_ROLE = 'user_role',
         ROLE_COLUMN_ID = 'id',
+        ROLE_COLUMN_ROLE = 'role',
         ROLE_COLUMN_NAME_CS = 'cs_role',
         ROLE_COLUMN_NAME_EN = 'en_role',
 
@@ -51,6 +52,14 @@ abstract class BaseManager extends Object
 
     TABLE_LANGUAGE = 'language',
         LANGUAGE_COLUMN_ID = 'id',
-        LANGUAGE_COLUMN_LANGUAGE = 'language';
+        LANGUAGE_COLUMN_LANGUAGE = 'language',
+
+    TABLE_COMMENT = 'comment',
+        COMMENT_ID = 'id',
+        COMMENT_ARTICLE_ID = 'article_id',
+        COMMENT_USER_ID = 'user_id',
+        COMMENT_CONTENT = 'content',
+        COMMENT_CREATED = 'created',
+        COMMENT_RATING_ID = 'comment_rating_id';
 
 }

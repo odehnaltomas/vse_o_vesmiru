@@ -26,8 +26,7 @@ class Authenticator extends BaseManager implements IAuthenticator
      *
      * @param array $credentials - Pole, které obsahuje hodnoty (uživ. jméno a heslo) získané z odeslaného formuláře SignInForm
      * @return Nette\Security\Identity - Vrací instanci třídy Identity, do které se vloží data o přihlašovaném uživateli (v případé úspěšného přihlášení)
-     * @throws Nette\Security\AuthenticationException - Vyhodí výjimku, pokud předané uživ. jméno v datbázi neexistuje
-     *                                                  nebo pokud je předné heslo nesprávné
+     * @throws Nette\Security\AuthenticationException - Vyhodí výjimku, pokud předané uživ. jméno v databázi neexistuje nebo pokud je předané heslo nesprávné
      */
     public function authenticate(array $credentials)
     {
@@ -58,10 +57,6 @@ class Authenticator extends BaseManager implements IAuthenticator
             'en_sex' => $row->sex[self::SEX_COLUMN_NAME_EN]
         );
 
-        $roles = array('User');
-        if($row->role[self::ROLE_COLUMN_ID] === 2) $roles[] = 'Moderator';
-        if($row->role[self::ROLE_COLUMN_ID] === 3) $roles[] = 'Admin';
-
-        return new Nette\Security\Identity($row[self::USER_COLUMN_ID], $roles, $data);
+        return new Nette\Security\Identity($row[self::USER_COLUMN_ID], $row->role[self::ROLE_COLUMN_ROLE], $data);
     }
 }

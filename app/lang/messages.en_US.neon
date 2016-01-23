@@ -5,3 +5,4 @@ exceptions:
 
 flash:
     signedOut: "You have been signed out!"
+    permissionAddArticle: "You haven't permission to add articles!"

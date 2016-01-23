@@ -1,6 +1,8 @@
 {block content}
-{ifset $article->title}
-<h1 n:block="title">{$article->title}</h1>
+{if $article}
+    <h1>{$article->title}</h1>
+    {!$article->content}
 
-{!$article->content}
-{/ifset}
+    {else}
+    Překlad článku ještě není!
+{/if}
