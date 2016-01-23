@@ -24,6 +24,7 @@ class ArticleManager extends BaseManager
      */
     private $languageManager;
 
+
     /**
      * ArticleManager constructor.
      * @param Nette\Database\Context $database
@@ -34,25 +35,22 @@ class ArticleManager extends BaseManager
         $this->languageManager = $languageManager;
     }
 
+
     /**
      * @param $articleId
      * @return Nette\Database\Table\Selection
      */
-    public function getArticle($articleId, $locale){
-        $localeIdNow = $this->languageManager->getLanguageId($locale);
+    public function getArticle($articleId){
         $article = $this->database->table('article')->get($articleId);
-
-        if($localeIdNow == $article->language_id) {
-            return $article;
-        } else {
-            return $this->database->table('article')->where(self::ARTICLE_COLUMN_ID, $article->translation_id)->fetch();
-        }
+        return $article;
     }
+
 
     public function getComments($articleId, $locale){
-        $article = $this->getArticle(articleId, $locale);
+        $article = $this->getArticle($articleId, $locale);
         return $this->database->table(self::TABLE_COMMENT)->where(self::COMMENT_ARTICLE_ID, $article->id)->fetchAll();
     }
+
 
     public function getArticles($locale){
         $languageId = $this->languageManager->getLanguageId($locale);
@@ -61,6 +59,7 @@ class ArticleManager extends BaseManager
                     ->order('created DESC');
     }
 
+
     public function getLangArticleSum($locale){
         $languageId = $this->languageManager->getLanguageId($locale);
         return $this->database->table(self::TABLE_ARTICLE)
@@ -68,6 +67,7 @@ class ArticleManager extends BaseManager
                     ->count("id");
 
     }
+
 
     /**
      * @param $id

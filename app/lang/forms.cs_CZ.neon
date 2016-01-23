@@ -24,3 +24,6 @@ article:
     save: "Uložit"
     caption: "Popisek:"
     requiredCaption: "Popisek musí být vyplněn!"
+    commentWrite: 'Napište komentář:'
+    publish: 'Zveřejnit'
+    commentPlaceholder: 'Pro napsání komentáře se musíte přihlásit!'

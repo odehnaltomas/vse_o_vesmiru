@@ -2,6 +2,17 @@
 {if $article}
     <h1>{$article->title}</h1>
     {!$article->content}
+    <hr>
+    <h2>Komentáře</h2>
+    {control commentForm}
+    {if $comments}
+        {foreach $comments as $comment}
+            <div>$commemt->content</div>
+        {/foreach}
+
+        {else}
+        Tento článek ještě nikdo neokomentoval.
+    {/if}
 
     {else}
     Překlad článku ještě není!

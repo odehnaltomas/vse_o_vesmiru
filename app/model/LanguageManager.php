@@ -29,4 +29,11 @@ class LanguageManager extends BaseManager
                     ->fetchField();
     }
 
+    public function getLangugage($id){
+        return $this->database->table(self::TABLE_LANGUAGE)
+                    ->select(self::LANGUAGE_COLUMN_LANGUAGE)
+                    ->where(self::LANGUAGE_COLUMN_ID, $id)
+                    ->fetchField();
+    }
+
 }

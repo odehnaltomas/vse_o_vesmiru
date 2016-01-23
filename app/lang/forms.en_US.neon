@@ -24,4 +24,7 @@ article:
     save: "Save"
     caption: "Caption:"
     requiredCaption: "The caption must be filled!"
+    commentWrite: 'Write a comment:'
+    publish: 'Publish'
+    commentPlaceholder: 'You need to be logged in to write a comment!'
 

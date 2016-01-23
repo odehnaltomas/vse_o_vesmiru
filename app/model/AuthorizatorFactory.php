@@ -27,12 +27,14 @@ class AuthorizatorFactory
 
         $authorizator->addResource('sign');
         $authorizator->addResource('article');
+        $authorizator->addResource('comment');
 
         $authorizator->allow('guest', 'sign', array('in', 'up'));
         $authorizator->allow('guest', 'article', 'view');
 
         $authorizator->deny('user', 'sign', array('in', 'up'));
         $authorizator->allow('user', 'sign', 'out');
+        $authorizator->allow('user', 'comment', 'write');
 
         $authorizator->allow('moderator', 'article', array('add', 'edit'));
 
