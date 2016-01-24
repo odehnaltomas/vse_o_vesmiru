@@ -46,12 +46,21 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $articleId
+     * @param $locale
+     * @return array|Nette\Database\Table\IRow[]
+     */
     public function getComments($articleId, $locale){
         $article = $this->getArticle($articleId, $locale);
         return $this->database->table(self::TABLE_COMMENT)->where(self::COMMENT_ARTICLE_ID, $article->id)->fetchAll();
     }
 
 
+    /**
+     * @param $locale
+     * @return Nette\Database\Table\Selection
+     */
     public function getArticles($locale){
         $languageId = $this->languageManager->getLanguageId($locale);
         return $this->database->table(self::TABLE_ARTICLE)
@@ -60,6 +69,10 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $locale
+     * @return int
+     */
     public function getLangArticleSum($locale){
         $languageId = $this->languageManager->getLanguageId($locale);
         return $this->database->table(self::TABLE_ARTICLE)
@@ -97,5 +110,19 @@ class ArticleManager extends BaseManager
         } catch(Nette\Database\UniqueConstraintViolationException $e) {
             throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateTitle");
         }
+    }
+
+
+    public function addComment($values, $articleId, $userId){
+        $data = array();
+        foreach ($values as $value){
+            $data[] = $value;
+        }
+        list($content) = $data;
+        $this->database->table(self::TABLE_COMMENT)->insert(array(
+            self::COMMENT_ARTICLE_ID => $articleId,
+            self::COMMENT_USER_ID => $userId,
+            self::COMMENT_CONTENT => $content
+        ));
     }
 }

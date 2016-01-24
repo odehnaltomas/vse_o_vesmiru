@@ -3,6 +3,8 @@ sign:
 
 article:
     titleAdd: "Přidat článek"
+    noComment: "Nikdo zatím neokomentoval tento článek!"
+    noTranslation: "Překlad článku ještě není!"
 
 visualPaginator:
     next: "Další"

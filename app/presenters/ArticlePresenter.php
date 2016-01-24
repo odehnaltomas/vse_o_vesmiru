@@ -61,6 +61,7 @@ class ArticlePresenter extends BasePresenter
         }
     }
 
+
     /**
      * @return Form
      */
@@ -89,6 +90,7 @@ class ArticlePresenter extends BasePresenter
         return $form;
     }
 
+
     /**
      * @param Form $form
      * @param $values
@@ -102,6 +104,7 @@ class ArticlePresenter extends BasePresenter
         }
     }
 
+
     protected function createComponentVisualPaginator()
     {
         $control = new VisualPaginator\Control;
@@ -109,6 +112,7 @@ class ArticlePresenter extends BasePresenter
         $control->disableAjax();
         return $control;
     }
+
 
     public function renderArticleList(){
         $articles = $this->articleManager->getArticles($this->locale);
@@ -123,13 +127,17 @@ class ArticlePresenter extends BasePresenter
         $this->template->articles = $articles;
     }
 
-    public function createComponentCommentForm(){
+
+    protected function createComponentCommentForm(){
         $form = new Form();
         $form->setTranslator($this->translator);
 
         if($this->user->isAllowed('comment','write')){
             $form->addTextArea('content', 'forms.article.commentWrite');
+
             $form->addSubmit('submit', 'forms.article.publish');
+
+            $form->onSuccess[] = array($this, 'commentFormSucceeded');
         } else {
             $form->addTextArea('content', 'forms.article.commentWrite')
                 ->setAttribute('placeholder','forms.article.commentPlaceholder')
@@ -138,10 +146,26 @@ class ArticlePresenter extends BasePresenter
             $form->addSubmit('submit', 'forms.article.publish')
                 ->setDisabled();
         }
-
         return $form;
     }
 
+
+    /**
+     * @param Form $form
+     * @param $values
+     */
+    public function commentFormSucceeded(Form $form, $values){
+        $articleId = $this->getParameter('articleId');
+        $userId = $this->user->getId();
+        $this->articleManager->addComment($values, $articleId, $userId);
+
+        $this->redirect('this');
+    }
+
+
+    /**
+     * @param $articleId
+     */
     public function renderShow($articleId){
         $article = $this->articleManager->getArticle($articleId, $this->locale);
         $articleLang = $this->languageManager->getLangugage($article->language_id);

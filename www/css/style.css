@@ -64,6 +64,7 @@ body {
 #middle {
 	width: 960px;
 	height: 100px;
+	position: relative;
 }
 
 #content {
@@ -194,4 +195,47 @@ form .error {
 	border-bottom-color: red;
 	background-color: #efefef;
 	transition: 0.2s linear;
+}
+
+#middle #localization {
+	position: absolute;
+	height: 35px;
+	width: 80px;
+	right: 0;
+	bottom: 0;
+}
+
+#middle #localization #czech {
+	background: url("../images/czech-icon.png") no-repeat;
+	width: 32px;
+	height: 32px;
+	float: right;
+	margin-right: 3px;
+}
+
+#middle #localization #english {
+	background: url("../images/uk-icon.png") no-repeat;
+	width: 32px;
+	height: 32px;
+	float: right;
+}
+
+.comment {
+	width: 100%;
+	height: 50px;
+	background: salmon;
+	margin-bottom: 5px;
+}
+
+.comment .info {
+	width: 100px;
+	height: 100%;
+	background: darkturquoise;
+	float: left;
+}
+
+.comment .content {
+	height: 100%;
+	float:left;
+	background: red;
 }
