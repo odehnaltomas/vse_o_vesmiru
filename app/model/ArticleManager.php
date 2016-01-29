@@ -53,7 +53,10 @@ class ArticleManager extends BaseManager
      */
     public function getComments($articleId, $locale){
         $article = $this->getArticle($articleId, $locale);
-        return $this->database->table(self::TABLE_COMMENT)->where(self::COMMENT_ARTICLE_ID, $article->id)->fetchAll();
+        return $this->database->table(self::TABLE_COMMENT)
+                    ->where(self::COMMENT_ARTICLE_ID, $article->id)
+                    ->order(self::COMMENT_CREATED . ' DESC')
+                    ->fetchAll();
     }
 
 
@@ -65,7 +68,7 @@ class ArticleManager extends BaseManager
         $languageId = $this->languageManager->getLanguageId($locale);
         return $this->database->table(self::TABLE_ARTICLE)
                     ->where(self::ARTICLE_COLUMN_LANGUAGE_ID ,$languageId)
-                    ->order('created DESC');
+                    ->order(self::ARTICLE_COLUMN_CREATED . ' DESC');
     }
 
 
@@ -124,5 +127,11 @@ class ArticleManager extends BaseManager
             self::COMMENT_USER_ID => $userId,
             self::COMMENT_CONTENT => $content
         ));
+    }
+
+    public function getArticlesToTranslate(){
+        return $this->database->table(self::TABLE_ARTICLE)
+                    ->where(self::ARTICLE_COLUMN_TRANSLATION_ID, NULL)
+                    ->order(self::ARTICLE_COLUMN_CREATED);
     }
 }

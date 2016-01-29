@@ -70,6 +70,7 @@ body {
 #content {
 	background: white;
 	width: 930px;
+	min-height: 500px;
 	padding: 10px 15px;
 }
 
@@ -222,20 +223,58 @@ form .error {
 
 .comment {
 	width: 100%;
-	height: 50px;
+	min-height: 50px;
 	background: salmon;
 	margin-bottom: 5px;
+	display: block;
+	overflow: hidden;
+	border: solid
 }
 
 .comment .info {
-	width: 100px;
-	height: 100%;
-	background: darkturquoise;
+	width: 10%;
+	min-height: 40px;
 	float: left;
 }
 
 .comment .content {
-	height: 100%;
-	float:left;
-	background: red;
+	box-sizing: border-box;
+	min-height: 40px;
+	width: 90%;
+	float: right;
+	background: white;
+	padding: 5px;
+	border: solid black 1px;
+}
+
+.comment .head {
+	float: left;
+	width: 90%;
+	height: 1.5em;
+}
+
+#translation_table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#translation_table .row:hover {
+	background: #b7b7b7;
+}
+
+#translation_table td {
+	border: solid black 2px;
+	padding: 5px;
+	width: 20px;
+	height: 20px;
+}
+
+#translation_table .icons {
+	vertical-align: middle;
+	text-align: center;
+}
+
+#translation_table img {
+	width: 32px;
+	height: 32px;
 }

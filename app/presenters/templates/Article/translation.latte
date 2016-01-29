@@ -1,0 +1,36 @@
+{block content}
+<h1>Chybějící překlady článků</h1>
+<table id="translation_table">
+    <tr>
+        <th>Článek</th>
+        <th>CZ</th>
+        <th>EN</th>
+        <th>Datum Přidání</th>
+    </tr>
+    {foreach $articles as $article}
+        <tr class="row">
+            <td>
+                {$article->title}
+            </td>
+            <td class="icons">
+                {if $article->language_id === 1}
+                    <img src="{$basePath}/images/success.png">
+                    {else}
+                        <img src="{$basePath}/images/error.png">
+                {/if}
+            </td>
+
+            <td class="icons">
+                {if $article->language_id === 2}
+                    <img src="{$basePath}/images/success.png">
+                    {else}
+                        <img src="{$basePath}/images/error.png">
+                {/if}
+            </td>
+
+            <td>
+                {$article->created|date:"j.n. Y, H:i"}
+            </td>
+        </tr>
+    {/foreach}
+</table>

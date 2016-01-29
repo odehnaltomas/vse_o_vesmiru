@@ -9,9 +9,15 @@
         {foreach $comments as $comment}
             <div class="comment">
                 <div class="info">
-                ahdofs
+                ahdosf
                 </div>
-                <div class="content">{$comment->content}</div>
+
+                <div class="head">
+                    {$comment->user['username']} |
+                    {$comment->created|date:"j.n. Y, H:i"}
+                </div>
+
+                <div class="content">{!$comment->content|nl2br}</div>
             </div>
         {/foreach}
 

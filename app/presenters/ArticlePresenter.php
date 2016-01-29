@@ -178,4 +178,11 @@ class ArticlePresenter extends BasePresenter
         $this->template->article = $article;
         $this->template->comments = $this->articleManager->getComments($articleId, $this->locale);
     }
+
+
+    public function renderTranslation(){
+        $articles = $this->articleManager->getArticlesToTranslate();
+
+        $this->template->articles = $articles;
+    }
 }
