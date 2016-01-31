@@ -241,16 +241,61 @@ form .error {
 	box-sizing: border-box;
 	min-height: 40px;
 	width: 90%;
-	float: right;
+	float: left;
 	background: white;
 	padding: 5px;
 	border: solid black 1px;
 }
 
+.comment .rating {
+	width: 100px;
+	height: 1.5em;
+	float: right;
+	margin: 1px 3px 1px 3px;
+}
+
+.comment .rating .dislike {
+	background: url("../images/dislike.png") no-repeat;
+	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
+.comment .rating .dislike:hover {
+	background: url("../images/dislike_black.png") no-repeat;
+	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
+.comment .rating .like {
+	background: url("../images/like.png") no-repeat;
+	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
+.comment .rating .like:hover {
+	background: url("../images/like_black.png") no-repeat;
+	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
+.comment .rating span {
+	font-family: x360;
+	font-size: 1.0em;
+	float: right;
+}
+
 .comment .head {
 	float: left;
 	width: 90%;
-	height: 1.5em;
+	height: 1.7em;
 }
 
 #translation_table {

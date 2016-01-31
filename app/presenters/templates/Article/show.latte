@@ -15,10 +15,14 @@
                 <div class="head">
                     {$comment->user['username']} |
                     {$comment->created|date:"j.n. Y, H:i"}
+                    <div class="rating">
+                        <div class="dislike"></div>
+                        <span>1000</span>
+                        <div class="like"></div>
+                    </div>
                 </div>
 
                 <div class="content">{!$comment->content|nl2br}</div>
-                <div class="rating"></div>
             </div>
         {/foreach}
 
