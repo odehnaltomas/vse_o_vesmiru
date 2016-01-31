@@ -5,6 +5,7 @@
  * Date: 2. 12. 2015
  * Time: 16:20
  */
+//TODO: možnost psaní překladů
 
 namespace App\Presenters;
 

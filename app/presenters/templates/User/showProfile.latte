@@ -1,0 +1,40 @@
+{block content}
+    <h1>Tvůj profil</h1>
+    <table>
+        <tr>
+            <td>Jméno:</td>
+            <td>{$userData->first_name}</td>
+        </tr>
+
+        <tr>
+            <td>Příjmení:</td>
+            <td>{$userData->last_name}</td>
+        </tr>
+
+        <tr>
+            <td>Email:</td>
+            <td>
+            {if $userData->email}
+                {$userData->email}
+                {else}
+                Nevyplněno
+            {/if}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Pohlaví:</td>
+            <td>{$userData->sex[$locale.'_sex']}</td>
+        </tr>
+
+        <tr>
+            <td>Typ uživatele:</td>
+            <td>{$userData->role[$locale.'_role']}</td>
+        </tr>
+
+        <tr>
+            <td>Napsaných komenářů:</td>
+            <td>{$numberOfComments}</td>
+        </tr>
+
+    </table>

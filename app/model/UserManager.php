@@ -52,6 +52,16 @@ class UserManager extends BaseManager
 			throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateUsername");
 		}
 	}
+
+
+	public function getUserData($userId){
+		return $this->database->table(self::TABLE_USER)->get($userId);
+	}
+
+
+	public function getUserComments($userId){
+		return $this->database->table(self::TABLE_COMMENT)->where(self::COMMENT_USER_ID, $userId);
+	}
 }
 
 
