@@ -1,5 +1,5 @@
 $(function(){
-
+    $.nette.init();
 });
 
 

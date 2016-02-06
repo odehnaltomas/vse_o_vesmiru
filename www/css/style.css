@@ -224,7 +224,7 @@ form .error {
 .comment {
 	width: 100%;
 	min-height: 50px;
-	background: salmon;
+	background: rgba(227, 188, 203, 0.61);
 	margin-bottom: 5px;
 	display: block;
 	overflow: hidden;
@@ -248,7 +248,7 @@ form .error {
 }
 
 .comment .rating {
-	width: 100px;
+	width: 160px;
 	height: 1.5em;
 	float: right;
 	margin: 1px 3px 1px 3px;
@@ -260,10 +260,11 @@ form .error {
 	width: 1.5em;
 	height: 1.5em;
 	float: right;
+	margin-left: 10px;
 }
 
 .comment .rating .dislike:hover {
-	background: url("../images/dislike_black.png") no-repeat;
+	background: url("../images/dislike_color.png") no-repeat;
 	background-size: contain;
 	width: 1.5em;
 	height: 1.5em;
@@ -279,7 +280,7 @@ form .error {
 }
 
 .comment .rating .like:hover {
-	background: url("../images/like_black.png") no-repeat;
+	background: url("../images/like_color.png") no-repeat;
 	background-size: contain;
 	width: 1.5em;
 	height: 1.5em;
@@ -290,6 +291,7 @@ form .error {
 	font-family: x360;
 	font-size: 1.0em;
 	float: right;
+	margin-left: 10px;
 }
 
 .comment .head {
