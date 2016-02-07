@@ -51,12 +51,64 @@ class ArticleManager extends BaseManager
      * @param $locale
      * @return array|Nette\Database\Table\IRow[]
      */
-    public function getComments($articleId, $locale){
-        $article = $this->getArticle($articleId, $locale);
+    public function getComments($articleId){
+        $article = $this->getArticle($articleId);
         return $this->database->table(self::TABLE_COMMENT)
-                    ->where(self::COMMENT_ARTICLE_ID, $article->id)
+                    ->where(self::COMMENT_ARTICLE_ID, $articleId)
                     ->order(self::COMMENT_CREATED . ' DESC')
                     ->fetchAll();
+    }
+
+
+    public function getCommentsRating($articleId){
+        $ratingsArray = array();
+
+        $comments = $this->getComments($articleId);
+        foreach( $comments as $comment){
+            $ratingsArray[$comment->id] = $this->database->query('SELECT R.*
+                                                                FROM comment_rating R RIGHT JOIN (SELECT C.id
+                                                                FROM comment C LEFT JOIN article A
+                                                                ON C.article_id = A.id WHERE A.id = '. $articleId .') C
+                                                                ON R.comment_id = C.id WHERE C.id = '. $comment->id)->fetchAll();
+        }
+        return $ratingsArray;
+    }
+
+    //TODO: vyresit vraceni pro sablonu
+    public function getUserRatings($articleId, $userId=NULL){
+        $ratings =$this->database->query('SELECT R.*
+                                        FROM comment_rating R RIGHT JOIN (SELECT C.id
+                                        FROM comment C LEFT JOIN article A
+                                        ON C.article_id = A.id WHERE A.id = '. $articleId .') C
+                                        ON R.comment_id = C.id WHERE R.user_id = "'. $userId.'"')->fetchAll();
+        $ratArray = array();
+        foreach($ratings as $rating){
+            $ratArray[$rating->comment_id] = $rating;
+        }
+        return $ratArray;
+    }
+
+
+    public function getRating($articleId){
+        $array = $this->getCommentsRating($articleId);
+        $values = array();
+        foreach($array as $key => $comment){
+            $value = 0;
+            foreach($comment as $rating){
+                $value += $rating->value;
+            }
+            $values[$key] = $value;
+        }
+        return $values;
+    }
+
+
+    public function addCommentRating($commentId, $userId, $value){
+        $this->database->table(self::TABLE_COMMENT_RATING)->insert(array(
+            self::COMMENT_RATING_USER_ID => $userId,
+            self::COMMENT_RATING_COMMENT_ID => $commentId,
+            self::COMMENT_RATING_VALUE => $value
+        ));
     }
 
 
@@ -107,8 +159,7 @@ class ArticleManager extends BaseManager
                 self::ARTICLE_COLUMN_TITLE => $title,
                 self::ARTICLE_COLUMN_CAPTION => $caption,
                 self::ARTICLE_COLUMN_CONTENT => $content,
-                self::ARTICLE_COLUMN_USER_ID => $id,
-                self::ARTICLE_COLUMN_ARTICLE_RATING => 0
+                self::ARTICLE_COLUMN_USER_ID => $id
             ));
         } catch(Nette\Database\UniqueConstraintViolationException $e) {
             throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateTitle");

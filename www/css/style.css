@@ -228,7 +228,7 @@ form .error {
 	margin-bottom: 5px;
 	display: block;
 	overflow: hidden;
-	border: solid
+	border: solid black 2px;
 }
 
 .comment .info {
@@ -244,7 +244,8 @@ form .error {
 	float: left;
 	background: white;
 	padding: 5px;
-	border: solid black 1px;
+	border-left: solid black 1px;
+	border-top: solid black 1px;
 }
 
 .comment .rating {
@@ -263,6 +264,15 @@ form .error {
 	margin-left: 10px;
 }
 
+.comment .rating .dislike-pressed{
+	background: url("../images/dislike_color.png") no-repeat;
+	background-size: contain;
+	margin-left: 10px;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
 .comment .rating .dislike:hover {
 	background: url("../images/dislike_color.png") no-repeat;
 	background-size: contain;
@@ -274,6 +284,15 @@ form .error {
 .comment .rating .like {
 	background: url("../images/like.png") no-repeat;
 	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
+.comment .rating .like-pressed {
+	background: url("../images/like_color.png") no-repeat;
+	background-size: contain;
+	margin-left: 10px;
 	width: 1.5em;
 	height: 1.5em;
 	float: right;

@@ -60,6 +60,11 @@ abstract class BaseManager extends Object
         COMMENT_USER_ID = 'user_id',
         COMMENT_CONTENT = 'content',
         COMMENT_CREATED = 'created',
-        COMMENT_RATING_ID = 'comment_rating_id';
+
+    TABLE_COMMENT_RATING = 'comment_rating',
+        COMMENT_RATING_ID = 'id',
+        COMMENT_RATING_USER_ID = 'user_id',
+        COMMENT_RATING_COMMENT_ID = 'comment_id',
+        COMMENT_RATING_VALUE = 'value';
 
 }

@@ -6,25 +6,40 @@
     <h2>Komentáře</h2>
     {control commentForm}
     {if $comments}
-        {foreach $comments as $comment}
-            <div class="comment">
-                <div class="info">
-                ahdosf
-                </div>
-
-                <div class="head">
-                    {$comment->user['username']} |
-                    {$comment->created|date:"j.n. Y, H:i"}
-                    <div class="rating">
-                        <a href="#"><div class="dislike"></div></a>
-                        <span>1000</span>
-                        <a href="#"><div class="like"></div></a>
+        {snippet comments}
+            {foreach $comments as $comment}
+                <div class="comment">
+                    <div class="info">
+                    ahdosf
                     </div>
-                </div>
 
-                <div class="content">{!$comment->content|nl2br}</div>
-            </div>
-        {/foreach}
+                    <div class="head">
+                        {$comment->user['username']} |
+                        {$comment->created|date:"j.n. Y, H:i"}
+                        <div class="rating">
+                            {ifset $userRatings[$comment->id]}
+                                {if $userRatings[$comment->id]['value'] === -1}
+                                    <a n:href="dislike! $comment->id" class="ajax"><div class="dislike-pressed"></div></a>
+                                    <span>{$ratingValues[$comment->id]}</span>
+                                    <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
+                                    {else}
+                                    <a n:href="dislike! $comment->id" class="ajax"><div class="dislike"></div></a>
+                                    <span>{$ratingValues[$comment->id]}</span>
+                                    <a n:href="like! $comment->id" class="ajax"><div class="like-pressed"></div></a>
+                                {/if}
+                                {else}
+                                <a n:href="dislike! $comment->id" class="ajax"><div class="dislike"></div></a>
+                                <span>{$ratingValues[$comment->id]}</span>
+                                <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
+                            {/ifset}
+
+                        </div>
+                    </div>
+
+                    <div class="content">{!$comment->content|nl2br}</div>
+                </div>
+            {/foreach}
+        {/snippet}
 
         {else}
         {_ templates.article.noComment}

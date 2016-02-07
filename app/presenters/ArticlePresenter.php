@@ -177,7 +177,25 @@ class ArticlePresenter extends BasePresenter
         }
 
         $this->template->article = $article;
-        $this->template->comments = $this->articleManager->getComments($articleId, $this->locale);
+        $this->template->comments = $this->articleManager->getComments($articleId);
+        $this->template->userRatings = $this->articleManager->getUserRatings($articleId, $this->user->getId());
+        $this->template->ratingValues = $this->articleManager->getRating($articleId);
+    }
+
+
+    public function handleLike($commentId){
+        $this->articleManager->addCommentRating($commentId, $this->user->getId(), 1);
+        if($this->isAjax()){
+            $this->redrawControl('comments');
+        }
+    }
+
+
+    public function handleDislike($commentId){
+        $this->articleManager->addCommentRating($commentId, $this->user->getId(), -1);
+        if($this->isAjax()){
+            $this->redrawControl('comments');
+        }
     }
 
 
