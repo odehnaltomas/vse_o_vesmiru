@@ -48,7 +48,6 @@ class ArticleManager extends BaseManager
 
     /**
      * @param $articleId
-     * @param $locale
      * @return array|Nette\Database\Table\IRow[]
      */
     public function getComments($articleId){
@@ -60,6 +59,10 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $articleId
+     * @return array
+     */
     public function getCommentsRating($articleId){
         $ratingsArray = array();
 
@@ -74,7 +77,12 @@ class ArticleManager extends BaseManager
         return $ratingsArray;
     }
 
-    //TODO: vyresit vraceni pro sablonu
+
+    /**
+     * @param $articleId
+     * @param null $userId
+     * @return array
+     */
     public function getUserRatings($articleId, $userId=NULL){
         $ratings =$this->database->query('SELECT R.*
                                         FROM comment_rating R RIGHT JOIN (SELECT C.id
@@ -89,6 +97,10 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $articleId
+     * @return array
+     */
     public function getRating($articleId){
         $array = $this->getCommentsRating($articleId);
         $values = array();
@@ -103,6 +115,27 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $userId
+     * @param $commentId
+     * @param $value
+     * @return int
+     */
+    public function alreadyRated($userId, $commentId, $value){
+        $row = $this->database->table(self::TABLE_COMMENT_RATING)->where(
+            self::COMMENT_RATING_USER_ID. '=? AND ' .self::COMMENT_RATING_COMMENT_ID. '=? AND ' .self::COMMENT_RATING_VALUE. '=?',
+            $userId, $commentId, $value)->fetch();
+        if($row) {
+            return $row->delete();
+        }
+        return 0;
+    }
+
+    /**
+     * @param $commentId
+     * @param $userId
+     * @param $value
+     */
     public function addCommentRating($commentId, $userId, $value){
         $this->database->table(self::TABLE_COMMENT_RATING)->insert(array(
             self::COMMENT_RATING_USER_ID => $userId,
@@ -167,6 +200,11 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $values
+     * @param $articleId
+     * @param $userId
+     */
     public function addComment($values, $articleId, $userId){
         $data = array();
         foreach ($values as $value){
@@ -180,6 +218,10 @@ class ArticleManager extends BaseManager
         ));
     }
 
+
+    /**
+     * @return Nette\Database\Table\Selection
+     */
     public function getArticlesToTranslate(){
         return $this->database->table(self::TABLE_ARTICLE)
                     ->where(self::ARTICLE_COLUMN_TRANSLATION_ID, NULL)

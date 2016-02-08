@@ -34,7 +34,7 @@ class AuthorizatorFactory
 
         $authorizator->deny('user', 'sign', array('in', 'up'));
         $authorizator->allow('user', 'sign', 'out');
-        $authorizator->allow('user', 'comment', 'write');
+        $authorizator->allow('user', 'comment', array('write', 'like', 'dislike'));
 
         $authorizator->allow('moderator', 'article', array('add', 'edit'));
 

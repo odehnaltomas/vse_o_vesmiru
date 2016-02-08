@@ -180,19 +180,16 @@ class ArticlePresenter extends BasePresenter
         $this->template->comments = $this->articleManager->getComments($articleId);
         $this->template->userRatings = $this->articleManager->getUserRatings($articleId, $this->user->getId());
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
-        $this->template->buttonsColor = array(
-            'like' => 'like',
-            'like-pressed' => 'like-pressed',
-            'dislike' => 'dislike',
-            'dislike-pressed' => 'dislike-pressed',
-            'like-gray' => 'like-gray',
-            'dislike-gray' => 'dislike-gray'
-        );
+        $this->template->user = $this->user;
     }
 
 
-    public function handleLike($commentId){
-        $this->articleManager->addCommentRating($commentId, $this->user->getId(), 1);
+    public function handleLike($commentId) {
+        if(!$this->articleManager->alreadyRated($this->user->getId(), $commentId, 1)) {
+            $this->articleManager->alreadyRated($this->user->getId(), $commentId, -1);
+            $this->articleManager->addCommentRating($commentId, $this->user->getId(), 1);
+        }
+
         if($this->isAjax()){
             $this->redrawControl('comments');
         }
@@ -200,7 +197,11 @@ class ArticlePresenter extends BasePresenter
 
 
     public function handleDislike($commentId){
-        $this->articleManager->addCommentRating($commentId, $this->user->getId(), -1);
+        if(!$this->articleManager->alreadyRated($this->user->getId(), $commentId, -1)) {
+            $this->articleManager->alreadyRated($this->user->getId(), $commentId, 1);
+            $this->articleManager->addCommentRating($commentId, $this->user->getId(), -1);
+        }
+
         if($this->isAjax()){
             $this->redrawControl('comments');
         }

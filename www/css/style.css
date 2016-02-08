@@ -264,6 +264,15 @@ form .error {
 	margin-left: 10px;
 }
 
+.comment .rating .dislike-gray {
+	background: url("../images/dislike_gray.png") no-repeat;
+	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+	margin-left: 10px;
+}
+
 .comment .rating .dislike-pressed{
 	background: url("../images/dislike_color.png") no-repeat;
 	background-size: contain;
@@ -289,6 +298,14 @@ form .error {
 	float: right;
 }
 
+.comment .rating .like-gray {
+	background: url("../images/like_gray.png") no-repeat;
+	background-size: contain;
+	width: 1.5em;
+	height: 1.5em;
+	float: right;
+}
+
 .comment .rating .like-pressed {
 	background: url("../images/like_color.png") no-repeat;
 	background-size: contain;
@@ -306,8 +323,24 @@ form .error {
 	float: right;
 }
 
-.comment .rating span {
+.comment .rating .value {
 	font-family: x360;
+	font-size: 1.0em;
+	float: right;
+	margin-left: 10px;
+}
+
+.comment .rating .value1 {
+	font-family: x360;
+	color: #00b004;
+	font-size: 1.0em;
+	float: right;
+	margin-left: 10px;
+}
+
+.comment .rating .value- {
+	font-family: x360;
+	color: #ff0000;
 	font-size: 1.0em;
 	float: right;
 	margin-left: 10px;

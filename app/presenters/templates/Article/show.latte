@@ -21,15 +21,29 @@
                             {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === -1}
                                 <a n:href="dislike! $comment->id" class="ajax"><div class="dislike-pressed"></div></a>
                                 {else}
-                                <a n:href="dislike! $comment->id" class="ajax"><div class="dislike"></div></a>
+                                {if $user->isAllowed('comment', 'dislike')}
+                                    <a n:href="dislike! $comment->id" class="ajax"><div class="dislike"></div></a>
+                                    {else}
+                                    <div class="dislike-gray"></div>
+                                {/if}
                             {/if}
 
-                                <span>{$ratingValues[$comment->id]}</span>
+                                {if $ratingValues[$comment->id] > 0}
+                                <span class="value1">+{$ratingValues[$comment->id]}</span>
+                                    {elseif $ratingValues[$comment->id] < 0}
+                                    <span class="value-">{$ratingValues[$comment->id]}</span>
+                                    {else}
+                                    <span class="value">{$ratingValues[$comment->id]}</span>
+                                {/if}
 
                             {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === 1}
                                 <a n:href="like! $comment->id" class="ajax"><div class="like-pressed"></div></a>
                                 {else}
-                                <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
+                                {if $user->isAllowed('comment', 'dislike')}
+                                    <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
+                                    {else}
+                                    <div class="like-gray"></div>
+                                {/if}
                             {/if}
 
                         </div>
