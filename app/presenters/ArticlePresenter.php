@@ -180,6 +180,14 @@ class ArticlePresenter extends BasePresenter
         $this->template->comments = $this->articleManager->getComments($articleId);
         $this->template->userRatings = $this->articleManager->getUserRatings($articleId, $this->user->getId());
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
+        $this->template->buttonsColor = array(
+            'like' => 'like',
+            'like-pressed' => 'like-pressed',
+            'dislike' => 'dislike',
+            'dislike-pressed' => 'dislike-pressed',
+            'like-gray' => 'like-gray',
+            'dislike-gray' => 'dislike-gray'
+        );
     }
 
 

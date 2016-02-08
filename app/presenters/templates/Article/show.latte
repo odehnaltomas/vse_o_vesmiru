@@ -17,21 +17,20 @@
                         {$comment->user['username']} |
                         {$comment->created|date:"j.n. Y, H:i"}
                         <div class="rating">
-                            {ifset $userRatings[$comment->id]}
-                                {if $userRatings[$comment->id]['value'] === -1}
-                                    <a n:href="dislike! $comment->id" class="ajax"><div class="dislike-pressed"></div></a>
-                                    <span>{$ratingValues[$comment->id]}</span>
-                                    <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
-                                    {else}
-                                    <a n:href="dislike! $comment->id" class="ajax"><div class="dislike"></div></a>
-                                    <span>{$ratingValues[$comment->id]}</span>
-                                    <a n:href="like! $comment->id" class="ajax"><div class="like-pressed"></div></a>
-                                {/if}
+
+                            {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === -1}
+                                <a n:href="dislike! $comment->id" class="ajax"><div class="dislike-pressed"></div></a>
                                 {else}
                                 <a n:href="dislike! $comment->id" class="ajax"><div class="dislike"></div></a>
+                            {/if}
+
                                 <span>{$ratingValues[$comment->id]}</span>
+
+                            {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === 1}
+                                <a n:href="like! $comment->id" class="ajax"><div class="like-pressed"></div></a>
+                                {else}
                                 <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
-                            {/ifset}
+                            {/if}
 
                         </div>
                     </div>
