@@ -227,4 +227,9 @@ class ArticleManager extends BaseManager
                     ->where(self::ARTICLE_COLUMN_TRANSLATION_ID, NULL)
                     ->order(self::ARTICLE_COLUMN_CREATED);
     }
+
+
+    public function saveArticleRating($articleId, $value){
+
+    }
 }

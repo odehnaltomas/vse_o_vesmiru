@@ -37,7 +37,16 @@ class ArticlePresenter extends BasePresenter
     /** @var array */
     private $language = array(
         'cs' => 'forms.article.czech',
-        'en' => 'forms.article.english',
+        'en' => 'forms.article.english'
+    );
+
+    /** @var array */
+    private $articleRating = array(
+        1 => 1,
+        2 => 2,
+        3 => 3,
+        4 => 4,
+        5 => 5
     );
 
     /**
@@ -164,6 +173,8 @@ class ArticlePresenter extends BasePresenter
     }
 
 
+    //TODO: karma u uzivatelu
+    //TODO: hodnoceni clanku
     /**
      * @param $articleId
      */
@@ -181,6 +192,7 @@ class ArticlePresenter extends BasePresenter
         $this->template->userRatings = $this->articleManager->getUserRatings($articleId, $this->user->getId());
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
         $this->template->user = $this->user;
+        $this->template->articleRating = $this->articleRating;
     }
 
 
@@ -212,5 +224,9 @@ class ArticlePresenter extends BasePresenter
         $articles = $this->articleManager->getArticlesToTranslate();
 
         $this->template->articles = $articles;
+    }
+
+    public function handleRateArticle($articleId, $value){
+
     }
 }

@@ -2,6 +2,16 @@
 {if $article}
     <h1>{$article->title}</h1>
     {!$article->content}
+
+    <div class='movie_choice'>
+        <div id="r1" class="rate_widget">
+            {foreach $articleRating as $value}
+            <a n:href="rateArticle! $article->id" class="ajax ratings_stars"></a>
+            {/foreach}
+            <div class="total_votes">vote data</div>
+        </div>
+    </div>
+
     <hr>
     <h2>Komentáře</h2>
     {control commentForm}
