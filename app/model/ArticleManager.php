@@ -175,7 +175,7 @@ class ArticleManager extends BaseManager
      * @param $values
      * @throws App\Exceptions\DuplicateNameException
      */
-    public function addArticle($id, $values) {
+    public function addArticle($userId, $values) {
 
         $data = array();
         foreach($values as $value){
@@ -192,8 +192,44 @@ class ArticleManager extends BaseManager
                 self::ARTICLE_COLUMN_TITLE => $title,
                 self::ARTICLE_COLUMN_CAPTION => $caption,
                 self::ARTICLE_COLUMN_CONTENT => $content,
-                self::ARTICLE_COLUMN_USER_ID => $id
+                self::ARTICLE_COLUMN_USER_ID => $userId
             ));
+        } catch(Nette\Database\UniqueConstraintViolationException $e) {
+            throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateTitle");
+        }
+    }
+
+
+    /**
+     * @param $userId
+     * @param $values
+     * @throws App\Exceptions\DuplicateNameException
+     */
+    public function addTranslation($userId, $values){
+
+        $data = array();
+        foreach($values as $value){
+            $data[] = $value;
+        }
+
+        list($language, $title, $caption, $content, $originalArticleId) = $data;
+
+        $languageId = $this->languageManager->getLanguageId($language);
+
+        try {
+            $translation = $this->database->table(self::TABLE_ARTICLE)->insert(array(
+                self::ARTICLE_COLUMN_TRANSLATION_ID => $originalArticleId,
+                self::ARTICLE_COLUMN_LANGUAGE_ID => $languageId,
+                self::ARTICLE_COLUMN_TITLE => $title,
+                self::ARTICLE_COLUMN_CAPTION => $caption,
+                self::ARTICLE_COLUMN_CONTENT => $content,
+                self::ARTICLE_COLUMN_USER_ID => $userId
+            ));
+
+            $this->database->table(self::TABLE_ARTICLE)
+                ->where(self::ARTICLE_COLUMN_ID, $originalArticleId)
+                ->update(array(self::ARTICLE_COLUMN_TRANSLATION_ID => $translation->id));
+
         } catch(Nette\Database\UniqueConstraintViolationException $e) {
             throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateTitle");
         }

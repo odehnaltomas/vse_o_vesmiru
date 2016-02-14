@@ -109,6 +109,8 @@ class ArticlePresenter extends BasePresenter
     {
         try {
             $this->articleManager->addArticle($this->user->getId(), $values);
+            $this->flashMessage('Článek byl úspěšně uložen.');
+            $this->redirect('Article:articleList');
         } catch(App\Exceptions\DuplicateNameException $e) {
             $form->addError($this->translator->translate($e->getMessage()));
         }
@@ -220,6 +222,11 @@ class ArticlePresenter extends BasePresenter
     }
 
 
+    public function handleRateArticle($articleId, $value){
+
+    }
+
+
     public function renderTranslationList(){
         $articles = $this->articleManager->getArticlesToTranslate();
 
@@ -233,8 +240,10 @@ class ArticlePresenter extends BasePresenter
 
         if($article->language['language'] === 'cs') {
             $this['addTranslationForm']['language']->setDefaultValue('en');
+            $this['addTranslationForm']['language']->setDisabled(['cs']);
         } else {
             $this['addTranslationForm']['language']->setDefaultValue('cs');
+            $this['addTranslationForm']['language']->setDisabled(['en']);
         }
     }
 
@@ -267,13 +276,21 @@ class ArticlePresenter extends BasePresenter
 
         $form->addSubmit('submit', 'forms.article.save');
 
-        $form->onSuccess[] = array($this, 'addArticleFormSucceeded');
+        $form->onSuccess[] = array($this, 'addTranslationFormSucceeded');
         return $form;
     }
 
 
-    public function handleRateArticle($articleId, $value){
-
+    public function addTranslationFormSucceeded($form, $values){
+        if($this->user->isAllowed('translation', 'add')){
+            try {
+                $this->articleManager->addTranslation($this->user->getId(), $values);
+                $this->flashMessage('Překlad byl úspěšně uložen.');
+                $this->redirect('Article:articleList');
+            } catch(App\Exceptions\DuplicateNameException $e) {
+                $form->addError($this->translator->translate($e->getMessage()));
+            }
+        }
     }
 
 

@@ -11,8 +11,6 @@ $(function(){
             $(this).prevAll().andSelf().removeClass('ratings_over');
         }
     );
-
-    $('#inputLanguage_translation input').prop('disabled', true);
 });
 
 
