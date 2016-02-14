@@ -1,0 +1,22 @@
+{block content}
+
+<h1>Originální článek</h1>
+
+<h2>Titulek:</h2>
+    <p>{$article->title}</p>
+<hr>
+
+<h2>Popisek:</h2>
+    <p>{!$article->caption}</p>
+<hr>
+
+<h2>Obsah:</h2>
+    <p>{!$article->content}</p>
+<hr>
+
+<h2>Vytvořeno:</h2>
+    <p>{$article->created|date:'j.n. Y'}</p>
+<hr>
+
+<h2>Napsal:</h2>
+    <p>{$article->user['username']}</p>

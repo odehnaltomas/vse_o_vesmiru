@@ -1,36 +1,63 @@
 {block content}
-<h1>Chybějící překlady článků</h1>
-<table id="translation_table">
-    <tr>
-        <th>Článek</th>
-        <th>CZ</th>
-        <th>EN</th>
-        <th>Datum Přidání</th>
-    </tr>
-    {foreach $articles as $article}
-        <tr class="row">
-            <td>
-                {$article->title}
-            </td>
-            <td class="icons">
-                {if $article->language_id === 1}
-                    <img src="{$basePath}/images/success.png">
-                    {else}
-                        <img src="{$basePath}/images/error.png">
-                {/if}
-            </td>
+<h1>Překlad</h1>
+<a n:href="Article:translationOriginal $articleId" target="_blind">Původní článek</a>
+<div class="form">
+    {form addTranslationForm}
 
-            <td class="icons">
-                {if $article->language_id === 2}
-                    <img src="{$basePath}/images/success.png">
-                    {else}
-                        <img src="{$basePath}/images/error.png">
-                {/if}
-            </td>
+        <div class="error" n:if="$form->hasErrors()">
+                <ul>
+                    <li n:foreach="$form->errors as $error">{$error}</li>
+                </ul>
+        </div>
 
-            <td>
-                {$article->created|date:"j.n. Y, H:i"}
-            </td>
-        </tr>
-    {/foreach}
-</table>
+        <div class="component">
+                <div id="labelLanguage" class="label">
+                    {label language /}
+                </div>
+
+                <div id="inputLanguage_translation" class="input" >
+                    {input language}
+                </div>
+                <div class="cleaner"></div>
+        </div>
+
+        <div class="component">
+                <div id="labelTitle" class="label">
+                    {label title /}
+                </div>
+
+                <div id="inputTitle" class="input">
+                    {input title}
+                </div>
+                <div class="cleaner" />
+        </div>
+
+        <div class="component">
+                <div id="labelCaption" class="label">
+                    {label caption /}
+                </div>
+
+                <div id="inputCaption" class="input">
+                    {input caption}
+                </div>
+                <div class="cleaner" />
+        </div>
+
+        <div class="component">
+                <div class="label">
+                    {label content /}
+                </div>
+
+                <div class="input">
+                    {input content}
+                </div>
+        </div>
+
+        <div class="component">
+                <div class="input">
+                    {input submit}
+                </div>
+        </div>
+
+    {/form}
+</div>

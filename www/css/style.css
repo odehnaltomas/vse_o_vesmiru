@@ -377,7 +377,7 @@ form .error {
 	width: 32px;
 	height: 32px;
 }
-
+/*=´================================*/
 .rate_widget {
 	border:     1px solid #CCC;
 	overflow:   visible;
@@ -410,4 +410,13 @@ form .error {
 	font: 10px verdana, sans-serif;
 	margin: 0 auto 40px auto;
 	width: 180px;
+}
+/*=´================================*/
+
+#translation_table th {
+	font-family: x360;
+}
+
+#form .component .inputLanguage_translation {
+
 }

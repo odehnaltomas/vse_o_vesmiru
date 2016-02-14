@@ -220,13 +220,64 @@ class ArticlePresenter extends BasePresenter
     }
 
 
-    public function renderTranslation(){
+    public function renderTranslationList(){
         $articles = $this->articleManager->getArticlesToTranslate();
 
         $this->template->articles = $articles;
     }
 
+
+    public function actionTranslation($articleId){
+        $article = $this->articleManager->getArticle($articleId);
+        $this['addTranslationForm']['originalArticleId']->setDefaultValue($articleId);
+
+        if($article->language['language'] === 'cs') {
+            $this['addTranslationForm']['language']->setDefaultValue('en');
+        } else {
+            $this['addTranslationForm']['language']->setDefaultValue('cs');
+        }
+    }
+
+
+    public function renderTranslation($articleId){
+        $this->template->articleId = $articleId;
+    }
+
+
+    protected function createComponentAddTranslationForm()
+    {
+        $form = new Form;
+        $form->setTranslator($this->translator);
+
+        $form->addRadioList('language', 'forms.article.selectLanguage', $this->language)
+            ->setValue($this->locale)
+            ->getSeparatorPrototype()->setName(null);
+
+        $form->addText('title', 'forms.article.title')
+            ->setRequired('forms.article.requiredTitle');
+
+        $form->addTextArea('caption', 'forms.article.caption')
+            ->setRequired('forms.article.requiredCaption');
+
+        $form->addTextArea('content', 'forms.article.content')
+            ->setRequired('forms.article.requiredContent')
+            ->setAttribute('class', 'mceEditor_' . $this->locale);
+
+        $form->addHidden('originalArticleId');
+
+        $form->addSubmit('submit', 'forms.article.save');
+
+        $form->onSuccess[] = array($this, 'addArticleFormSucceeded');
+        return $form;
+    }
+
+
     public function handleRateArticle($articleId, $value){
 
+    }
+
+
+    public function renderTranslationOriginal($articleId){
+        $this->template->article = $this->articleManager->getArticle($articleId);
     }
 }
