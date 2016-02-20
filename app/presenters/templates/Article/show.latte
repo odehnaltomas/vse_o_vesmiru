@@ -26,6 +26,16 @@
                     <div class="head">
                         {$comment->user['username']} |
                         {$comment->created|date:"j.n. Y, H:i"}
+
+                        {ifset $user->identity->data['username']}
+                            {if $user->identity->data['username'] === $comment->user['username'] || $user->identity->roles[0] === "moderator" || $user->identity->roles[0] === "admin"}
+                                <a n:href="deleteComment! $comment->id" class="ajax delete"><div class="del-obr"></div></a>
+
+                                {else}
+                                <div class="delete-space"></div>
+                            {/if}
+                        {/ifset}
+
                         <div class="rating">
 
                             {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === -1}

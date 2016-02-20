@@ -6,6 +6,7 @@
  * Time: 22:29
  */
 //TODO: komentare
+//TODO: synchronizovat konstanty s databazi
 namespace App\Model;
 
 

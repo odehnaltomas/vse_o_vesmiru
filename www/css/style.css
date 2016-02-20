@@ -248,6 +248,28 @@ form .error {
 	border-top: solid black 1px;
 }
 
+.comment .delete {
+	height: 1.5em;
+	width: 32px;
+	float: right;
+	margin: 1px 3px 1px 3px;
+}
+
+.comment .delete .del-obr {
+	height: 1.5em;
+	width: 30px;
+	background: url("../images/del-comment.png") no-repeat;
+	background-size: contain;
+	float: right;
+}
+
+.comment .delete-space {
+	height: 1.5em;
+	width: 32px;
+	float: right;
+	margin: 1px 3px 1px 3px;
+}
+
 .comment .rating {
 	width: 160px;
 	height: 1.5em;

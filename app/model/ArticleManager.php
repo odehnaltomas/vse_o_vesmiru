@@ -255,6 +255,17 @@ class ArticleManager extends BaseManager
     }
 
 
+    public function delComment($commentId){
+        $this->database->table(self::TABLE_COMMENT_RATING)
+            ->where(self::COMMENT_RATING_COMMENT_ID, $commentId)
+            ->delete();
+
+        $this->database->table(self::TABLE_COMMENT)
+            ->where(self::COMMENT_ID, $commentId)
+            ->delete();
+    }
+
+
     /**
      * @return Nette\Database\Table\Selection
      */

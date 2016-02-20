@@ -221,6 +221,13 @@ class ArticlePresenter extends BasePresenter
         }
     }
 
+    public function handleDeleteComment($commentId){
+        $this->articleManager->delComment($commentId);
+        if($this->isAjax()){
+            $this->redrawControl('comments');
+        }
+    }
+
 
     public function handleRateArticle($articleId, $value){
 
