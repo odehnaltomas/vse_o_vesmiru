@@ -152,22 +152,13 @@ class ArticleManager extends BaseManager
     public function getArticles($locale){
         $languageId = $this->languageManager->getLanguageId($locale);
         return $this->database->table(self::TABLE_ARTICLE)
-                    ->where(self::ARTICLE_COLUMN_LANGUAGE_ID ,$languageId)
+                    ->where(self::ARTICLE_COLUMN_LANGUAGE_ID, $languageId)
+                    ->where(self::ARTICLE_COLUMN_DELETED, 1)
                     ->order(self::ARTICLE_COLUMN_CREATED . ' DESC');
     }
 
 
-    /**
-     * @param $locale
-     * @return int
-     */
-    public function getLangArticleSum($locale){
-        $languageId = $this->languageManager->getLanguageId($locale);
-        return $this->database->table(self::TABLE_ARTICLE)
-                    ->where(self::ARTICLE_COLUMN_LANGUAGE_ID, $languageId)
-                    ->count("id");
 
-    }
 
 
     /**
@@ -192,7 +183,8 @@ class ArticleManager extends BaseManager
                 self::ARTICLE_COLUMN_TITLE => $title,
                 self::ARTICLE_COLUMN_CAPTION => $caption,
                 self::ARTICLE_COLUMN_CONTENT => $content,
-                self::ARTICLE_COLUMN_USER_ID => $userId
+                self::ARTICLE_COLUMN_USER_ID => $userId,
+                self::ARTICLE_COLUMN_DELETED => 1
             ));
         } catch(Nette\Database\UniqueConstraintViolationException $e) {
             throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateTitle");
@@ -204,8 +196,6 @@ class ArticleManager extends BaseManager
         return $this->database->table(self::TABLE_ARTICLE)
                     ->where(self::ARTICLE_COLUMN_ID, $articleId)
                     ->update(array(self::ARTICLE_COLUMN_DELETED => 0));
-
-
     }
 
 
@@ -232,7 +222,8 @@ class ArticleManager extends BaseManager
                 self::ARTICLE_COLUMN_TITLE => $title,
                 self::ARTICLE_COLUMN_CAPTION => $caption,
                 self::ARTICLE_COLUMN_CONTENT => $content,
-                self::ARTICLE_COLUMN_USER_ID => $userId
+                self::ARTICLE_COLUMN_USER_ID => $userId,
+                self::ARTICLE_COLUMN_DELETED => 1
             ));
 
             $this->database->table(self::TABLE_ARTICLE)
@@ -281,6 +272,7 @@ class ArticleManager extends BaseManager
     public function getArticlesToTranslate(){
         return $this->database->table(self::TABLE_ARTICLE)
                     ->where(self::ARTICLE_COLUMN_TRANSLATION_ID, NULL)
+                    ->where(self::ARTICLE_COLUMN_DELETED, 1)
                     ->order(self::ARTICLE_COLUMN_CREATED);
     }
 

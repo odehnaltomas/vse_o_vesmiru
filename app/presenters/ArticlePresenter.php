@@ -5,7 +5,6 @@
  * Date: 2. 12. 2015
  * Time: 16:20
  */
-//TODO: možnost psaní překladů
 //TODO: upravit SQL dotazy, když by byl článek vymazán
 
 namespace App\Presenters;
@@ -176,21 +175,36 @@ class ArticlePresenter extends BasePresenter
     }
 
 
+    /**
+     * @param $articleId
+     */
+    public function actionShow($articleId){
+        $article = $this->articleManager->getArticle($articleId, $this->locale);
+        $articleLang = $this->languageManager->getLangugage($article->language_id);
+
+        if($article->deleted === 0){
+            $this->flashMessage('Tento článek byl vymazán!');
+            $this->redirect('Article:articleList');
+        }
+        if($this->locale !== $articleLang){
+            $id = $article->translation_id;
+            if($id !== NULL) {
+                $this->redirect('Article:show', array('articleId' => $id));
+            } else {
+                $this->flashMessage('Překlad neexistuje!');
+                $this->redirect('Article:articleList');
+            }
+        }
+    }
+
+
     //TODO: karma u uzivatelu
     //TODO: hodnoceni clanku
     /**
      * @param $articleId
      */
     public function renderShow($articleId){
-        $article = $this->articleManager->getArticle($articleId, $this->locale);
-        $articleLang = $this->languageManager->getLangugage($article->language_id);
-
-        if($this->locale !== $articleLang){
-            $id = $article->translation_id;
-            $this->redirect('Article:show', array('articleId' => $id));
-        }
-
-        $this->template->article = $article;
+        $this->template->article = $article = $this->articleManager->getArticle($articleId, $this->locale);
         $this->template->comments = $this->articleManager->getComments($articleId);
         $this->template->userRatings = $this->articleManager->getUserRatings($articleId, $this->user->getId());
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
