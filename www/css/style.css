@@ -441,3 +441,13 @@ form .error {
 
 #form .component .inputLanguage_translation {
 }
+
+td #karma-plus {
+	color: #00B004;
+	float: left;
+}
+
+td #karma-minus {
+	color: #FF0000;
+	float: left;
+}

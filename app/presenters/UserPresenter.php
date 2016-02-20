@@ -34,6 +34,7 @@ class UserPresenter extends BasePresenter
             $this->template->numberOfComments = $this->userManager->getUserComments($this->user->getId())->count($this->user->getId());
             $this->template->locale = $this->locale;
             $this->template->userData = $this->userManager->getUserData($this->user->getId());
+            $this->template->userKarma = $this->userManager->getUserKarma($this->user->getId());
         } else {
             throw new Nette\Application\UI\BadSignalException('spatne');
         }

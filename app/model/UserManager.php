@@ -62,6 +62,27 @@ class UserManager extends BaseManager
 	public function getUserComments($userId){
 		return $this->database->table(self::TABLE_COMMENT)->where(self::COMMENT_USER_ID, $userId);
 	}
+
+
+	public function getUserKarma($userId){
+		$rows = $this->database->query("SELECT CR.value
+										FROM comment_rating CR RIGHT JOIN
+											(SELECT id FROM comment WHERE user_id = $userId) AS C
+										ON CR.comment_id = C.id
+										WHERE CR.id IS NOT NULL")
+				->fetchAll();
+
+		$karma = array(
+			'plus' => 0,
+			'minus' => 0
+		);
+		foreach($rows as $row){
+			if($row->value === -1) $karma['minus']--;
+			else $karma['plus']++;
+		}
+
+		return $karma;
+	}
 }
 
 
