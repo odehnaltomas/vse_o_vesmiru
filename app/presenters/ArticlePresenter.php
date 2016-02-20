@@ -210,6 +210,7 @@ class ArticlePresenter extends BasePresenter
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
         $this->template->user = $this->user;
         $this->template->articleRating = $this->articleRating;
+        $this->template->usersKarma = $this->articleManager->getUsersKarma($articleId);
         $this['articleDelForm']['articleId']->setDefaultValue($articleId);
     }
 

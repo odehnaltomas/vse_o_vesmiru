@@ -78,7 +78,7 @@ class UserManager extends BaseManager
 		);
 		foreach($rows as $row){
 			if($row->value === -1) $karma['minus']--;
-			else $karma['plus']++;
+			elseif($row->value === 1) $karma['plus']++;
 		}
 
 		return $karma;
