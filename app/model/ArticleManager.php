@@ -200,6 +200,15 @@ class ArticleManager extends BaseManager
     }
 
 
+    public function delArticle($articleId){
+        return $this->database->table(self::TABLE_ARTICLE)
+                    ->where(self::ARTICLE_COLUMN_ID, $articleId)
+                    ->update(array(self::ARTICLE_COLUMN_DELETED => 0));
+
+
+    }
+
+
     /**
      * @param $userId
      * @param $values

@@ -50,6 +50,7 @@ abstract class BaseManager extends Object
         ARTICLE_COLUMN_CREATED = 'created',
         ARTICLE_COLUMN_USER_ID = 'user_id',
         ARTICLE_COLUMN_ARTICLE_RATING = 'article_rating_id',
+        ARTICLE_COLUMN_DELETED = 'deleted',
 
     TABLE_LANGUAGE = 'language',
         LANGUAGE_COLUMN_ID = 'id',

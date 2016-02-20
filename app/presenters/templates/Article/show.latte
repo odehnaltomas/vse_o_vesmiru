@@ -11,6 +11,9 @@
             <div class="total_votes">vote data</div>
         </div>
     </div>
+    {if $user->roles[0] === "moderator" || $user->roles[0] === "admin"}
+    {control articleDelForm}
+    {/if}
 
     <hr>
     <h2>Komentáře</h2>
@@ -28,7 +31,7 @@
                         {$comment->created|date:"j.n. Y, H:i"}
 
                         {ifset $user->identity->data['username']}
-                            {if $user->identity->data['username'] === $comment->user['username'] || $user->identity->roles[0] === "moderator" || $user->identity->roles[0] === "admin"}
+                            {if $user->identity->data['username'] === $comment->user['username'] || $user->roles[0] === "moderator" || $user->roles[0] === "admin"}
                                 <a n:href="deleteComment! $comment->id" class="ajax delete"><div class="del-obr"></div></a>
 
                                 {else}

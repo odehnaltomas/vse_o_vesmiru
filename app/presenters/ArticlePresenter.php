@@ -6,6 +6,7 @@
  * Time: 16:20
  */
 //TODO: možnost psaní překladů
+//TODO: upravit SQL dotazy, když by byl článek vymazán
 
 namespace App\Presenters;
 
@@ -195,6 +196,7 @@ class ArticlePresenter extends BasePresenter
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
         $this->template->user = $this->user;
         $this->template->articleRating = $this->articleRating;
+        $this['articleDelForm']['articleId']->setDefaultValue($articleId);
     }
 
 
@@ -303,5 +305,28 @@ class ArticlePresenter extends BasePresenter
 
     public function renderTranslationOriginal($articleId){
         $this->template->article = $this->articleManager->getArticle($articleId);
+    }
+
+
+    public function createComponentArticleDelForm(){
+
+        $form = new Form;
+        $form->setTranslator($this->translator);
+
+        $form->addHidden('articleId');
+        $form->addSubmit('submit', 'Smazat článek');
+
+        $form->onSuccess[] = array($this, 'articleDelFormSucceeded');
+        return $form;
+    }
+
+
+    public function articleDelFormSucceeded($form, $values){
+        if($this->user->isAllowed('article', 'del')){
+            if($this->articleManager->delArticle($values->articleId)){
+                $this->flashMessage('Článek byl úspěšně vymazán!');
+                $this->redirect('Article:articleList');
+            }
+        }
     }
 }
