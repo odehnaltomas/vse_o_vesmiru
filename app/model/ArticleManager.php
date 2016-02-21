@@ -162,11 +162,11 @@ class ArticleManager extends BaseManager
         $rows = $this->database->query("SELECT CR.value, C.id, C.user_id
                                         FROM comment_rating CR RIGHT JOIN
                                             (SELECT comment.id, comment.user_id FROM comment LEFT JOIN
-                                            (SELECT comment.user_id
-                                             FROM comment LEFT JOIN user
-                                             ON comment.user_id = user.id
-                                             WHERE comment.article_id = 22
-                                             GROUP BY user.id) AS USER
+                                                (SELECT comment.user_id
+                                                 FROM comment LEFT JOIN user
+                                                 ON comment.user_id = user.id
+                                                 WHERE comment.article_id = $articleId
+                                                 GROUP BY user.id) AS USER
                                             ON comment.user_id = USER.user_id) AS C
                                         ON CR.comment_id = C.id
                                         ORDER BY C.id")

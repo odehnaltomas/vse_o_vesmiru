@@ -5,7 +5,6 @@
  * Date: 2. 12. 2015
  * Time: 16:20
  */
-//TODO: upravit SQL dotazy, když by byl článek vymazán
 
 namespace App\Presenters;
 
@@ -198,7 +197,7 @@ class ArticlePresenter extends BasePresenter
     }
 
 
-    //TODO: karma u uzivatelu
+
     //TODO: hodnoceni clanku
     /**
      * @param $articleId

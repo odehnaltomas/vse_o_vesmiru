@@ -232,9 +232,11 @@ form .error {
 }
 
 .comment .info {
+	box-sizing: border-box;
 	width: 10%;
 	min-height: 40px;
 	float: left;
+	padding-left: 6px;
 }
 
 .comment .content {
@@ -444,10 +446,12 @@ form .error {
 
 .karma-plus {
 	color: #00B004;
+	font-family: x360;
 	float: left;
 }
 
 .karma-minus {
 	color: #FF0000;
+	font-family: x360;
 	float: left;
 }
