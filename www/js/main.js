@@ -1,4 +1,4 @@
-$(function(){
+$(document).ready(function(){
     $.nette.init();
 
     $('.ratings_stars').hover(
@@ -11,6 +11,12 @@ $(function(){
             $(this).prevAll().andSelf().removeClass('ratings_over');
         }
     );
+
+    $('.dropdownMenu').hover(function() {
+        $(this).find('.dropdown-content').slideDown(200);
+    }, function() {
+        $(this).find('.dropdown-content').slideUp(200);
+    });
 });
 
 

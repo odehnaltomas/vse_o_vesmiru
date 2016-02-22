@@ -20,6 +20,32 @@
 	<div id="header">
             <div id="header_content" class="center">
                 <a n:href="Homepage:"><div id="logo"></div></a>
+
+                <div class="menu">
+                        <div class="dropdownMenu">
+                                <a n:href="Article:"><button class="menuButton">Články</button></a>
+                                <div class="dropdown-content">
+                                        {if $user->isAllowed('article', 'add')}
+                                        <a n:href="Article:add">Přidat článek</a>
+                                        {/if}
+
+                                        <a n:href="Article:articleList">Seznam článků</a>
+
+                                        {if $user->isAllowed('translation', 'list')}
+                                        <a n:href="Article:translationList">Překlady</a>
+                                        {/if}
+                                </div>
+                        </div>
+
+                        <div class="dropdownMenu">
+                                <a n:href="User:"><button class="menuButton">Uživatel</button></a>
+                                <div class="dropdown-content">
+                                        <a n:href="User:showProfile">Profil uživatele</a>
+                                        <a href="#">Seznam uživatelů</a>
+                                </div>
+                        </div>
+                </div>
+
                 {if $user->isLoggedIn()}
                     <a n:href="Sign:out" class="list">{_ forms.sign.signOut}</a>
                 {/if}
@@ -33,12 +59,13 @@
 
     <div class="center">
             <div id="middle">
-                    <div id="localization">
-                            <a href={link this locale=>en}><div id="english"></div></a>
+            </div>
 
-                            <a href={link this locale=>cs}><div id="czech"></div></a>
-                            <div class="cleaner"></div>
-                    </div>
+            <div id="localization">
+                    <a href={link this locale=>en}><div id="english"></div></a>
+
+                    <a href={link this locale=>cs}><div id="czech"></div></a>
+                    <div class="cleaner"></div>
             </div>
 
             <div id="content">

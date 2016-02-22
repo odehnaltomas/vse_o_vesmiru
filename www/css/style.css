@@ -15,7 +15,6 @@ body {
 .center {
 	margin: auto;
 	width: 960px;
-	height: 100%;
 }
 
 #header {
@@ -37,13 +36,12 @@ body {
 }
 #header_content a {
 	text-decoration: none;
-	color: white;
 	line-height: 40px;
 	font-family: x360;
 }
 
 #header_content a:hover {
-	background: linear-gradient(to bottom, rgb(255,255,255) 0%, rgb(0,0,0) 100%);
+	background: #525252;
 	color: white;
 }
 
@@ -63,8 +61,7 @@ body {
 
 #middle {
 	width: 960px;
-	height: 100px;
-	position: relative;
+	height: 65px;
 }
 
 #content {
@@ -198,15 +195,14 @@ form .error {
 	transition: 0.2s linear;
 }
 
-#middle #localization {
-	position: absolute;
+#localization {
 	height: 35px;
-	width: 80px;
+	width: 100%;
 	right: 0;
 	bottom: 0;
 }
 
-#middle #localization #czech {
+#localization #czech {
 	background: url("../images/czech-icon.png") no-repeat;
 	width: 32px;
 	height: 32px;
@@ -214,7 +210,7 @@ form .error {
 	margin-right: 3px;
 }
 
-#middle #localization #english {
+#localization #english {
 	background: url("../images/uk-icon.png") no-repeat;
 	width: 32px;
 	height: 32px;
@@ -455,3 +451,56 @@ form .error {
 	font-family: x360;
 	float: left;
 }
+
+/*=============================MENU*/
+.menu {
+	float: left;
+	height: 100%;
+}
+
+.menuButton{
+	font-family: x360;
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgb(232, 232, 232) 47%, rgb(191, 191, 191) 100%);
+	color: black;
+	line-height: 40px;
+	font-size: inherit;
+	border: none;
+	cursor: pointer;
+	height: 100%;
+	min-width: 155px;
+	padding: 0;
+}
+
+.dropdownMenu {
+	height: 100%;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background: #dddddd;
+	min-width: 155px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+	text-align: center;
+	color: black !important;
+	padding: 7px 10px;
+	text-decoration: none;
+	display: block;
+	margin: 0;
+}
+
+.dropdownMenu:hover .menuButton {
+	background: #525252;
+	color: white;
+}
+
+.dropdown-content a:hover {
+	background: #bcbcbc !important;
+}
+
+/*=============================MENU*/
