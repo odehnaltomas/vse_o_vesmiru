@@ -176,9 +176,14 @@ class ArticlePresenter extends BasePresenter
 
     /**
      * @param $articleId
+     * @throws Nette\Application\BadRequestException
      */
     public function actionShow($articleId){
         $article = $this->articleManager->getArticle($articleId, $this->locale);
+
+        if(!$article)
+            throw new Nette\Application\BadRequestException;
+
         $articleLang = $this->languageManager->getLangugage($article->language_id);
 
         if($article->deleted === 0){
@@ -259,6 +264,10 @@ class ArticlePresenter extends BasePresenter
 
     public function actionTranslation($articleId){
         $article = $this->articleManager->getArticle($articleId);
+
+        if(!$article)
+            throw new Nette\Application\BadRequestException;
+
         $this['addTranslationForm']['originalArticleId']->setDefaultValue($articleId);
 
         if($article->language['language'] === 'cs') {
@@ -342,5 +351,11 @@ class ArticlePresenter extends BasePresenter
                 $this->redirect('Article:articleList');
             }
         }
+    }
+
+    public function actionDel($articleId){
+        dump($article = $this->articleManager->getArticle($articleId));
+        if(!$article)
+            throw new Nette\Application\BadRequestException;
     }
 }

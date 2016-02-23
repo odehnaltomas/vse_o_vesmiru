@@ -36,7 +36,7 @@ class UserPresenter extends BasePresenter
             $this->template->userData = $this->userManager->getUserData($this->user->getId());
             $this->template->userKarma = $this->userManager->getUserKarma($this->user->getId());
         } else {
-            throw new Nette\Application\UI\BadSignalException('spatne');
+            throw new Nette\Application\UI\BadSignalException();
         }
     }
 }
