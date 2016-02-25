@@ -358,4 +358,8 @@ class ArticlePresenter extends BasePresenter
         if(!$article)
             throw new Nette\Application\BadRequestException;
     }
+
+    public function handleDeleteArticle($articleId){
+
+    }
 }

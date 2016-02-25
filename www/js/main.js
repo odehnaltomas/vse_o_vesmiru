@@ -17,6 +17,25 @@ $(document).ready(function(){
     }, function() {
         $(this).find('.dropdown-content').slideUp(200);
     });
+
+    $('.deleteArticle').click(function(){
+        $('.popUp-background').css('display', 'block');
+        $('.popUp').css('display', 'block');
+    });
+
+    $('.cancel').click(function(){
+        $('.popUp-background').css('display', 'none');
+        $('.popUp').css('display', 'none');
+    });
+
+    $('.popUp-background').click(function(){
+        $(this).css('display', 'none');
+        $('.popUp').css('display', 'none');
+    });
+
+    $('.popUp').click(function(e){
+        e.stopPropagation();
+    });
 });
 
 
