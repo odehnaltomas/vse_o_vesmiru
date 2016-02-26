@@ -23,6 +23,7 @@ session:
 
 services:
 	- App\Model\UserManager
+	- App\Forms\DeleteArticleFactory
 	- App\Model\ArticleManager
 	- App\Model\LanguageManager
 

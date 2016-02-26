@@ -6,6 +6,9 @@
  * Time: 16:20
  */
 
+//TODO: Mazání článků přímo u výpisu článků
+//TODO:
+
 namespace App\Presenters;
 
 use Nette;
@@ -15,7 +18,7 @@ use Nette\Security\User;
 use App\Model\LanguageManager;
 use App;
 use IPub\VisualPaginator\Components as VisualPaginator;
-use Tester\Environment;
+use App\Forms\DeleteArticleFactory;
 
 
 class ArticlePresenter extends BasePresenter
@@ -47,6 +50,9 @@ class ArticlePresenter extends BasePresenter
         4 => 4,
         5 => 5
     );
+
+    /** @var DeleteArticleFactory @inject */
+    public $delArticleFactory;
 
     /**
      * ArticlePresenter constructor.
@@ -215,7 +221,7 @@ class ArticlePresenter extends BasePresenter
         $this->template->user = $this->user;
         $this->template->articleRating = $this->articleRating;
         $this->template->usersKarma = $this->articleManager->getUsersKarma($articleId);
-        $this['articleDelForm']['articleId']->setDefaultValue($articleId);
+        $this['deleteArticleForm']['articleId']->setDefaultValue($articleId);
     }
 
 
@@ -331,35 +337,28 @@ class ArticlePresenter extends BasePresenter
     }
 
 
-    public function createComponentArticleDelForm(){
-
-        $form = new Form;
-        $form->setTranslator($this->translator);
-
-        $form->addHidden('articleId');
-        $form->addSubmit('submit', 'Smazat článek');
-
-        $form->onSuccess[] = array($this, 'articleDelFormSucceeded');
-        return $form;
-    }
-
-
-    public function articleDelFormSucceeded($form, $values){
-        if($this->user->isAllowed('article', 'del')){
-            if($this->articleManager->delArticle($values->articleId)){
-                $this->flashMessage('Článek byl úspěšně vymazán!');
-                $this->redirect('Article:articleList');
-            }
-        }
-    }
-
     public function actionDel($articleId){
         dump($article = $this->articleManager->getArticle($articleId));
         if(!$article)
             throw new Nette\Application\BadRequestException;
     }
 
-    public function handleDeleteArticle($articleId){
 
+    protected function createComponentDeleteArticleForm(){
+        $form = $this->delArticleFactory->create();
+
+        $form->setTranslator($this->translator);
+
+        $form->onSuccess[] = function() {
+            $this->flashMessage('Článek byl úspěšně vymazán!');
+            $this->redirect('Article:articleList');
+        };
+        return $form;
+    }
+
+
+    public function handleDeleteArticle($articleId){
+        $this['deleteArticleForm']['articleId']->setDefaultValue($articleId);
+        $this->redrawControl('popUp');
     }
 }

@@ -2,33 +2,34 @@
 
 <h1 n:block="title">Články</h1>
 
-{snippet articleList}
-    {control visualPaginator}
 
-    {foreach $articles as $article}
-    {if $user->isLoggedIn()}
-    <a n:href="deleteArticle! $article->id" class="ajax deleteArticle"><div class="del-obr"></div></a>
-    {/if}
-    <a n:href="Article:show $article->id">
-            <div  class="article">
-                    <h2>{$article->title}</h2>
-                    <div class="date">{$article->created|date:'j.n. Y'}</div>
-                    <div class="caption">{$article->caption}</div>
-            </div>
-    </a>
-    {/foreach}
+{control visualPaginator}
 
-    {control visualPaginator}
-{/snippet}
+{foreach $articles as $article}
+{if $user->isLoggedIn()}
+<a n:href="deleteArticle! $article->id" class="ajax deleteArticle"><div class="del-obr"></div></a>
+{/if}
+<a n:href="Article:show $article->id">
+        <div  class="article">
+                <h2>{$article->title}</h2>
+                <div class="date">{$article->created|date:'j.n. Y'}</div>
+                <div class="caption">{$article->caption}</div>
+        </div>
+</a>
+{/foreach}
 
-{snippet popUp}
-        <div class="popUp-background">
-                <div class="popUp">
+{control visualPaginator}
+
+
+
+<div class="popUp-background">
+        <div class="popUp">
+                {snippet popUp}
                         {if $user->roles[0] === 'moderator' || $user->roles[0] === 'admin'}
-
+                            {control deleteArticleForm}
                         {elseif $user->roles[0] === 'user'}
                         {/if}
-                        <button class="cancel">Cancel</button>
-                </div>
+                {/snippet}
+                <button class="cancel">Cancel</button>
         </div>
-{/snippet}
+</div>

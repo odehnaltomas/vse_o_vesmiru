@@ -215,6 +215,10 @@ class ArticleManager extends BaseManager
     }
 
 
+    /**
+     * @param $articleId
+     * @return int
+     */
     public function delArticle($articleId){
         return $this->database->table(self::TABLE_ARTICLE)
                     ->where(self::ARTICLE_COLUMN_ID, $articleId)
