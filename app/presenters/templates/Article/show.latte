@@ -12,7 +12,7 @@
         </div>
     </div>
     {if $user->roles[0] === "moderator" || $user->roles[0] === "admin"}
-    {control deleteArticleForm}
+    <a n:href="deleteArticle! $article->id" class="ajax"><button class="deleteArticle-show">Smazat článek</button></a>
     {/if}
 
     <hr>
@@ -87,3 +87,16 @@
     {else}
     {_ templates.article.noTranslation}
 {/if}
+
+<div class="popUp-background">
+        <div class="popUp">
+                {snippet popUp}
+                        {if $user->roles[0] === 'moderator' || $user->roles[0] === 'admin'}
+                            Opravdu chcete tento článek smazat?
+                            {control deleteArticleForm}
+                        {elseif $user->roles[0] === 'user'}
+                        {/if}
+                {/snippet}
+                <button class="cancel">Cancel</button>
+        </div>
+</div>

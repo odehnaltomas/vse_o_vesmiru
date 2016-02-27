@@ -185,7 +185,7 @@ class ArticleManager extends BaseManager
 
 
     /**
-     * @param $id
+     * @param $userId
      * @param $values
      * @throws App\Exceptions\DuplicateNameException
      */

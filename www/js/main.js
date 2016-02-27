@@ -23,6 +23,11 @@ $(document).ready(function(){
         $('.popUp').css('display', 'block');
     });
 
+    $('.deleteArticle-show').click(function(){
+        $('.popUp-background').css('display', 'block');
+        $('.popUp').css('display', 'block');
+    });
+
     $('.cancel').click(function(){
         $('.popUp-background').css('display', 'none');
         $('.popUp').css('display', 'none');
