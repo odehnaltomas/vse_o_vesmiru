@@ -1,0 +1,28 @@
+{block content}
+
+<table class="usersTable">
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Jméno</th>
+        <th>Email</th>
+        <th>Pohlaví</th>
+        <th>Role</th>
+    </tr>
+    {foreach $users as $user}
+        <tr>
+            <td class="id">{$user->id}</td>
+            <td>{$user->username}</td>
+            <td>{$user->first_name} {$user->last_name}</td>
+            <td>
+            {if $user->email === ""}
+            Nevyplněno
+            {else}
+            {$user->email}
+            {/if}
+            </td>
+            <td>{$user->sex[$locale.'_sex']}</td>
+            <td>{$user->role[$locale.'_role']}</td>
+        </tr>
+    {/foreach}
+</table>
