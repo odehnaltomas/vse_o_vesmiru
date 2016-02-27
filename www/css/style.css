@@ -542,7 +542,7 @@ form .error {
 }
 
 .usersTable tr:hover td {
-	background: #d3d3d3;
+	background: #eaeaea;
 }
 
 .usersTable td {
@@ -556,4 +556,14 @@ form .error {
 
 .usersTable .id {
 	width: 40px;
+}
+
+.usersTable .td-role{
+	padding: 0;
+}
+
+#role {
+	height: 100%;
+	width: 100%;
+	cursor: pointer;
 }

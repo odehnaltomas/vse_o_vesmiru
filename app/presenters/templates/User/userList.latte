@@ -8,21 +8,54 @@
         <th>Email</th>
         <th>Pohlaví</th>
         <th>Role</th>
+        <th>Uzamčen</th>
     </tr>
-    {foreach $users as $user}
+    {foreach $usersData as $userData}
         <tr>
-            <td class="id">{$user->id}</td>
-            <td>{$user->username}</td>
-            <td>{$user->first_name} {$user->last_name}</td>
+            <td class="id">{$userData->id}</td>
+            <td>{$userData->username}</td>
+            <td>{$userData->first_name} {$userData->last_name}</td>
             <td>
-            {if $user->email === ""}
+            {if $userData->email === ""}
             Nevyplněno
             {else}
-            {$user->email}
+            {$userData->email}
             {/if}
             </td>
-            <td>{$user->sex[$locale.'_sex']}</td>
-            <td>{$user->role[$locale.'_role']}</td>
+            <td>{$userData->sex[$locale.'_sex']}</td>
+            {if $user->isAllowed('userSource', 'changeRoles')}
+                {if $user->getId() !== $userData->id}
+                <td class="td-role">
+                    <a n:href="showPopUp! $userData->id, $userData->role['id']" class="ajax role">
+                        <button id="role">{$userData->role[$locale.'_role']}</button>
+                    </a>
+                </td>
+                {else}
+                <td>{$userData->role[$locale.'_role']}</td>
+                {/if}
+                {else}
+                <td>{$userData->role[$locale.'_role']}</td>
+            {/if}
+
+            <td>
+                {if $userData->banned === 0}
+                    Ano
+                    {else}
+                    Ne
+                {/if}
+            </td>
         </tr>
     {/foreach}
 </table>
+
+<div class="popUp-background">
+        <div class="popUp">
+                {snippet popUp}
+                        {if $user->isAllowed('popUp', 'userPopUp')}
+                            {$username}
+                            {control changeRole}
+                        {/if}
+                {/snippet}
+                <button class="cancel">Cancel</button>
+        </div>
+</div>

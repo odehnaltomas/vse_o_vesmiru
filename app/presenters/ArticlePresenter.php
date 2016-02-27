@@ -359,6 +359,8 @@ class ArticlePresenter extends BasePresenter
 
     public function handleDeleteArticle($articleId){
         $this['deleteArticleForm']['articleId']->setDefaultValue($articleId);
-        $this->redrawControl('popUp');
+        if($this->isAjax()) {
+            $this->redrawControl('popUp');
+        }
     }
 }

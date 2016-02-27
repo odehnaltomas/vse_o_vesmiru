@@ -32,7 +32,7 @@ class Authenticator extends BaseManager implements IAuthenticator
     {
         list($username, $password) = $credentials;
 
-        $row = $this->database->table(self::TABLE_USER)->where(self::USER_COLUMN_NAME, $username)->fetch();
+        $row = $this->database->table(self::TABLE_USER)->where(self::USER_COLUMN_USERNAME, $username)->fetch();
 
         if (!$row) {
             throw new Nette\Security\AuthenticationException("messages.exceptions.wrongLogin", self::IDENTITY_NOT_FOUND);

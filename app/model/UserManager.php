@@ -41,7 +41,7 @@ class UserManager extends BaseManager
 
 		try {
 			$this->database->table(self::TABLE_USER)->insert(array(
-				self::USER_COLUMN_NAME => $username,
+				self::USER_COLUMN_USERNAME => $username,
 				self::USER_COLUMN_PASSWORD => Passwords::hash($password),
 				self::USER_COLUMN_FIRST_NAME => $firstName,
 				self::USER_COLUMN_LAST_NAME => $lastName,
@@ -88,6 +88,13 @@ class UserManager extends BaseManager
 	public function getUsers(){
 		return $this->database->table(self::TABLE_USER)
 				->order(self::USER_COLUMN_USERNAME)->fetchAll();
+	}
+
+
+	public function changeUserRole($userId, $role){
+		return $this->database->table(self::TABLE_USER)
+				->where(self::USER_COLUMN_ID, $userId)
+				->update(array(self::USER_COLUMN_ROLE => $role));
 	}
 }
 

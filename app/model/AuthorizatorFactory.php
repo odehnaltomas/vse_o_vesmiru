@@ -29,6 +29,8 @@ class AuthorizatorFactory
         $authorizator->addResource('article');
         $authorizator->addResource('translation');
         $authorizator->addResource('comment');
+        $authorizator->addResource('userSource');
+        $authorizator->addResource('popUp');
 
         $authorizator->allow('guest', 'sign', array('in', 'up'));
         $authorizator->allow('guest', 'article', 'view');
@@ -39,6 +41,10 @@ class AuthorizatorFactory
 
         $authorizator->allow('moderator', 'article', array('add', 'edit', 'del'));
         $authorizator->allow('moderator', 'translation', array('list', 'original', 'add', 'del'));
+        $authorizator->allow('moderator', 'popUp', 'articlePopUp');
+
+        $authorizator->allow('admin', 'userSource', array('changeRoles', 'ban'));
+        $authorizator->allow('admin', 'popUp', 'userPopUp');
 
         return $authorizator;
     }
