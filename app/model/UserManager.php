@@ -83,6 +83,12 @@ class UserManager extends BaseManager
 
 		return $karma;
 	}
+
+
+	public function getUsers(){
+		return $this->database->table(self::TABLE_USER)
+				->order(self::USER_COLUMN_USERNAME)->fetchAll();
+	}
 }
 
 

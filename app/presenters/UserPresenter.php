@@ -29,7 +29,7 @@ class UserPresenter extends BasePresenter
         $this->user = $user;
     }
 
-    public function renderShowProfile(){
+    public function renderShowYourProfile(){
         if($this->user->isLoggedIn()){
             $this->template->numberOfComments = $this->userManager->getUserComments($this->user->getId())->count($this->user->getId());
             $this->template->locale = $this->locale;
@@ -38,5 +38,11 @@ class UserPresenter extends BasePresenter
         } else {
             throw new Nette\Application\UI\BadSignalException();
         }
+    }
+
+
+    public function renderUserList(){
+        $this->template->locale = $this->locale;
+        $this->template->users = $this->userManager->getUsers();
     }
 }

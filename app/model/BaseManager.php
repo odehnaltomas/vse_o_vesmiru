@@ -22,7 +22,7 @@ abstract class BaseManager extends Object
     const
     TABLE_USER = 'user',
         USER_COLUMN_ID = 'id',
-        USER_COLUMN_NAME = 'username',
+        USER_COLUMN_USERNAME = 'username',
         USER_COLUMN_PASSWORD = 'password',
         USER_COLUMN_FIRST_NAME = 'first_name',
         USER_COLUMN_LAST_NAME = 'last_name',

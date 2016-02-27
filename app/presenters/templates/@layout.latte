@@ -41,9 +41,9 @@
                                 <a n:href="User:"><button class="menuButton">Uživatel</button></a>
                                 <div class="dropdown-content">
                                         {if $user->isLoggedIn()}
-                                        <a n:href="User:showProfile">Profil uživatele</a>
+                                        <a n:href="User:showYourProfile">Profil uživatele</a>
                                         {/if}
-                                        <a href="#">Seznam uživatelů</a>
+                                        <a n:href="User:userList">Seznam uživatelů</a>
                                 </div>
                         </div>
                 </div>

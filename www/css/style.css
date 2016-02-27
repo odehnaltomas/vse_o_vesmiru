@@ -534,3 +534,26 @@ form .error {
 	float: right;
 	margin: 1px 3px 1px 3px;
 }
+
+.usersTable {
+	height: 100%;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.usersTable tr:hover td {
+	background: #d3d3d3;
+}
+
+.usersTable td {
+	border: solid black 2px;
+	padding: 5px;
+}
+
+.usersTable th {
+	font-family: x360;
+}
+
+.usersTable .id {
+	width: 40px;
+}
