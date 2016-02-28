@@ -220,9 +220,23 @@ class ArticleManager extends BaseManager
      * @return int
      */
     public function delArticle($articleId){
-        return $this->database->table(self::TABLE_ARTICLE)
-                    ->where(self::ARTICLE_COLUMN_ID, $articleId)
-                    ->update(array(self::ARTICLE_COLUMN_DELETED => 0));
+        $article = $this->database->table(self::TABLE_ARTICLE)
+                                ->get($articleId);
+        if($article->translation_id === NULL) {
+            return $this->database->table(self::TABLE_ARTICLE)
+                ->where(self::ARTICLE_COLUMN_ID, $articleId)
+                ->update(array(self::ARTICLE_COLUMN_DELETED => 0));
+        }
+        else {
+            $this->database->table(self::TABLE_ARTICLE)
+                ->where(self::ARTICLE_COLUMN_ID, $article->translation_id)
+                ->update(array(self::ARTICLE_COLUMN_TRANSLATION_ID => NULL));
+
+            $this->database->table(self::TABLE_ARTICLE)
+                ->where(self::ARTICLE_COLUMN_ID, $articleId)
+                ->update(array(self::ARTICLE_COLUMN_DELETED => 0, self::ARTICLE_COLUMN_TRANSLATION_ID => NULL));
+        }
+
     }
 
 
