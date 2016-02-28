@@ -23,27 +23,36 @@
             {/if}
             </td>
             <td>{$userData->sex[$locale.'_sex']}</td>
-            {if $user->isAllowed('userSource', 'changeRoles')}
-                {if $user->getId() !== $userData->id}
+
+            {if $user->isAllowed('userSource', 'changeRoles') && $user->getId() !== $userData->id}
                 <td class="td-role">
-                    <a n:href="showPopUp! $userData->id, $userData->role['id']" class="ajax role">
+                    <a n:href="changeRole! $userData->id, $userData->role['id']" class="ajax role">
                         <button id="role">{$userData->role[$locale.'_role']}</button>
                     </a>
                 </td>
                 {else}
                 <td>{$userData->role[$locale.'_role']}</td>
-                {/if}
-                {else}
-                <td>{$userData->role[$locale.'_role']}</td>
             {/if}
 
-            <td>
-                {if $userData->banned === 0}
-                    Ano
-                    {else}
-                    Ne
-                {/if}
-            </td>
+            {if $user->isAllowed('userSource', 'ban') && $user->getId() !== $userData->id}
+                <td class="td-ban">
+                    <a n:href="changeBan! $userData->id, $userData->banned" class="ajax ban">
+                        {if $userData->banned === 0}
+                            <button id="role">Ano</button>
+                            {else}
+                            <button id="role">Ne</button>
+                        {/if}
+                    </a>
+                </td>
+                {else}
+                <td>
+                    {if $userData->banned === 0}
+                        Ano
+                        {else}
+                        Ne
+                    {/if}
+                </td>
+            {/if}
         </tr>
     {/foreach}
 </table>
@@ -52,10 +61,30 @@
         <div class="popUp">
                 {snippet popUp}
                         {if $user->isAllowed('popUp', 'userPopUp')}
-                            {$username}
+                            {if $userId !== 0}
+                            {$usersData[$userId]->username}
+                            {$usersData[$userId]->role[$locale.'_role']}
+                            {/if}
                             {control changeRole}
                         {/if}
                 {/snippet}
                 <button class="cancel">Cancel</button>
+        </div>
+
+        <div class="popUpBan">
+                {snippet popUpBan}
+                        {if $user->isAllowed('popUp', 'userPopUp')}
+                            {if $userId !== 0}
+                                {$usersData[$userId]->username}
+                                {if $usersData[$userId]->banned === 0}
+                                    Ano
+                                {else}
+                                    Ne
+                                {/if}
+                            {/if}
+                            {control changeBan}
+                        {/if}
+                {/snippet}
+                <button class="cancelBan">Cancel</button>
         </div>
 </div>

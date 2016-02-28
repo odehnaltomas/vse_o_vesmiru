@@ -23,6 +23,11 @@ $(document).ready(function(){
         $('.popUp').css('display', 'block');
     });
 
+    $('.ban').click(function(){
+        $('.popUp-background').css('display', 'block');
+        $('.popUpBan').css('display', 'block');
+    });
+
     $('.role').click(function(){
         $('.popUp-background').css('display', 'block');
         $('.popUp').css('display', 'block');
@@ -31,6 +36,11 @@ $(document).ready(function(){
     $('.deleteArticle-show').click(function(){
         $('.popUp-background').css('display', 'block');
         $('.popUp').css('display', 'block');
+    });
+
+    $('.cancelBan').click(function(){
+        $('.popUp-background').css('display', 'none');
+        $('.popUpBan').css('display', 'none');
     });
 
     $('.cancel').click(function(){
@@ -44,6 +54,10 @@ $(document).ready(function(){
     });
 
     $('.popUp').click(function(e){
+        e.stopPropagation();
+    });
+
+    $('.popUpBan').click(function(e){
         e.stopPropagation();
     });
 });

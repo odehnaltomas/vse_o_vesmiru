@@ -96,6 +96,13 @@ class UserManager extends BaseManager
 				->where(self::USER_COLUMN_ID, $userId)
 				->update(array(self::USER_COLUMN_ROLE => $role));
 	}
+
+
+	public function changeUserBan($userId, $ban){
+		return $this->database->table(self::TABLE_USER)
+				->where(self::USER_COLUMN_ID, $userId)
+				->update(array(self::USER_COLUMN_BAN => $ban));
+	}
 }
 
 

@@ -28,6 +28,7 @@ abstract class BaseManager extends Object
         USER_COLUMN_LAST_NAME = 'last_name',
         USER_COLUMN_SEX = 'sex_id',
         USER_COLUMN_ROLE = 'role_id',
+        USER_COLUMN_BAN = 'banned',
 
     TABLE_USER_ROLE = 'user_role',
         ROLE_COLUMN_ID = 'id',

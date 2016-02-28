@@ -65,7 +65,7 @@
                             {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === 1}
                                 <a n:href="like! $comment->id" class="ajax"><div class="like-pressed"></div></a>
                                 {else}
-                                {if $user->isAllowed('comment', 'dislike')}
+                                {if $user->isAllowed('comment', 'like')}
                                     <a n:href="like! $comment->id" class="ajax"><div class="like"></div></a>
                                     {else}
                                     <div class="like-gray"></div>
