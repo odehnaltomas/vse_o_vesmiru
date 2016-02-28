@@ -94,11 +94,14 @@ class UserPresenter extends BasePresenter
     }
 
     public function handleChangeRole($userId, $role){
-        $this['changeRole']['userId']->setDefaultValue($userId);
-        $this['changeRole']['role']->setValue($role);
-        $this->userId = $userId;
-        if($this->isAjax()) {
-            $this->redrawControl('popUp');
+        if($this->user->isAllowed('userSource', 'changeRoles')) {
+
+            $this['changeRole']['userId']->setDefaultValue($userId);
+            $this['changeRole']['role']->setValue($role);
+            $this->userId = $userId;
+            if ($this->isAjax()) {
+                $this->redrawControl('popUp');
+            }
         }
     }
 
@@ -131,15 +134,15 @@ class UserPresenter extends BasePresenter
 
 
     public function handleChangeBan($userId, $ban){
-        $this['changeBan']['userId']->setDefaultValue($userId);
-        $this['changeBan']['banned']->setValue($ban);
-        $this->userId = $userId;
-        if($this->isAjax()) {
-            $this->redrawControl('popUpBan');
+        if($this->user->isAllowed('userSource', 'ban')) {
+            $this['changeBan']['userId']->setDefaultValue($userId);
+            $this['changeBan']['banned']->setValue($ban);
+            $this->userId = $userId;
+            if ($this->isAjax()) {
+                $this->redrawControl('popUpBan');
+            }
         }
     }
-
-
 
 
     public function renderUserList(){

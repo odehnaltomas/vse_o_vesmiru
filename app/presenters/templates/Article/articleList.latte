@@ -25,10 +25,11 @@
 <div class="popUp-background">
         <div class="popUp">
                 {snippet popUp}
-                        {if $user->roles[0] === 'moderator' || $user->roles[0] === 'admin'}
+                        {if $user->isAllowed('article', 'del')}
                             Opravdu chcete tento článek smazat?
                             {control deleteArticleForm}
-                        {elseif $user->roles[0] === 'user'}
+                        {elseif $user->isAllowed('article', 'delRequest')}
+                            {control deleteArticleForm}
                         {/if}
                 {/snippet}
                 <button class="cancel">Cancel</button>

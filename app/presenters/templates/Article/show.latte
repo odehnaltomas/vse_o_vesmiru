@@ -11,7 +11,7 @@
             <div class="total_votes">vote data</div>
         </div>
     </div>
-    {if $user->roles[0] === "moderator" || $user->roles[0] === "admin"}
+    {if $user->isLoggedIn()}
     <a n:href="deleteArticle! $article->id" class="ajax"><button class="deleteArticle-show">Smazat článek</button></a>
     {/if}
 
@@ -34,7 +34,7 @@
                         {$comment->created|date:"j.n. Y, H:i"}
 
                         {ifset $user->identity->data['username']}
-                            {if $user->identity->data['username'] === $comment->user['username'] || $user->roles[0] === "moderator" || $user->roles[0] === "admin"}
+                            {if $user->identity->data['username'] === $comment->user['username'] || $user->isAllowed('comment', 'del')}
                                 <a n:href="deleteComment! $comment->id" class="ajax delete"><div class="del-obr"></div></a>
 
                                 {else}
@@ -91,10 +91,11 @@
 <div class="popUp-background">
         <div class="popUp">
                 {snippet popUp}
-                        {if $user->roles[0] === 'moderator' || $user->roles[0] === 'admin'}
+                        {if $user->isAllowed('article', 'del')}
                             Opravdu chcete tento článek smazat?
                             {control deleteArticleForm}
-                        {elseif $user->roles[0] === 'user'}
+                        {elseif $user->isAllowed('article', 'delRequest')}
+                            {control deleteArticleForm}
                         {/if}
                 {/snippet}
                 <button class="cancel">Cancel</button>

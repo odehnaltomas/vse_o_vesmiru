@@ -68,11 +68,9 @@ class ArticlePresenter extends BasePresenter
     }
 
 
-    public function actionAdd()
-    {
+    public function actionAdd() {
         if(!$this->user->isAllowed('article', 'add')){
-            $this->flashMessage($this->translator->translate('messages.flash.permissionAddArticle'), 'error');
-            $this->redirect('Homepage:');
+            throw new Nette\Application\UI\BadSignalException;
         }
     }
 
@@ -80,8 +78,7 @@ class ArticlePresenter extends BasePresenter
     /**
      * @return Form
      */
-    protected function createComponentAddArticleForm()
-    {
+    protected function createComponentAddArticleForm() {
         $form = new Form;
         $form->setTranslator($this->translator);
 
@@ -109,16 +106,19 @@ class ArticlePresenter extends BasePresenter
     /**
      * @param Form $form
      * @param $values
+     * @throws Nette\Application\UI\BadSignalException
      */
-    public function addArticleFormSucceeded(Form $form, $values)
-    {
-        try {
-            $this->articleManager->addArticle($this->user->getId(), $values);
-            $this->flashMessage('Článek byl úspěšně uložen.');
-            $this->redirect('Article:articleList');
-        } catch(App\Exceptions\DuplicateNameException $e) {
-            $form->addError($this->translator->translate($e->getMessage()));
-        }
+    public function addArticleFormSucceeded(Form $form, $values) {
+        if($this->user->isAllowed('article', 'add')) {
+            try {
+                $this->articleManager->addArticle($this->user->getId(), $values);
+                $this->flashMessage('Článek byl úspěšně uložen.');
+                $this->redirect('Article:articleList');
+            } catch (App\Exceptions\DuplicateNameException $e) {
+                $form->addError($this->translator->translate($e->getMessage()));
+            }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
@@ -170,13 +170,17 @@ class ArticlePresenter extends BasePresenter
     /**
      * @param Form $form
      * @param $values
+     * @throws Nette\Application\UI\BadSignalException
      */
     public function commentFormSucceeded(Form $form, $values){
-        $articleId = $this->getParameter('articleId');
-        $userId = $this->user->getId();
-        $this->articleManager->addComment($values, $articleId, $userId);
+        if($this->user->isAllowed('comment', 'write')) {
+            $articleId = $this->getParameter('articleId');
+            $userId = $this->user->getId();
+            $this->articleManager->addComment($values, $articleId, $userId);
 
-        $this->redirect('this');
+            $this->redirect('this');
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
@@ -226,27 +230,34 @@ class ArticlePresenter extends BasePresenter
 
 
     public function handleLike($commentId) {
-        if(!$this->articleManager->alreadyRated($this->user->getId(), $commentId, 1)) {
-            $this->articleManager->alreadyRated($this->user->getId(), $commentId, -1);
-            $this->articleManager->addCommentRating($commentId, $this->user->getId(), 1);
-        }
+        if($this->user->isAllowed('comment', 'like')) {
+            if (!$this->articleManager->alreadyRated($this->user->getId(), $commentId, 1)) {
+                $this->articleManager->alreadyRated($this->user->getId(), $commentId, -1);
+                $this->articleManager->addCommentRating($commentId, $this->user->getId(), 1);
+            }
 
-        if($this->isAjax()){
-            $this->redrawControl('comments');
-        }
+            if ($this->isAjax()) {
+                $this->redrawControl('comments');
+            }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
     public function handleDislike($commentId){
-        if(!$this->articleManager->alreadyRated($this->user->getId(), $commentId, -1)) {
-            $this->articleManager->alreadyRated($this->user->getId(), $commentId, 1);
-            $this->articleManager->addCommentRating($commentId, $this->user->getId(), -1);
-        }
+        if($this->user->isAllowed('comment', 'dislike')) {
+            if (!$this->articleManager->alreadyRated($this->user->getId(), $commentId, -1)) {
+                $this->articleManager->alreadyRated($this->user->getId(), $commentId, 1);
+                $this->articleManager->addCommentRating($commentId, $this->user->getId(), -1);
+            }
 
-        if($this->isAjax()){
-            $this->redrawControl('comments');
-        }
+            if ($this->isAjax()) {
+                $this->redrawControl('comments');
+            }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
+
 
     public function handleDeleteComment($commentId){
         $this->articleManager->delComment($commentId);
@@ -262,27 +273,34 @@ class ArticlePresenter extends BasePresenter
 
 
     public function renderTranslationList(){
-        $articles = $this->articleManager->getArticlesToTranslate();
+        if($this->user->isAllowed('translation', 'list')) {
 
-        $this->template->articles = $articles;
+            $articles = $this->articleManager->getArticlesToTranslate();
+
+            $this->template->articles = $articles;
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
     public function actionTranslation($articleId){
-        $article = $this->articleManager->getArticle($articleId);
+        if($this->user->isAllowed('translation', 'add')) {
+            $article = $this->articleManager->getArticle($articleId);
 
-        if(!$article)
-            throw new Nette\Application\BadRequestException;
+            if (!$article)
+                throw new Nette\Application\BadRequestException;
 
-        $this['addTranslationForm']['originalArticleId']->setDefaultValue($articleId);
+            $this['addTranslationForm']['originalArticleId']->setDefaultValue($articleId);
 
-        if($article->language['language'] === 'cs') {
-            $this['addTranslationForm']['language']->setDefaultValue('en');
-            $this['addTranslationForm']['language']->setDisabled(['cs']);
-        } else {
-            $this['addTranslationForm']['language']->setDefaultValue('cs');
-            $this['addTranslationForm']['language']->setDisabled(['en']);
-        }
+            if ($article->language['language'] === 'cs') {
+                $this['addTranslationForm']['language']->setDefaultValue('en');
+                $this['addTranslationForm']['language']->setDisabled(['cs']);
+            } else {
+                $this['addTranslationForm']['language']->setDefaultValue('cs');
+                $this['addTranslationForm']['language']->setDisabled(['en']);
+            }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
@@ -329,18 +347,16 @@ class ArticlePresenter extends BasePresenter
                 $form->addError($this->translator->translate($e->getMessage()));
             }
         }
+        else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
     public function renderTranslationOriginal($articleId){
-        $this->template->article = $this->articleManager->getArticle($articleId);
-    }
-
-
-    public function actionDel($articleId){
-        dump($article = $this->articleManager->getArticle($articleId));
-        if(!$article)
-            throw new Nette\Application\BadRequestException;
+        if($this->user->isAllowed('translation', 'original'))
+            $this->template->article = $this->articleManager->getArticle($articleId);
+        else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 

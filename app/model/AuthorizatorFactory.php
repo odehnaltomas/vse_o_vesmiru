@@ -45,7 +45,7 @@ class AuthorizatorFactory
 
 
         $authorizator->allow('moderator', 'article', array('add', 'edit', 'del'));
-        $authorizator->allow('moderator', 'translation', array('list', 'original', 'add', 'del'));
+        $authorizator->allow('moderator', 'translation', array('list', 'original', 'add'));
         $authorizator->allow('moderator', 'popUp', 'articlePopUp');
         $authorizator->allow('moderator', 'comment', 'del');
 

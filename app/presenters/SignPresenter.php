@@ -40,6 +40,12 @@ class SignPresenter extends BasePresenter
 	}
 
 
+	public function actionIn(){
+		if($this->user->isLoggedIn())
+			$this->redirect('Homepage:');
+	}
+
+
 	/**
 	 * Komponenta pro vytvoření formuláře na přihlášení uživatelů.
 	 * 
@@ -68,8 +74,7 @@ class SignPresenter extends BasePresenter
 	 * @param Form $form
 	 * @param $values
 	 */
-	public function signInFormSucceeded(Form $form, $values)
-	{
+	public function signInFormSucceeded(Form $form, $values){
 		if ($values->remember) {
 			$this->user->setExpiration('14 days', FALSE);
 		} else {
@@ -85,11 +90,19 @@ class SignPresenter extends BasePresenter
 	}
 
 
-	public function actionOut()
-	{
-		$this->user->logout(TRUE);
-		$this->flashMessage($this->translator->translate('messages.flash.signedOut'));
-		$this->redirect('in');
+	public function actionOut(){
+		if($this->user->isLoggedIn()) {
+			$this->user->logout(TRUE);
+			$this->flashMessage($this->translator->translate('messages.flash.signedOut'));
+			$this->redirect('in');
+		} else
+			$this->redirect('Sign:in');
+	}
+
+
+	public function actionUp(){
+		if($this->user->isLoggedIn())
+			$this->redirect('Homepage:');
 	}
 
 

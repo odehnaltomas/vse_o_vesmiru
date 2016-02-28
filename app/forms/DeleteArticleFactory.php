@@ -35,11 +35,13 @@ class DeleteArticleFactory extends Nette\Object
     public function create(){
         $form = new Form;
 
-        if($this->user->roles[0] === 'user') {
-            $form->addTextArea('purpose', 'Důvod smazání: ');
+        if($this->user->isAllowed('article', 'delRequest')) {
+            $form->addTextArea('message', 'Důvod smazání: ');
 
             $form->addSubmit('send', 'Poslat žádost');
-        } elseif($this->user->roles[0] === 'moderator' || $this->user->roles[0] === 'admin') {
+
+            $form->addHidden('userId');
+        } elseif($this->user->isAllowed('article', 'del')) {
             $form->addSubmit('send', 'Smazat');
         }
 
