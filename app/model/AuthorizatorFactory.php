@@ -48,7 +48,7 @@ class AuthorizatorFactory {
         $authorizator->allow('moderator', 'translation', array('list', 'original', 'add'));
         $authorizator->allow('moderator', 'popUp', 'articlePopUp');
         $authorizator->allow('moderator', 'comment', 'del');
-        $authorizator->allow('moderator', 'request', array('list', 'accept', 'reject'));
+        $authorizator->allow('moderator', 'request', array('list', 'accept', 'reject', 'showArticle'));
 
         $authorizator->deny('moderator', 'article', array('addRequest', 'delRequest', 'editRequest'));
 

@@ -12,6 +12,7 @@ namespace App\Presenters;
 use App\Forms\TCreateComponentDeleteArticleForm;
 use App\Model\ArticleManager;
 use App\Model\RequestManager;
+use Nette\Application\BadRequestException;
 use Nette\Application\UI\BadSignalException;
 
 class RequestPresenter extends BasePresenter
@@ -52,7 +53,6 @@ class RequestPresenter extends BasePresenter
     }
 
 
-    //TODO: vyřešit více requestů na jeden článek (accepted)
     public function handleAcceptDelRequest($articleId, $requestId){
         if($this->user->isAllowed('request', 'accept')) {
             $this->requestManager->acceptDelRequest($requestId, $articleId);
@@ -60,6 +60,33 @@ class RequestPresenter extends BasePresenter
             $this->flashMessage('Článek byl smazán!');
 
             if ($this->isAjax()) {
+                $this->redrawControl('requests');
+                $this->redrawControl('flashmessages');
+            }
+        } else
+            throw new BadSignalException;
+    }
+
+
+    public function renderShowArticle($articleId){
+        if($this->user->isAllowed('request', 'showArticle')){
+            $article = $this->articleManager->getArticle($articleId);
+
+            if(!$article)
+                throw new BadRequestException;
+
+            $this->template->article = $article;
+        }
+    }
+
+
+    public function handleAcceptAddRequest($articleId, $requestId){
+        if($this->user->isAllowed('request', 'accept')){
+            $this->requestManager->acceptAddRequest($requestId);
+            $this->articleManager->visibleArticle($articleId);
+            $this->flashMessage('Článek byl přidán.');
+
+            if($this->isAjax()){
                 $this->redrawControl('requests');
                 $this->redrawControl('flashmessages');
             }

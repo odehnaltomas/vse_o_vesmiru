@@ -25,7 +25,7 @@
                         <div class="dropdownMenu">
                                 <a n:href="Article:"><button class="menuButton">Články</button></a>
                                 <div class="dropdown-content">
-                                        {if $user->isAllowed('article', 'add')}
+                                        {if $user->isAllowed('article', 'add') || $user->isAllowed('article', 'addRequest')}
                                         <a n:href="Article:add">Přidat článek</a>
                                         {/if}
 
@@ -46,6 +46,15 @@
                                         <a n:href="User:userList">Seznam uživatelů</a>
                                 </div>
                         </div>
+
+                        {if $user->isAllowed('request', 'list')}
+                        <div class="dropdownMenu">
+                                <a n:href="Request:"><button class="menuButton">Požadavky</button></a>
+                                <div class="dropdown-content">
+                                        <a n:href="Request:requestList">Seznam</a>
+                                </div>
+                        </div>
+                        {/if}
                 </div>
 
                 {if $user->isLoggedIn()}

@@ -20,13 +20,7 @@ class RequestManager extends BaseManager
     }
 
 
-    public function addRequest($values) {
-        $data = array();
-        foreach($values as $value){
-            $data[] = $value;
-        }
-
-        list($message, $userId, $requestCounterId, $articleId) = $data;
+    public function addRequest($userId, $requestCounterId, $articleId, $message = "") {
 
         $request = $this->database->table(self::TABLE_REQUEST)
             ->where(self::REQUEST_REQUEST_COUNTER_ID, $requestCounterId)
@@ -79,5 +73,12 @@ class RequestManager extends BaseManager
                     ->update(array(self::REQUEST_STATE => 4));
             }
         }
+    }
+
+
+    public function acceptAddRequest($requestId){
+        return $this->database->table(self::TABLE_REQUEST)
+                    ->where(self::REQUEST_ID, $requestId)
+                    ->update(array(self::REQUEST_STATE => 3));
     }
 }

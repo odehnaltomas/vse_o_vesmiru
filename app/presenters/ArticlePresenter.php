@@ -79,9 +79,10 @@ class ArticlePresenter extends BasePresenter
 
 
     public function actionAdd() {
-        if(!$this->user->isAllowed('article', 'add')){
+        if($this->user->isAllowed('article', 'add') || $this->user->isAllowed('article', 'addRequest')){
+
+        } else
             throw new Nette\Application\UI\BadSignalException;
-        }
     }
 
 
@@ -118,15 +119,18 @@ class ArticlePresenter extends BasePresenter
      * @param $values
      * @throws Nette\Application\UI\BadSignalException
      */
-    public function addArticleFormSucceeded(Form $form, $values) {
-        if($this->user->isAllowed('article', 'add')) {
-            try {
-                $this->articleManager->addArticle($this->user->getId(), $values);
-                $this->flashMessage('Článek byl úspěšně uložen.');
-                $this->redirect('Article:articleList');
-            } catch (App\Exceptions\DuplicateNameException $e) {
-                $form->addError($this->translator->translate($e->getMessage()));
-            }
+    public function addArticleFormSucceeded(Form $form, $values)
+    {
+        if ($this->user->isAllowed('article', 'add')) {
+            $this->articleManager->addArticle($this->user->getId(), $values);
+            $this->flashMessage('Článek byl úspěšně uložen.');
+            $this->redirect('Article:articleList');
+
+        } elseif($this->user->isAllowed('article','addRequest')){
+            $article = $this->articleManager->addArticle($this->user->getId(), $values, 'request');
+            $this->requestManager->addRequest($this->user->getId(), 2, $article->id);
+            $this->flashMessage('Požadavek na přidání článku byl odeslán.');
+            $this->redirect('Article:articleList');
         } else
             throw new Nette\Application\UI\BadSignalException;
     }
