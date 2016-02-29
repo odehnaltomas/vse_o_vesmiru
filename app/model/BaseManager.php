@@ -76,12 +76,18 @@ abstract class BaseManager extends Object
         REQUEST_ARTICLE_ID = 'article_id',
         REQUEST_USER_ID = 'user_id',
         REQUEST_MESSAGE = 'message',
+        REQUEST_CREATED = 'created',
+        REQUEST_STATE = 'state',
 
     TABLE_REQUEST_COUNTER = 'request',
         REQUEST_COUNTER_ID = 'id',
         REQUEST_COUNTER_REQUEST = 'request',
         REQUEST_COUNTER_CS_REQUEST = 'cs_request',
-        REQUEST_COUNTER_EN_REQUEST = 'en_request';
+        REQUEST_COUNTER_EN_REQUEST = 'en_request',
 
+    TABLE_REQUEST_STATE = 'request_state',
+        REQUEST_STATE_ID = 'id',
+        REQUEST_STATE_CS_STATE = 'cs_state',
+        REQUEST_STATE_EN_STATE = 'en_state';
 
 }
