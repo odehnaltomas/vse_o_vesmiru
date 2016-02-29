@@ -580,3 +580,28 @@ form .error {
 	width: 100%;
 	cursor: pointer;
 }
+
+.request {
+	min-height: 50px;
+	width: 100%;
+	border: solid black 1px;
+	margin: 2px;
+	margin-bottom: 10px !important;
+}
+
+.request:hover {
+	background: #dfdfdf;
+}
+
+.request .header {
+	box-sizing: border-box;
+	width: 100%;
+	background: #525252;
+	color: #ffffff;
+	font-family: x360;
+	padding: 3px;
+}
+
+.request table td {
+	padding: 3px;
+}

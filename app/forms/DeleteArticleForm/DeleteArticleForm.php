@@ -76,7 +76,7 @@ class DeleteArticleForm extends BaseControl
             } else
                 $this->presenter->flashMessage('Požadavek na smazání článku byl odeslán.');
         }
-        $this->presenter->redirect('Article:articleList');
+        $this->presenter->redirect('this');
     }
 
 }

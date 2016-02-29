@@ -71,7 +71,9 @@
             </div>
 
             <div id="content">
-                    <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+                    {snippet flashmessages}
+                        <div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+                    {/snippet}
 
 	                {include content}
 

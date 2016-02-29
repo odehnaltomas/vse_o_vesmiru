@@ -1,0 +1,32 @@
+{block content}
+
+{snippet requests}
+    <div n:foreach="$requests as $request" class="request">
+        <div class="header">Požadavek: {$request->request_counter[$locale . '_request']}</div>
+        <table>
+            <tr>
+                <td>Vytvořeno:</td>
+                <td>{$request->created|date:"j.n. Y, H:i"}</td>
+            </tr>
+
+            <tr>
+                <td>Článek:</td>
+                <td><a n:href="Article:show $request->article['id']" target="_blind">{$request->article['title']}</a></td>
+            </tr>
+
+            <tr>
+                <td>Od uživatele:</td>
+                <td>{$request->user['username']}</td>
+            </tr>
+
+            <tr>
+                <td>Důvod smazání:</td>
+                <td>{!$request->message}</td>
+            </tr>
+            <tr>
+                <td><a n:href="acceptRequest! $request->user['id'], $request->id" class="ajax"><button>Potvrdit (smazat článek)</button></a></td>
+                <td><a n:href="rejectRequest! $request->id" class="ajax"><button>Zamítnout</button></a></td>
+            </tr>
+        </table>
+    </div>
+{/snippet}

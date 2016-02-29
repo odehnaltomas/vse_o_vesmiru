@@ -31,14 +31,16 @@ class RequestManager extends BaseManager
         $request = $this->database->table(self::TABLE_REQUEST)
             ->where(self::REQUEST_REQUEST_COUNTER_ID, $requestCounterId)
             ->where(self::REQUEST_ARTICLE_ID, $articleId)
-            ->where(self::REQUEST_USER_ID, $userId)->fetch();
+            ->where(self::REQUEST_USER_ID, $userId)
+            ->where(self::REQUEST_STATE, 1)->fetch();
 
         if(!$request) {
             return $this->database->table(self::TABLE_REQUEST)->insert(array(
                 self::REQUEST_REQUEST_COUNTER_ID => $requestCounterId,
                 self::REQUEST_ARTICLE_ID => $articleId,
                 self::REQUEST_USER_ID => $userId,
-                self::REQUEST_MESSAGE => $message
+                self::REQUEST_MESSAGE => $message,
+                self::REQUEST_STATE => 1
             ));
         } else
             return 0;
@@ -46,6 +48,16 @@ class RequestManager extends BaseManager
 
 
     public function getRequests() {
+        return $this->database->table(self::TABLE_REQUEST)
+                    ->where('NOT ' . self::REQUEST_STATE, 2)
+                    ->where('NOT ' . self::REQUEST_STATE, 3)
+                    ->order(self::REQUEST_CREATED . " DESC");
+    }
 
+
+    public function rejectRequest($requestId){
+        $this->database->table(self::TABLE_REQUEST)
+                    ->where(self::REQUEST_ID, $requestId)
+                    ->update(array(self::REQUEST_STATE => 2));
     }
 }
