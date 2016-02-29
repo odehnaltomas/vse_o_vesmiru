@@ -12,6 +12,7 @@ namespace App\Presenters;
 use App\Forms\TCreateComponentDeleteArticleForm;
 use App\Model\ArticleManager;
 use App\Model\RequestManager;
+use Nette\Application\UI\BadSignalException;
 
 class RequestPresenter extends BasePresenter
 {
@@ -29,31 +30,40 @@ class RequestPresenter extends BasePresenter
 
 
     public function renderRequestList(){
-        $this->template->locale = $this->locale;
-        $this->template->requests = $this->requestManager->getRequests();
+        if($this->user->isAllowed('request', 'list')) {
+            $this->template->locale = $this->locale;
+            $this->template->requests = $this->requestManager->getRequests();
+        } else
+            throw new BadSignalException;
     }
 
 
     public function handleRejectRequest($requestId){
-        $this->requestManager->rejectRequest($requestId);
-        $this->flashMessage('Požadavek byl zamítnut!');
+        if($this->user->isAllowed('request', 'reject')) {
+            $this->requestManager->rejectRequest($requestId);
+            $this->flashMessage('Požadavek byl zamítnut!');
 
-        if($this->isAjax()) {
-            $this->redrawControl('requests');
-            $this->redrawControl('flashmessages');
-        }
+            if ($this->isAjax()) {
+                $this->redrawControl('requests');
+                $this->redrawControl('flashmessages');
+            }
+        } else
+            throw new BadSignalException;
     }
 
 
     //TODO: vyřešit více requestů na jeden článek (accepted)
     public function handleAcceptDelRequest($articleId, $requestId){
-        $this->requestManager->acceptDelRequest($requestId, $articleId);
-        $this->articleManager->delArticle($articleId);
-        $this->flashMessage('Článek byl smazán!');
+        if($this->user->isAllowed('request', 'accept')) {
+            $this->requestManager->acceptDelRequest($requestId, $articleId);
+            $this->articleManager->delArticle($articleId);
+            $this->flashMessage('Článek byl smazán!');
 
-        if($this->isAjax()){
-            $this->redrawControl('requests');
-            $this->redrawControl('flashmessages');
-        }
+            if ($this->isAjax()) {
+                $this->redrawControl('requests');
+                $this->redrawControl('flashmessages');
+            }
+        } else
+            throw new BadSignalException;
     }
 }
