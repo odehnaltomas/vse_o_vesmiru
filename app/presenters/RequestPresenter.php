@@ -10,18 +10,21 @@ namespace App\Presenters;
 
 
 use App\Forms\TCreateComponentDeleteArticleForm;
+use App\Model\ArticleManager;
 use App\Model\RequestManager;
 
 class RequestPresenter extends BasePresenter
 {
-    use TCreateComponentDeleteArticleForm;
 
     private $requestManager;
 
+    private $articleManager;
 
-    public function __construct(RequestManager $requestManager)
+
+    public function __construct(RequestManager $requestManager, ArticleManager $articleManager)
     {
         $this->requestManager = $requestManager;
+        $this->articleManager = $articleManager;
     }
 
 
@@ -43,7 +46,14 @@ class RequestPresenter extends BasePresenter
 
 
     //TODO: vyřešit více requestů na jeden článek (accepted)
-    public function handleAcceptRequest($userId, $requestId){
+    public function handleAcceptDelRequest($articleId, $requestId){
+        $this->requestManager->acceptDelRequest($requestId, $articleId);
+        $this->articleManager->delArticle($articleId);
+        $this->flashMessage('Článek byl smazán!');
 
+        if($this->isAjax()){
+            $this->redrawControl('requests');
+            $this->redrawControl('flashmessages');
+        }
     }
 }

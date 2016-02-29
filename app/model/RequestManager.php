@@ -51,6 +51,7 @@ class RequestManager extends BaseManager
         return $this->database->table(self::TABLE_REQUEST)
                     ->where('NOT ' . self::REQUEST_STATE, 2)
                     ->where('NOT ' . self::REQUEST_STATE, 3)
+                    ->where('NOT ' . self::REQUEST_STATE, 4)
                     ->order(self::REQUEST_CREATED . " DESC");
     }
 
@@ -59,5 +60,24 @@ class RequestManager extends BaseManager
         $this->database->table(self::TABLE_REQUEST)
                     ->where(self::REQUEST_ID, $requestId)
                     ->update(array(self::REQUEST_STATE => 2));
+    }
+
+
+    public function acceptDelRequest($requestId, $articleId){
+        $requests = $this->database->table(self::TABLE_REQUEST)
+                    ->where(self::REQUEST_ARTICLE_ID, $articleId)
+                    ->where(self::REQUEST_STATE, 1)->fetchAll();
+
+        foreach($requests as $request) {
+            if($request->id === (int)$requestId){
+                $this->database->table(self::TABLE_REQUEST)
+                    ->where(self::REQUEST_ID, $requestId)
+                    ->update(array(self::REQUEST_STATE => 3));
+            } else {
+                $this->database->table(self::TABLE_REQUEST)
+                    ->where(self::REQUEST_ID, $request->id)
+                    ->update(array(self::REQUEST_STATE => 4));
+            }
+        }
     }
 }

@@ -24,7 +24,7 @@
                 <td>{!$request->message}</td>
             </tr>
             <tr>
-                <td><a n:href="acceptRequest! $request->user['id'], $request->id" class="ajax"><button>Potvrdit (smazat článek)</button></a></td>
+                <td><a n:href="acceptDelRequest! $request->article['id'], $request->id" class="ajax"><button>Potvrdit (smazat článek)</button></a></td>
                 <td><a n:href="rejectRequest! $request->id" class="ajax"><button>Zamítnout</button></a></td>
             </tr>
         </table>
