@@ -237,7 +237,8 @@ class ArticlePresenter extends BasePresenter
         $this->template->user = $this->user;
         $this->template->articleRating = $this->articleRating;
         $this->template->usersKarma = $this->articleManager->getUsersKarma($articleId);
-        $this['deleteArticleForm']['articleId']->setDefaultValue($articleId);
+        $this->template->articleId = $articleId;
+        $this->template->userId = $this->user->getId();
     }
 
 
