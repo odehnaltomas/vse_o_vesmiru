@@ -27,9 +27,9 @@
                 {snippet popUp}
                         {if $user->isAllowed('article', 'del')}
                             Opravdu chcete tento článek smazat?
-                            {control deleteArticleForm}
+                            {control deleteArticleForm NULL, $articleId}
                         {elseif $user->isAllowed('article', 'delRequest')}
-                            {control deleteArticleForm}
+                            {control deleteArticleForm $userId, $articleId}
                         {/if}
                 {/snippet}
                 <button class="cancel">Cancel</button>

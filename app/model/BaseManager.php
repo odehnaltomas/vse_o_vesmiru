@@ -68,6 +68,20 @@ abstract class BaseManager extends Object
         COMMENT_RATING_ID = 'id',
         COMMENT_RATING_USER_ID = 'user_id',
         COMMENT_RATING_COMMENT_ID = 'comment_id',
-        COMMENT_RATING_VALUE = 'value';
+        COMMENT_RATING_VALUE = 'value',
+
+    TABLE_REQUEST = 'request',
+        REQUEST_ID = 'id',
+        REQUEST_REQUEST_COUNTER_ID = 'request_counter_id',
+        REQUEST_ARTICLE_ID = 'article_id',
+        REQUEST_USER_ID = 'user_id',
+        REQUEST_MESSAGE = 'message',
+
+    TABLE_REQUEST_COUNTER = 'request',
+        REQUEST_COUNTER_ID = 'id',
+        REQUEST_COUNTER_REQUEST = 'request',
+        REQUEST_COUNTER_CS_REQUEST = 'cs_request',
+        REQUEST_COUNTER_EN_REQUEST = 'en_request';
+
 
 }

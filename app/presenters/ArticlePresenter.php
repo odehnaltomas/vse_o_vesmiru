@@ -18,11 +18,18 @@ use Nette\Security\User;
 use App\Model\LanguageManager;
 use App;
 use IPub\VisualPaginator\Components as VisualPaginator;
-use App\Forms\DeleteArticleFactory;
+use App\Forms\TCreateComponentDeleteArticleForm;
+use App\Model\RequestManager;
 
 
 class ArticlePresenter extends BasePresenter
 {
+
+    use TCreateComponentDeleteArticleForm;
+
+
+    private $userId;
+    private $articleId;
     /**
      * @var User
      */
@@ -31,7 +38,7 @@ class ArticlePresenter extends BasePresenter
     /**
      * @var ArticleManager
      */
-    private $articleManager;
+    public $articleManager;
 
     /** @var LanguageManager */
     private $languageManager;
@@ -42,6 +49,9 @@ class ArticlePresenter extends BasePresenter
         'en' => 'forms.article.english'
     );
 
+    /** @var App\Model\RequestManager  */
+    public $requestManager;
+
     /** @var array */
     private $articleRating = array(
         1 => 1,
@@ -51,20 +61,20 @@ class ArticlePresenter extends BasePresenter
         5 => 5
     );
 
-    /** @var DeleteArticleFactory @inject */
-    public $delArticleFactory;
 
     /**
      * ArticlePresenter constructor.
      * @param ArticleManager $articleManager
      * @param User $user
      * @param LanguageManager $languageManager
+     * @param RequestManager $requestManager
      */
-    public function __construct(ArticleManager $articleManager, User $user, LanguageManager $languageManager)
+    public function __construct(ArticleManager $articleManager, User $user, LanguageManager $languageManager, RequestManager $requestManager)
     {
         $this->articleManager = $articleManager;
         $this->user = $user;
         $this->languageManager = $languageManager;
+        $this->requestManager = $requestManager;
     }
 
 
@@ -142,6 +152,8 @@ class ArticlePresenter extends BasePresenter
         $articles->limit($paginator->itemsPerPage, $paginator->offset);
 
         $this->template->articles = $articles;
+        $this->template->userId = $this->userId;
+        $this->template->articleId = $this->articleId;
     }
 
 
@@ -360,23 +372,14 @@ class ArticlePresenter extends BasePresenter
     }
 
 
-    protected function createComponentDeleteArticleForm(){
-        $form = $this->delArticleFactory->create();
-
-        $form->setTranslator($this->translator);
-
-        $form->onSuccess[] = function() {
-            $this->flashMessage('Článek byl úspěšně vymazán!');
-            $this->redirect('Article:articleList');
-        };
-        return $form;
-    }
-
-
     public function handleDeleteArticle($articleId){
-        $this['deleteArticleForm']['articleId']->setDefaultValue($articleId);
+        if($this->user->isAllowed('article', 'delRequest')) {
+            $this->userId = $this->user->getId();
+        }
+        $this->articleId = $articleId;
         if($this->isAjax()) {
             $this->redrawControl('popUp');
         }
+
     }
 }

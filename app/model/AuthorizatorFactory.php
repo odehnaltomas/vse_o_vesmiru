@@ -11,8 +11,7 @@ namespace App;
 use Nette\Security\Permission;
 
 
-class AuthorizatorFactory
-{
+class AuthorizatorFactory {
 
     /**
      * @return \Nette\Security\IAuthorizator

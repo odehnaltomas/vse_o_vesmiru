@@ -23,9 +23,10 @@ session:
 
 services:
 	- App\Model\UserManager
-	- App\Forms\DeleteArticleFactory
+	- App\Forms\IDeleteArticleFormFactory
 	- App\Model\ArticleManager
 	- App\Model\LanguageManager
+	- App\Model\RequestManager
 
 	authorizatorFactory: App\AuthorizatorFactory
 	authorizator: @authorizatorFactory::create
