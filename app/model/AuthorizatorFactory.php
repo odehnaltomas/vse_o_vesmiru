@@ -31,6 +31,7 @@ class AuthorizatorFactory {
         $authorizator->addResource('comment');
         $authorizator->addResource('userSource');
         $authorizator->addResource('popUp');
+        $authorizator->addResource('request');
 
 
         $authorizator->allow('guest', 'sign', array('in', 'up'));
@@ -47,6 +48,7 @@ class AuthorizatorFactory {
         $authorizator->allow('moderator', 'translation', array('list', 'original', 'add'));
         $authorizator->allow('moderator', 'popUp', 'articlePopUp');
         $authorizator->allow('moderator', 'comment', 'del');
+        $authorizator->allow('moderator', 'request', array('list', 'accept', 'reject'));
 
         $authorizator->deny('moderator', 'article', array('addRequest', 'delRequest', 'editRequest'));
 
