@@ -440,7 +440,7 @@ class ArticlePresenter extends BasePresenter
 
         } elseif($this->user->isAllowed('article','editRequest')){
             $article = $this->articleManager->addArticle($this->user->getId(), $values, 'request');
-            $this->requestManager->addRequest($this->user->getId(), 3, $article->id);
+            $this->requestManager->addRequest($this->user->getId(), 3, $article->id, $values->articleId);
             $this->flashMessage('Požadavek na upravení článku byl odeslán.');
             $this->redirect('Article:show', array('articleId' => $values->articleId));
         } else

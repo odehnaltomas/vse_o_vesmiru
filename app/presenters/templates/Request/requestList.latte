@@ -12,9 +12,9 @@
             <tr>
                 <td>Článek:</td>
                 {if $request->request_counter['id'] === 1}
-                    <td><a n:href="Article:show $request->article['id']" target="_blind">{$request->article['title']}</a></td>
+                    <td><a n:href="Article:show $request->article['id']" target="_blank">{$request->article['title']}</a></td>
                 {elseif $request->request_counter['id'] === 2 || $request->request_counter['id'] === 3}
-                    <td><a n:href="Request:showArticle $request->article['id']" target="_blind">{$request->article['title']}</a></td>
+                    <td><a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']}</a></td>
                 {/if}
             </tr>
 
@@ -24,9 +24,15 @@
             </tr>
 
             <tr>
-                <td>Důvod smazání:</td>
-                <td>{!$request->message}</td>
+                {if $request->request_counter['id'] === 1}
+                    <td>Důvod smazání:</td>
+                    <td>{!$request->message}</td>
+                {elseif $request->request_counter['id'] === 3}
+                    <td>Neupravený článek:</td>
+                    <td><a n:href="Article:show $request->message" target="_blank">{$request->article['title']}</a></td>
+                {/if}
             </tr>
+            
             <tr>
                 {if $request->request_counter['id'] === 1}
                     <td><a n:href="acceptDelRequest! $request->article['id'], $request->id" class="ajax"><button>Potvrdit (smazat článek)</button></a></td>

@@ -96,6 +96,10 @@ class RequestPresenter extends BasePresenter
 
 
     public function handleAcceptEditRequest($articleId, $requestId){
-        
+        if($this->user->isAllowed('request', 'accept')){
+            $this->requestManager->acceptEditRequest($requestId);
+            $this->articleManager->acceptEditArticle($articleId);
+        } else
+            throw new BadSignalException;
     }
 }
