@@ -350,4 +350,22 @@ class ArticleManager extends BaseManager
                         self::ARTICLE_COLUMN_CONTENT => $content
                     ));
     }
+
+
+    public function acceptEditArticle($articleId, $originalArticleId){
+        $originalArticle = $this->database->table(self::TABLE_ARTICLE)
+                                ->where(self::ARTICLE_COLUMN_ID, $articleId)->fetch();
+
+        $this->database->table(self::TABLE_ARTICLE)
+                                ->where(self::ARTICLE_COLUMN_ID, $originalArticleId)
+                                ->update(array(
+                                    self::ARTICLE_COLUMN_LANGUAGE_ID => $originalArticle->language_id,
+                                    self::ARTICLE_COLUMN_TITLE => $originalArticle->title,
+                                    self::ARTICLE_COLUMN_CAPTION => $originalArticle->caption,
+                                    self::ARTICLE_COLUMN_CONTENT => $originalArticle->content
+                                ));
+
+        return $this->database->table(self::TABLE_ARTICLE)
+                    ->where(self::ARTICLE_COLUMN_ID, $articleId);
+    }
 }

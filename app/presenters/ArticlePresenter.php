@@ -7,7 +7,6 @@
  */
 
 //TODO: Mazání článků přímo u výpisu článků
-//TODO:
 
 namespace App\Presenters;
 

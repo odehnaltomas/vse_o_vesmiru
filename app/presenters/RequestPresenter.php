@@ -82,7 +82,7 @@ class RequestPresenter extends BasePresenter
 
     public function handleAcceptAddRequest($articleId, $requestId){
         if($this->user->isAllowed('request', 'accept')){
-            $this->requestManager->acceptAddRequest($requestId);
+            $this->requestManager->acceptRequest($requestId);
             $this->articleManager->visibleArticle($articleId);
             $this->flashMessage('Článek byl přidán.');
 
@@ -95,10 +95,16 @@ class RequestPresenter extends BasePresenter
     }
 
 
-    public function handleAcceptEditRequest($articleId, $requestId){
+    public function handleAcceptEditRequest($articleId, $originalArticleId, $requestId){
         if($this->user->isAllowed('request', 'accept')){
-            $this->requestManager->acceptEditRequest($requestId);
-            $this->articleManager->acceptEditArticle($articleId);
+            $this->requestManager->acceptRequest($requestId);
+            $this->articleManager->acceptEditArticle($articleId, $originalArticleId);
+            $this->flashMessage('Článek byl upraven.');
+
+            if($this->isAjax()){
+                $this->redrawControl('requests');
+                $this->redrawControl('flashmessages');
+            }
         } else
             throw new BadSignalException;
     }

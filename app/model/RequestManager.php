@@ -76,7 +76,7 @@ class RequestManager extends BaseManager
     }
 
 
-    public function acceptAddRequest($requestId){
+    public function acceptRequest($requestId){
         return $this->database->table(self::TABLE_REQUEST)
                     ->where(self::REQUEST_ID, $requestId)
                     ->update(array(self::REQUEST_STATE => 3));
