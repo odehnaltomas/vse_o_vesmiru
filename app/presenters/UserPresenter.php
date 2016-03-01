@@ -40,6 +40,11 @@ class UserPresenter extends BasePresenter
         1 => 'No'
     );
 
+    private $sex = array(
+        1 => "forms.sign.male",
+        2 => "forms.sign.female"
+    );
+
 
     public function __construct(Nette\Database\Context $database, UserManager $userManager, User $user)
     {
@@ -64,7 +69,7 @@ class UserPresenter extends BasePresenter
     public function renderShowProfile($userId){
         $user = $this->userManager->getUserData($userId);
 
-        if($user === NULL)
+        if(!$user)
             throw new Nette\Application\BadRequestException;
 
         $this->template->user = $user;
@@ -90,7 +95,8 @@ class UserPresenter extends BasePresenter
             $this->userManager->changeUserRole($values->userId, $values->role);
             $this->flashMessage('Role uživatele byla změněna.');
             $this->redirect('User:userList');
-        }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
     public function handleChangeRole($userId, $role){
@@ -102,7 +108,8 @@ class UserPresenter extends BasePresenter
             if ($this->isAjax()) {
                 $this->redrawControl('popUp');
             }
-        }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
@@ -129,7 +136,8 @@ class UserPresenter extends BasePresenter
             else
                 $this->flashMessage('Účet uživatele byl zamčen.');
             $this->redirect('User:userList');
-        }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
@@ -141,7 +149,8 @@ class UserPresenter extends BasePresenter
             if ($this->isAjax()) {
                 $this->redrawControl('popUpBan');
             }
-        }
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 
@@ -150,4 +159,55 @@ class UserPresenter extends BasePresenter
         $this->template->usersData = $this->userManager->getUsers();
         $this->template->userId = $this->userId;
     }
+
+
+    public function renderEditProfile($userId){
+        if($this->user->isLoggedIn()) {
+            $user = $this->userManager->getUserData($userId);
+
+            if (!$user)
+                throw new Nette\Application\BadRequestException;
+
+            $this['editProfileForm']['first_name']->setDefaultValue($user->first_name);
+            $this['editProfileForm']['last_name']->setDefaultValue($user->last_name);
+            $this['editProfileForm']['email']->setDefaultValue($user->email);
+            $this['editProfileForm']['sex']->setDefaultValue($user->sex['id']);
+            $this['editProfileForm']['userId']->setDefaultValue($userId);
+        } else
+            throw new Nette\Application\UI\BadSignalException;
+    }
+
+
+    protected function createComponentEditProfileForm(){
+        $form = new Form;
+
+        $form->setTranslator($this->translator);
+
+        $form->addText('first_name', 'Jméno:');
+
+        $form->addText('last_name', 'Příjmení:');
+
+        $form->addText('email', 'Email:');
+
+        $form->addRadioList('sex', 'Pohlaví', $this->sex);
+
+        $form->addSubmit('send', 'Uložit');
+
+        $form->addHidden('userId');
+
+        $form->onSuccess[] = $this->editProfileFormSucceeded;
+
+        return $form;
+    }
+
+
+    public function editProfileFormSucceeded($form, $values){
+        if($this->user->isLoggedIn()){
+            $this->userManager->changeUserData($values);
+            $this->flashMessage('Profil byl úspěšně změněn.');
+            $this->redirect('User:showYourProfile');
+        } else
+            throw new Nette\Application\UI\BadSignalException;
+    }
+
 }

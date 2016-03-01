@@ -54,6 +54,10 @@ class UserManager extends BaseManager
 	}
 
 
+	/**
+	 * @param $userId
+	 * @return Nette\Database\Table\IRow
+	 */
 	public function getUserData($userId){
 		return $this->database->table(self::TABLE_USER)->get($userId);
 	}
@@ -102,6 +106,26 @@ class UserManager extends BaseManager
 		return $this->database->table(self::TABLE_USER)
 				->where(self::USER_COLUMN_ID, $userId)
 				->update(array(self::USER_COLUMN_BAN => $ban));
+	}
+
+
+	public function changeUserData($values){
+		$data = array();
+
+		foreach($values as $value){
+			$data[] = $value;
+		}
+
+		list($firstName, $lastName, $email, $sex, $userId) = $data;
+
+		return $this->database->table(self::TABLE_USER)
+					->where(self::USER_COLUMN_ID, $userId)
+					->update(array(
+						self::USER_COLUMN_FIRST_NAME => $firstName,
+						self::USER_COLUMN_LAST_NAME => $lastName,
+						self::USER_COLUMN_EMAIL => $email,
+						self::USER_COLUMN_SEX => $sex
+					));
 	}
 }
 

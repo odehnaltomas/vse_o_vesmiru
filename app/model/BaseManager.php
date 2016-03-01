@@ -26,6 +26,7 @@ abstract class BaseManager extends Object
         USER_COLUMN_PASSWORD = 'password',
         USER_COLUMN_FIRST_NAME = 'first_name',
         USER_COLUMN_LAST_NAME = 'last_name',
+        USER_COLUMN_EMAIL = 'email',
         USER_COLUMN_SEX = 'sex_id',
         USER_COLUMN_ROLE = 'role_id',
         USER_COLUMN_BAN = 'banned',

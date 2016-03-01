@@ -113,9 +113,9 @@ class RequestPresenter extends BasePresenter
     public function renderMyRequests(){
         $this->template->locale = $this->locale;
         $requests = $this->requestManager->getRequests($this->user->getId());
-        if($requests) {
-            $this->template->requests = $requests;
-        } else
+        $this->template->requests = $requests;
+        if(empty($requests)) {
             $this->template->message = "Nemáš zatím žádné requesty!";
+        }
     }
 }

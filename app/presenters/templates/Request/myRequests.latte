@@ -1,6 +1,8 @@
 {block content}
 <h1>Moje požadavky</h1>
 
+{ifset $message}{$message}{/ifset}
+
 <div n:foreach="$requests as $request" class="request">
         <div class="header">
         <span>Požadavek: {$request->request_counter[$locale . '_request']}</span>
@@ -38,5 +40,4 @@
                 {/if}
             </tr>
         </table>
-        {ifset $message}{$message}{/ifset}
     </div>
