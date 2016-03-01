@@ -387,4 +387,63 @@ class ArticlePresenter extends BasePresenter
         }
 
     }
+
+
+    public function renderEdit($articleId){
+        if($this->user->isLoggedIn()) {
+            $article = $this->articleManager->getArticle($articleId);
+
+            if (!$article)
+                throw new Nette\Application\BadRequestException;
+
+            $this['editArticleForm']['language']->setDefaultValue($article->language['language']);
+            $this['editArticleForm']['title']->setDefaultValue($article->title);
+            $this['editArticleForm']['caption']->setDefaultValue($article->caption);
+            $this['editArticleForm']['content']->setDefaultValue($article->content);
+            $this['editArticleForm']['articleId']->setDefaultValue($articleId);
+
+        }
+    }
+
+
+    protected function createComponentEditArticleForm() {
+        $form = new Form;
+        $form->setTranslator($this->translator);
+
+        $form->addRadioList('language', 'forms.article.selectLanguage', $this->language)
+            ->getSeparatorPrototype()->setName(null);
+
+        $form->addText('title', 'forms.article.title')
+            ->setRequired('forms.article.requiredTitle');
+
+        $form->addTextArea('caption', 'forms.article.caption')
+            ->setRequired('forms.article.requiredCaption');
+
+        $form->addTextArea('content', 'forms.article.content')
+            ->setRequired('forms.article.requiredContent')
+            ->setAttribute('class', 'mceEditor_' . $this->locale);
+
+        $form->addHidden('articleId');
+
+        $form->addSubmit('send', 'Upravit');
+
+        $form->onSuccess[] = array($this, 'editArticleFormSucceeded');
+        return $form;
+    }
+
+
+    public function editArticleFormSucceeded($form, $values){
+        if ($this->user->isAllowed('article', 'edit')) {
+            $this->articleManager->editArticle($values);
+            $this->flashMessage('Článek byl úspěšně upraven.');
+            $this->redirect('Article:show', array('articleId' => $values->articleId));
+
+        } elseif($this->user->isAllowed('article','editRequest')){
+            $article = $this->articleManager->addArticle($this->user->getId(), $values, 'request');
+            $this->requestManager->addRequest($this->user->getId(), 3, $article->id);
+            $this->flashMessage('Požadavek na upravení článku byl odeslán.');
+            $this->redirect('Article:show', array('articleId' => $values->articleId));
+        } else
+            throw new Nette\Application\UI\BadSignalException;
+    }
 }

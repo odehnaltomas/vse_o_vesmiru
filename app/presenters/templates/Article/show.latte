@@ -15,6 +15,7 @@
         </div>
     </div>
     {if $user->isLoggedIn()}
+    <a n:href="Article:edit $article->id"><button>Upravit článek</button></a>
     <a n:href="deleteArticle! $article->id" class="ajax"><button class="deleteArticle-show">Smazat článek</button></a>
     {/if}
 
