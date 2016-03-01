@@ -108,4 +108,14 @@ class RequestPresenter extends BasePresenter
         } else
             throw new BadSignalException;
     }
+
+
+    public function renderMyRequests(){
+        $this->template->locale = $this->locale;
+        $requests = $this->requestManager->getRequests($this->user->getId());
+        if($requests) {
+            $this->template->requests = $requests;
+        } else
+            $this->template->message = "Nemáš zatím žádné requesty!";
+    }
 }

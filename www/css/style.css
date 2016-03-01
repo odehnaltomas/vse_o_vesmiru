@@ -605,3 +605,25 @@ form .error {
 .request table td {
 	padding: 3px;
 }
+
+.requestState {
+	float: right;
+	font-size: large;
+	line-height: normal;
+}
+
+.requestState.state_1{
+	color: #ffe335;
+}
+
+.requestState.state_2{
+	color: rgb(255, 84, 94);
+}
+
+.requestState.state_3{
+	color: #63ff58;
+}
+
+.requestState.state_4{
+	color: #7ad6ff;
+}

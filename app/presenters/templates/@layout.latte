@@ -47,11 +47,14 @@
                                 </div>
                         </div>
 
-                        {if $user->isAllowed('request', 'list')}
+                        {if $user->isLoggedIn()}
                         <div class="dropdownMenu">
                                 <a n:href="Request:"><button class="menuButton">Požadavky</button></a>
                                 <div class="dropdown-content">
+                                        <a n:href="Request:myRequests">Mé požadavky</a>
+                                        {if $user->isAllowed('request', 'list')}
                                         <a n:href="Request:requestList">Seznam</a>
+                                        {/if}
                                 </div>
                         </div>
                         {/if}

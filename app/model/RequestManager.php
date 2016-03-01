@@ -41,12 +41,18 @@ class RequestManager extends BaseManager
     }
 
 
-    public function getRequests() {
-        return $this->database->table(self::TABLE_REQUEST)
-                    ->where('NOT ' . self::REQUEST_STATE, 2)
-                    ->where('NOT ' . self::REQUEST_STATE, 3)
-                    ->where('NOT ' . self::REQUEST_STATE, 4)
-                    ->order(self::REQUEST_CREATED . " DESC");
+    public function getRequests($userId = NULL) {
+        if($userId === NULL) {
+            return $this->database->table(self::TABLE_REQUEST)
+                ->where('NOT ' . self::REQUEST_STATE, 2)
+                ->where('NOT ' . self::REQUEST_STATE, 3)
+                ->where('NOT ' . self::REQUEST_STATE, 4)
+                ->order(self::REQUEST_CREATED . " DESC")->fetchAll();
+        } else {
+            return $this->database->table(self::TABLE_REQUEST)
+                ->where(self::REQUEST_USER_ID, $userId)
+                ->order(self::REQUEST_CREATED . " DESC")->fetchAll();
+        }
     }
 
 
