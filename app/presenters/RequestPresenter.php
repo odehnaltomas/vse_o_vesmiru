@@ -93,4 +93,9 @@ class RequestPresenter extends BasePresenter
         } else
             throw new BadSignalException;
     }
+
+
+    public function handleAcceptEditRequest($articleId, $requestId){
+        
+    }
 }

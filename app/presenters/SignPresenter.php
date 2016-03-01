@@ -124,6 +124,7 @@ class SignPresenter extends BasePresenter
 		$form->addText('last_name', 'forms.sign.last_name');
 
 		$form->addRadioList('sex', 'forms.sign.sex', $this->sex)
+			->setDefaultValue(1)
 			->getSeparatorPrototype()->setName(NULL);
 
 		$form->addSubmit('send', 'forms.sign.signUp');

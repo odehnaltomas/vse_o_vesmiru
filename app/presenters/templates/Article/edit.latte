@@ -1,0 +1,59 @@
+{block content}
+
+<h1 n:block="title">Úprava článku</h1>
+<div class="form">
+{form editArticleForm}
+
+    <div class="error" n:if="$form->hasErrors()">
+        <ul>
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+
+    <div class="component">
+        <div id="labelLanguage" class="label">
+            {label language /}
+        </div>
+        <div id="inputLanguage" class="input" >
+            {input language}
+        </div>
+        <div class="cleaner"></div>
+    </div>
+
+    <div class="component">
+        <div id="labelTitle" class="label">
+            {label title /}
+        </div>
+        <div id="inputTitle" class="input">
+            {input title}
+        </div>
+        <div class="cleaner" />
+    </div>
+
+    <div class="component">
+        <div id="labelCaption" class="label">
+            {label caption /}
+        </div>
+        <div id="inputCaption" class="input">
+            {input caption}
+        </div>
+        <div class="cleaner" />
+    </div>
+
+    <div class="component">
+        <div class="label">
+            {label content /}
+        </div>
+        <div class="input">
+            {input content}
+        </div>
+    </div>
+
+    <div class="component">
+        <div class="input">
+            {input send}
+        </div>
+    </div>
+
+{/form}
+</div>

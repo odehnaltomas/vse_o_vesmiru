@@ -329,4 +329,25 @@ class ArticleManager extends BaseManager
                     ->where(self::ARTICLE_COLUMN_ID, $articleId)
                     ->update(array(self::ARTICLE_COLUMN_DELETED => 1));
     }
+
+
+    public function editArticle($values){
+        $data = array();
+        foreach($values as $value){
+            $data[] = $value;
+        }
+
+        list($language, $title, $caption, $content, $articleId) = $data;
+
+        $languageId = $this->languageManager->getLanguageId($language);
+
+        return $this->database->table(self::TABLE_ARTICLE)
+                    ->where(self::ARTICLE_COLUMN_ID, $articleId)
+                    ->update(array(
+                        self::ARTICLE_COLUMN_LANGUAGE_ID => $languageId,
+                        self::ARTICLE_COLUMN_TITLE => $title,
+                        self::ARTICLE_COLUMN_CAPTION => $caption,
+                        self::ARTICLE_COLUMN_CONTENT => $content
+                    ));
+    }
 }
