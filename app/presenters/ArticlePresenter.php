@@ -52,7 +52,7 @@ class ArticlePresenter extends BasePresenter
     public $requestManager;
 
     /** @var array */
-    private $articleRating = array(
+    private $ratingArticleValues = array(
         1 => 1,
         2 => 2,
         3 => 3,
@@ -238,7 +238,9 @@ class ArticlePresenter extends BasePresenter
         $this->template->userRatings = $this->articleManager->getUserRatings($articleId, $this->user->getId());
         $this->template->ratingValues = $this->articleManager->getRating($articleId);
         $this->template->user = $this->user;
-        $this->template->articleRating = $this->articleRating;
+        $this->template->ratingArticleValues = $this->ratingArticleValues;
+        $this->template->articleRating = $this->articleManager->getArticleRating($articleId);
+        $this->template->userArticleRating = $this->articleManager->ratedArticle($this->user->getId(), $articleId);
         $this->template->usersKarma = $this->articleManager->getUsersKarma($articleId);
         $this->template->articleId = $articleId;
         $this->template->userId = $this->user->getId();
@@ -283,8 +285,22 @@ class ArticlePresenter extends BasePresenter
     }
 
 
-    public function handleRateArticle($articleId, $value){
+    public function handleRateArticle($articleId, $userId, $value){
+        if($this->user->isLoggedIn()){
+            $rate = $this->articleManager->ratedArticle($userId, $articleId);
 
+            if(!$rate) {
+                $this->articleManager->rateArticle($articleId, $userId, $value);
+            } else
+                $this->articleManager->rateArticle($articleId, $userId, $value, $rate->id);
+
+
+            if($this->isAjax()){
+                $this->redrawControl('articleRating');
+            }
+
+        } else
+            throw new Nette\Application\UI\BadSignalException;
     }
 
 

@@ -368,4 +368,61 @@ class ArticleManager extends BaseManager
         return $this->database->table(self::TABLE_ARTICLE)
                     ->where(self::ARTICLE_COLUMN_ID, $articleId);
     }
+
+
+    public function rateArticle($articleId, $userId, $value, $rateId = NULL){
+        if($rateId === NULL) {
+            return $this->database->table(self::TABLE_ARTICLE_RATING)->insert(array(
+                self::ARTICLE_RATING_USER_ID => $userId,
+                self::ARTICLE_RATING_ARTICLE_ID => $articleId,
+                self::ARTICLE_RATING_VALUE => $value
+            ));
+        } else {
+            return $this->database->table(self::TABLE_ARTICLE_RATING)
+                ->where(self::ARTICLE_RATING_ID, $rateId)
+                ->update(array(
+                self::ARTICLE_RATING_VALUE => $value
+            ));
+        }
+    }
+
+
+    public function getArticleRating($articleId){
+        $ratings = $this->database->table(self::TABLE_ARTICLE_RATING)
+                        ->where(self::ARTICLE_RATING_ARTICLE_ID, $articleId);
+
+        $number = 0;
+
+        $data = array(
+            'count' => 0,
+            'value' => 0,
+            'roundValue' => 0
+        );
+
+        foreach($ratings as $rating){
+            $data['count']++;
+            $number += $rating->value;
+        }
+
+        if($data['count'] === 0){
+            return $data;
+        } else{
+            $data['value'] = $number/$data['count'];
+            $data['roundValue'] = round($data['value']);
+        }
+
+        return $data;
+    }
+
+
+    /**
+     * @param $userId
+     * @param $articleId
+     * @return Nette\Database\Table\IRow
+     */
+    public function ratedArticle($userId, $articleId){
+        return $this->database->table(self::TABLE_ARTICLE_RATING)
+                    ->where(self::ARTICLE_RATING_USER_ID, $userId)
+                    ->where(self::ARTICLE_RATING_ARTICLE_ID, $articleId)->fetch();
+    }
 }

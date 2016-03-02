@@ -6,14 +6,42 @@
     <div>
         Autor: {$article->user['username']}
     </div>
-    <div class='movie_choice'>
-        <div id="r1" class="rate_widget">
-            {foreach $articleRating as $value}
-            <a n:href="rateArticle! $article->id" class="ajax ratings_stars"></a>
-            {/foreach}
-            <div class="total_votes">vote data</div>
+
+    {snippet articleRating}
+        <div class='articleVote'>
+            {if $user->isLoggedIn()}
+                <div class="rateWidget">
+                    {foreach $ratingArticleValues as $value}
+
+                        {if $userArticleRating}
+                            {if $value <= $userArticleRating->value && $userArticleRating->value != 0}
+                            <a n:href="rateArticle! $article->id, $user->getId(), $value" class="ajax ratings_stars U"></a>
+                            {else}
+                                <a n:href="rateArticle! $article->id, $user->getId(), $value" class="ajax ratings_stars"></a>
+                            {/if}
+                        {elseif $value <= $articleRating['roundValue']}
+                            <a n:href="rateArticle! $article->id, $user->getId(), $value" class="ajax ratings_stars R"></a>
+                        {else}
+                            <a n:href="rateArticle! $article->id, $user->getId(), $value" class="ajax ratings_stars"></a>
+                        {/if}
+
+                    {/foreach}
+                </div>
+            {else}
+                <div class="rateWidgetNotLoggedIn">
+                    {foreach $ratingArticleValues as $value}
+                    {if $value <= $articleRating['roundValue']}
+                        <span class="ratings_starsN R"></span>
+                    {else}
+                        <span class="ratings_starsN"></span>
+                    {/if}
+                    {/foreach}
+                </div>
+            {/if}
+            <div class="total_votes">Hodnotilo: {$articleRating['count']}, průměrné hodnocení: {$articleRating['value']|number:1}</div>
         </div>
-    </div>
+    {/snippet}
+
     {if $user->isLoggedIn()}
     <a n:href="Article:edit $article->id"><button>Upravit článek</button></a>
     <a n:href="deleteArticle! $article->id" class="ajax"><button class="deleteArticle-show">Smazat článek</button></a>

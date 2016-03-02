@@ -398,38 +398,72 @@ form .error {
 	height: 32px;
 }
 /*=´================================*/
-.rate_widget {
-	border:     1px solid #CCC;
-	overflow:   visible;
-	padding:    10px;
-	position:   relative;
-	width:      180px;
-	height:     32px;
+.articleVote {
+	font: 10px verdana, sans-serif;
+	margin: 0 auto 40px auto;
+	width: 180px;
+	border: 1px solid #CCC;
+	padding: 10px;
 }
+
+.rateWidget {
+	overflow: visible;
+	position: relative;
+	width: 180px;
+	height: 32px;
+}
+
+.rateWidgetNotLoggedIn{
+	overflow: visible;
+	position: relative;
+	width: 180px;
+	height: 32px;
+}
+
+.rateWidgetNotLoggedIn > .ratings_starsN {
+	background: url('../images/ratingStar-notLoggedIn.png') no-repeat;
+}
+
+.rateWidget:hover > .ratings_stars {
+	background: url('../images/ratingStar-hover.png') no-repeat;
+}
+
 .ratings_stars {
 	background: url('../images/ratingStar-empty.png') no-repeat;
-	float:      left;
-	height:     28px;
-	padding:    2px;
-	width:      32px;
+	float: left;
+	height: 28px;
+	padding: 2px;
+	width: 32px;
 }
-.ratings_vote {
+.ratings_starsN {
+	background: url('../images/ratingStar-empty.png') no-repeat;
+	float: left;
+	height: 28px;
+	padding: 2px;
+	width: 32px;
+}
+
+.ratings_stars:hover ~ .ratings_stars {
+	background: url('../images/ratingStar-empty.png') no-repeat;
+}
+
+.ratings_stars.U {
+	background: url('../images/ratingStar-hover.png') no-repeat;
+}
+
+.ratings_stars.R {
 	background: url('../images/ratingStar-rated.png') no-repeat;
 }
-.ratings_over {
+
+.ratings_starsN.R {
 	background: url('../images/ratingStar-rated.png') no-repeat;
 }
+
 .total_votes {
 	background: #eaeaea;
 	top: 58px;
 	left: 0;
 	padding: 5px;
-	position:   absolute;
-}
-.movie_choice {
-	font: 10px verdana, sans-serif;
-	margin: 0 auto 40px auto;
-	width: 180px;
 }
 /*=´================================*/
 

@@ -54,6 +54,12 @@ abstract class BaseManager extends Object
         ARTICLE_COLUMN_ARTICLE_RATING = 'article_rating_id',
         ARTICLE_COLUMN_DELETED = 'deleted',
 
+    TABLE_ARTICLE_RATING = 'article_rating',
+        ARTICLE_RATING_ID = 'id',
+        ARTICLE_RATING_USER_ID = 'user_id',
+        ARTICLE_RATING_ARTICLE_ID = 'article_id',
+        ARTICLE_RATING_VALUE = 'value',
+
     TABLE_LANGUAGE = 'language',
         LANGUAGE_COLUMN_ID = 'id',
         LANGUAGE_COLUMN_LANGUAGE = 'language',
