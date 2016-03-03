@@ -58,7 +58,8 @@ $(document).ready(function(){
  */
 tinyMCE.init({
     selector: ".mceEditor_cs",
-    plugins: 'autoresize',
+    plugins: 'autoresize, link, emoticons, codesample',
+    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code emoticons link codesample',
     autoresize_min_width: '100%',
     autoresize_min_height: 600,
     autoresize_max_height: 1000,
