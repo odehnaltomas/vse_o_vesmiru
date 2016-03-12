@@ -2,6 +2,7 @@ exceptions:
     wrongLogin: "Špatné uživatelské jméno nebo heslo!"
     duplicateUsername: "Zadaný login již existuje!"
     duplicateTitle: "Článek se zadaným titulkem již existuje!"
+    bannedAccount: "Tento účet byl zablokován! Obraťte se prosím na administrátora."
 
 flash:
     signedOut: "Byl jste odhlášen!"

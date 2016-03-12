@@ -86,6 +86,8 @@ class SignPresenter extends BasePresenter
 			$form->getPresenter()->redirect('Homepage:');
 		} catch (Nette\Security\AuthenticationException $e) {
 			$form->addError($this->translator->translate($e->getMessage()));
+		} catch(App\Exceptions\BannedAccountException $e){
+			$form->addError($this->translator->translate($e->getMessage()));
 		}
 	}
 

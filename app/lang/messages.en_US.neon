@@ -2,6 +2,7 @@ exceptions:
     wrongLogin: "Wrong username or password!"
     duplicateUsername: "Login already exist!"
     duplicateTitle: "There's an article with given title!"
+    bannedAccount: "This account was blocked! Please contact the admin."
 
 flash:
     signedOut: "You have been signed out!"

@@ -46,7 +46,8 @@ class UserManager extends BaseManager
 				self::USER_COLUMN_FIRST_NAME => $firstName,
 				self::USER_COLUMN_LAST_NAME => $lastName,
 				self::USER_COLUMN_SEX => $sex,
-				self::USER_COLUMN_ROLE => 1
+				self::USER_COLUMN_ROLE => 1,
+				self::USER_COLUMN_BAN => 1
 			));
 		} catch (Nette\Database\UniqueConstraintViolationException $e) {
 			throw new App\Exceptions\DuplicateNameException("messages.exceptions.duplicateUsername");

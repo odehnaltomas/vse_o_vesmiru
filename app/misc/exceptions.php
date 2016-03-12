@@ -17,3 +17,13 @@ class DuplicateNameException extends \Exception
 {
 
 }
+
+
+/**
+ * Class BannedAccountException
+ * @package App\Exceptions
+ */
+class BannedAccountException extends \Exception
+{
+
+}

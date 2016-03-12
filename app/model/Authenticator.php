@@ -1,6 +1,7 @@
 <?php
 namespace App\Model;
 
+use App\Exceptions\BannedAccountException;
 use Nette;
 use Nette\Security\IAuthenticator;
 use Nette\Security\Passwords;
@@ -27,6 +28,7 @@ class Authenticator extends BaseManager implements IAuthenticator
      * @param array $credentials - Pole, které obsahuje hodnoty (uživ. jméno a heslo) získané z odeslaného formuláře SignInForm
      * @return Nette\Security\Identity - Vrací instanci třídy Identity, do které se vloží data o přihlašovaném uživateli (v případé úspěšného přihlášení)
      * @throws Nette\Security\AuthenticationException - Vyhodí výjimku, pokud předané uživ. jméno v databázi neexistuje nebo pokud je předané heslo nesprávné
+     * @throws BannedAccountException
      */
     public function authenticate(array $credentials)
     {
@@ -44,6 +46,10 @@ class Authenticator extends BaseManager implements IAuthenticator
             $row->update(array(
                 self::USER_COLUMN_PASSWORD => Passwords::hash($password),
             ));
+        }
+
+        if($row->banned === 0){
+            throw new BannedAccountException("messages.exceptions.bannedAccount");
         }
 
         $data = array(
