@@ -84,7 +84,7 @@ abstract class BaseManager extends Object
         REQUEST_USER_ID = 'user_id',
         REQUEST_MESSAGE = 'message',
         REQUEST_CREATED = 'created',
-        REQUEST_STATE = 'state',
+        REQUEST_STATE = 'request_state_id',
 
     TABLE_REQUEST_COUNTER = 'request',
         REQUEST_COUNTER_ID = 'id',
