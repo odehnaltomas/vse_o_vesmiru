@@ -1,0 +1,49 @@
+.pagination {
+    padding: 10px;
+    min-width: 100px;
+    font-family: "x360";
+    font-size: larger;
+}
+
+.pagination .paginator {
+    min-width: 100px;
+    text-align: center;
+}
+
+.pagination .paginator li {
+    display: inline;
+    list-style-type: none;
+    margin-right: 7px;
+    color: #082d7b;
+}
+
+.pagination .paginator li a {
+    text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #1d2375;
+}
+
+.pagination .paginator li:hover {
+    color: #051945;
+    background: #97ADBC;
+}
+
+.pagination .paginator li.disabled a{
+    color: black;
+}
+
+.pagination .paginator li.disabled{
+    background: none;
+    color: black;
+}
+
+.pagination .paginator .active {
+    color: white;
+    background: #97ADBC;
+}
+
+
+.cleaner {
+    clear: both;
+}
