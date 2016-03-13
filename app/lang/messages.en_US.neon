@@ -7,3 +7,8 @@ exceptions:
 flash:
     signedOut: "You have been signed out!"
     permissionAddArticle: "You haven't permission to add articles!"
+    deletedArticle: "This article was deleted!"
+    nonexistsTranslation: "Translation does not exist!"
+    translationSaved: "Translation was successfully saved."
+    alreadyDelRequest: "You've already requested for deleting the article."
+    requestDeleteArticle: "The request to delete the article was send."

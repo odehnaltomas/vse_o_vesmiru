@@ -7,3 +7,8 @@ exceptions:
 flash:
     signedOut: "Byl jste odhlášen!"
     permissionAddArticle: "Nemáte povolení přidávat články!"
+    deletedArticle: "Tento článek byl vymazán!"
+    nonexistsTranslation: "Překlad neexistuje!"
+    translationSaved: "Překlad byl úspěšně uložen."
+    alreadyDelRequest: "Již jsi zažádal o smazání toho článku."
+    requestDeleteArticle: "Požadavek na smazání článku byl odeslán."

@@ -28,7 +28,10 @@ class ArticlePresenter extends BasePresenter
 
 
     private $userId;
+
+    /** @var  int */
     private $articleId;
+
     /**
      * @var User
      */
@@ -122,13 +125,13 @@ class ArticlePresenter extends BasePresenter
     {
         if ($this->user->isAllowed('article', 'add')) {
             $this->articleManager->addArticle($this->user->getId(), $values);
-            $this->flashMessage('Článek byl úspěšně uložen.');
+            $this->flashMessage($this->translator->translate('forms.article.savedArticle'));
             $this->redirect('Article:articleList');
 
         } elseif($this->user->isAllowed('article','addRequest')){
             $article = $this->articleManager->addArticle($this->user->getId(), $values, 'request');
             $this->requestManager->addRequest($this->user->getId(), 2, $article->id);
-            $this->flashMessage('Požadavek na přidání článku byl odeslán.');
+            $this->flashMessage($this->translator->translate('forms.article.requestAddArticle'));
             $this->redirect('Article:articleList');
         } else
             throw new Nette\Application\UI\BadSignalException;
@@ -212,7 +215,7 @@ class ArticlePresenter extends BasePresenter
         $articleLang = $this->languageManager->getLangugage($article->language_id);
 
         if($article->deleted === 0){
-            $this->flashMessage('Tento článek byl vymazán!');
+            $this->flashMessage($this->translator->translate('messages.flash.deletedArticle'));
             $this->redirect('Article:articleList');
         }
         if($this->locale !== $articleLang){
@@ -220,7 +223,7 @@ class ArticlePresenter extends BasePresenter
             if($id !== NULL) {
                 $this->redirect('Article:show', array('articleId' => $id));
             } else {
-                $this->flashMessage('Překlad neexistuje!');
+                $this->flashMessage($this->translator->translate('messages.flash.nonexistsTranslation'));
                 $this->redirect('Article:articleList');
             }
         }
@@ -373,7 +376,7 @@ class ArticlePresenter extends BasePresenter
         if($this->user->isAllowed('translation', 'add')){
             try {
                 $this->articleManager->addTranslation($this->user->getId(), $values);
-                $this->flashMessage('Překlad byl úspěšně uložen.');
+                $this->flashMessage($this->translator->translate('messages.flash.translationSaved'));
                 $this->redirect('Article:articleList');
             } catch(App\Exceptions\DuplicateNameException $e) {
                 $form->addError($this->translator->translate($e->getMessage()));
@@ -440,7 +443,7 @@ class ArticlePresenter extends BasePresenter
 
         $form->addHidden('articleId');
 
-        $form->addSubmit('send', 'Upravit');
+        $form->addSubmit('send', 'forms.article.change ');
 
         $form->onSuccess[] = array($this, 'editArticleFormSucceeded');
         return $form;
@@ -450,13 +453,13 @@ class ArticlePresenter extends BasePresenter
     public function editArticleFormSucceeded($form, $values){
         if ($this->user->isAllowed('article', 'edit')) {
             $this->articleManager->editArticle($values);
-            $this->flashMessage('Článek byl úspěšně upraven.');
+            $this->flashMessage($this->translator->translate('forms.article.articleChanged'));
             $this->redirect('Article:show', array('articleId' => $values->articleId));
 
         } elseif($this->user->isAllowed('article','editRequest')){
             $article = $this->articleManager->addArticle($this->user->getId(), $values, 'request');
             $this->requestManager->addRequest($this->user->getId(), 3, $article->id, $values->articleId);
-            $this->flashMessage('Požadavek na upravení článku byl odeslán.');
+            $this->flashMessage($this->translator->translate('forms.article.requestEditArticle'));
             $this->redirect('Article:show', array('articleId' => $values->articleId));
         } else
             throw new Nette\Application\UI\BadSignalException;

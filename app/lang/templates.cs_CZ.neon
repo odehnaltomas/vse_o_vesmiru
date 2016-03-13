@@ -5,7 +5,12 @@ article:
     titleAdd: "Přidat článek"
     noComment: "Nikdo zatím neokomentoval tento článek!"
     noTranslation: "Překlad článku ještě není!"
+    articleList: "Seznam článků"
+    reallyDeleteArticle: "Opravdu chcete tento článek smazat?"
 
 visualPaginator:
     next: "Další"
     previous: "Předchozí"
+
+popUp:
+    cancel: "Zrušit"

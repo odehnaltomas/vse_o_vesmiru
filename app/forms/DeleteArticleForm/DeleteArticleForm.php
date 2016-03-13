@@ -41,15 +41,15 @@ class DeleteArticleForm extends BaseControl
         $form->setTranslator($this->presenter->translator);
 
         if($this->presenter->getUser()->isAllowed('article', 'delRequest')) {
-            $form->addTextArea('message', 'Důvod smazání: ');
+            $form->addTextArea('message', 'forms.article.purposeOfDeleting');
 
-            $form->addSubmit('send', 'Poslat žádost');
+            $form->addSubmit('send', 'forms.article.articleDeleteRequest');
 
             $form->addHidden('userId');
 
             $form->addHidden('requestCounterId', 1);
         } elseif($this->presenter->getUser()->isAllowed('article', 'del')) {
-            $form->addSubmit('send', 'Smazat');
+            $form->addSubmit('send', 'forms.article.articleDelete');
         }
 
         $form->addHidden('articleId');
@@ -68,13 +68,13 @@ class DeleteArticleForm extends BaseControl
         $result = NULL;
         if($this->presenter->getUser()->isAllowed('article', 'del')) {
             $this->presenter->articleManager->delArticle($values->articleId);
-            $this->presenter->flashMessage('Článek byl úspěšně vymazán.');
+            $this->presenter->flashMessage($this->translator->translate('forms.article.articleDeleted'));
         } elseif($this->presenter->getUser()->isAllowed('article', 'delRequest')){
-            $result = $this->presenter->requestManager->addRequest($values);
+            $result = $this->presenter->requestManager->addRequest($values->userId, 1, $values->articleId, $values->message);
             if($result === 0) {
-                $this->presenter->flashMessage('Již jsi zažádal o smazání toho článku.');
+                $this->presenter->flashMessage($this->presenter->translator->translate('messages.flash.alreadyDelRequest'));
             } else
-                $this->presenter->flashMessage('Požadavek na smazání článku byl odeslán.');
+                $this->presenter->flashMessage($this->presenter->translator->translate('messages.article.requestDeleteArticle'));
         }
         $this->presenter->redirect('this');
     }

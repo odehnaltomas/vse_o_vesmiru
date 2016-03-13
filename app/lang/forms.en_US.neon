@@ -27,4 +27,13 @@ article:
     commentWrite: 'Write a comment:'
     publish: 'Publish'
     commentPlaceholder: 'You need to be logged in to write a comment!'
+    change: "Change"
+    articleChanged: "The article was changed."
+    requestEditArticle: "The request to change the article was send."
+    savedArticle: "The article was successfully saved."
+    requestAddArticle: "The request to save the article was send."
+    articleDelete: "Delete"
+    articleDeleteRequest: "Send request"
+    purposeOfDeleting: "Purpose of deleting:"
+    articleDeleted: "The article was successfully deleted."
 

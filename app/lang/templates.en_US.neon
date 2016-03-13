@@ -5,7 +5,12 @@ article:
     titleAdd: "Add an article"
     noComment: "Nobody commented this article!"
     noTranslation: "The translation has not been added yet!"
+    articleList: "Article List"
+    reallyDeleteArticle: "Do you really want to delete this article?"
 
 visualPaginator:
     next: "Next"
     previous: "Previous"
+
+popUp:
+    cancel: "Cancel"

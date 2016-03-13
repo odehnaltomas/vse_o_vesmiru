@@ -27,3 +27,12 @@ article:
     commentWrite: 'Napište komentář:'
     publish: 'Zveřejnit'
     commentPlaceholder: 'Pro napsání komentáře se musíte přihlásit!'
+    change: "Upravit"
+    articleChanged: "Článek byl úspěšně upraven."
+    requestEditArticle: "Požadavek na upravení článku byl odeslán."
+    savedArticle: "Článek byl úspěšně uložen."
+    requestAddArticle: "Požadavek na přidání článku byl odeslán."
+    articleDelete: "Smazat"
+    articleDeleteRequest: "Poslat žádost"
+    purposeOfDeleting: "Důvod smazání:"
+    articleDeleted: "Článek byl úspěšně vymazán."

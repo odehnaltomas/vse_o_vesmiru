@@ -1,6 +1,6 @@
 {block content}
 
-<h1 n:block="title">Články</h1>
+<h1 n:block="title">{_ templates.article.articleList}</h1>
 
 
 <div class="list">
@@ -26,12 +26,13 @@
         <div class="popUp">
                 {snippet popUp}
                         {if $user->isAllowed('article', 'del')}
-                            Opravdu chcete tento článek smazat?
+                            {_ templates.articleList.reallyDeleteArticle}
                             {control deleteArticleForm NULL, $articleId}
                         {elseif $user->isAllowed('article', 'delRequest')}
+                            
                             {control deleteArticleForm $userId, $articleId}
                         {/if}
                 {/snippet}
-                <button class="cancel">Cancel</button>
+                <button class="cancel">{_ templates.popUp.cancel}</button>
         </div>
 </div>
