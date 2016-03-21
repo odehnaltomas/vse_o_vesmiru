@@ -29,7 +29,7 @@
                             {_ templates.articleList.reallyDeleteArticle}
                             {control deleteArticleForm NULL, $articleId}
                         {elseif $user->isAllowed('article', 'delRequest')}
-                            
+
                             {control deleteArticleForm $userId, $articleId}
                         {/if}
                 {/snippet}

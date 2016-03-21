@@ -207,7 +207,7 @@ class ArticlePresenter extends BasePresenter
      * @throws Nette\Application\BadRequestException
      */
     public function actionShow($articleId){
-        $article = $this->articleManager->getArticle($articleId, $this->locale);
+        $article = $this->articleManager->getArticle($articleId);
 
         if(!$article)
             throw new Nette\Application\BadRequestException;
