@@ -69,14 +69,15 @@ class RequestPresenter extends BasePresenter
 
 
     public function renderShowArticle($articleId){
-        if($this->user->isAllowed('request', 'showArticle')){
-            $article = $this->articleManager->getArticle($articleId);
+        $article = $this->articleManager->getArticle($articleId);
+        if($this->user->isAllowed('request', 'showArticle') || $article->user_id === $this->user->getId() ){
 
             if(!$article)
                 throw new BadRequestException;
 
             $this->template->article = $article;
-        }
+        } else
+            throw new BadSignalException;
     }
 
 

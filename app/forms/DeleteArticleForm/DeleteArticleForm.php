@@ -74,7 +74,7 @@ class DeleteArticleForm extends BaseControl
             if($result === 0) {
                 $this->presenter->flashMessage($this->presenter->translator->translate('messages.flash.alreadyDelRequest'));
             } else
-                $this->presenter->flashMessage($this->presenter->translator->translate('messages.article.requestDeleteArticle'));
+                $this->presenter->flashMessage($this->presenter->translator->translate('messages.flash.requestDeleteArticle'));
         }
         $this->presenter->redirect('this');
     }
