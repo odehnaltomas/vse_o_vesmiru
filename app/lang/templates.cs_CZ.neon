@@ -6,7 +6,22 @@ article:
     noComment: "Nikdo zatím neokomentoval tento článek!"
     noTranslation: "Překlad článku ještě není!"
     articleList: "Seznam článků"
-    reallyDeleteArticle: "Opravdu chcete tento článek smazat?"
+    editArticle: "Úprava článku"
+    rated: "Hodnotilo:"
+    averageRating: "průměrné hodnocení:"
+    editArticleButton: "Upravit článek"
+    author: "Autor:"
+    deleteArticle: "Smazat článek"
+    comments: "Komentáře"
+    originalArticle: "Původní článek"
+    translation: "Překlad"
+    missingTranslations: "Chybějící překlady článků"
+    article: "Článek"
+    dateOfAddition: "Datum Přidání"
+    content: "Obsah"
+    created: "Vytvořeno"
+    title: "Titulek"
+    caption: "Popisek"
 
 visualPaginator:
     next: "Další"
@@ -14,3 +29,53 @@ visualPaginator:
 
 popUp:
     cancel: "Zrušit"
+    reallyDeleteArticle: "Opravdu chcete tento článek smazat?"
+
+layout:
+    articles: "Články"
+    addArticle: "Přidat článek"
+    articleList: "Seznam článků"
+    translations: "Překlady"
+    user: "Uživatel"
+    userProfile: "Profil uživatele"
+    userList: "Seznam uživatelů"
+    requests: "Požadavky"
+    myRequests: "Mé požadavky"
+    requestList: "Seznam"
+
+request:
+    request: "Požadavek"
+    byUser: "Od uživatele"
+    changed: "Upraveno"
+    reasonOfDeleting: "Důvod smazání"
+    unchangedArticle: "Neupravený článek"
+    noRequests: "Nemáš zatím žádné requesty!"
+    myRequests: "Moje požadavky"
+    confirm: "Potvrdit"
+    addArticle: "přidat článek"
+    delArticle: "smazat článek"
+    editArticle: "upravit článek"
+    reject: "Zamítnout"
+
+user:
+    yourProfile: "Tvůj profil"
+    firstName: "Jméno"
+    lastName: "Příjmení"
+    email: "Email"
+    sex: "Pohlaví"
+    userType: "Typ uživatele"
+    writtenComments: "Napsaných komentářů"
+    karma: "Karma"
+    empty: "Nevyplněno"
+    editProfile: "Upravit profil"
+    id: "ID"
+    username: "Username"
+    role: "Role"
+    banned: "Uzamčen"
+    yes: "Ano"
+    no: "Ne"
+    name: "Jméno"
+
+
+title:
+    allAboutUniverse: "Vše o vesmíru"

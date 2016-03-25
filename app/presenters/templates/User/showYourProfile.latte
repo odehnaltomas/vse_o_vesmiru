@@ -1,44 +1,44 @@
 {block content}
-    <h1>Tvůj profil</h1>
+    <h1>{_templates.user.yourProfile}</h1>
     <table>
         <tr>
-            <td>Jméno:</td>
+            <td>{_templates.user.firstName}:</td>
             <td>{$userData->first_name}</td>
         </tr>
 
         <tr>
-            <td>Příjmení:</td>
+            <td>{_templates.user.lastName}:</td>
             <td>{$userData->last_name}</td>
         </tr>
 
         <tr>
-            <td>Email:</td>
+            <td>{_templates.user.email}:</td>
             <td>
             {if $userData->email}
                 {$userData->email}
                 {else}
-                Nevyplněno
+                {_templates.user.empty}
             {/if}
             </td>
         </tr>
 
         <tr>
-            <td>Pohlaví:</td>
+            <td>{_templates.user.sex}:</td>
             <td>{$userData->sex[$locale.'_sex']}</td>
         </tr>
 
         <tr>
-            <td>Typ uživatele:</td>
+            <td>{_templates.user.userType}:</td>
             <td>{$userData->role[$locale.'_role']}</td>
         </tr>
 
         <tr>
-            <td>Napsaných komenářů:</td>
+            <td>{_templates.user.writtenComments}:</td>
             <td>{$numberOfComments}</td>
         </tr>
 
         <tr>
-            <td>Karma:</td>
+            <td>{_templates.user.karma}:</td>
             <td>
                 <div class="karma-plus">{$userKarma['plus']}|</div>
                 <div class="karma-minus">{$userKarma['minus']}</div>
@@ -46,4 +46,4 @@
         </tr>
     </table>
 
-    <a n:href="User:editProfile $userData->id"><button>Upravit profil</button></a>
+    <a n:href="User:editProfile $userData->id"><button>{_templates.user.editProfile}</button></a>

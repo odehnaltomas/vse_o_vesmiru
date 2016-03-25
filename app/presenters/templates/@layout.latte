@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>{ifset title}{include title|striptags}| {/ifset}Vše o vesmíru</title>
+	<title>{ifset title}{include title|striptags}| {/ifset}{_templates.title.allAboutUniverse}</title>
 
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
 	<link rel="stylesheet" href="{$basePath}/css/VPTemplate.css">
@@ -24,37 +24,37 @@
 
                 <div class="menu">
                         <div class="dropdownMenu">
-                                <a n:href="Article:"><button class="menuButton">Články</button></a>
+                                <a n:href="Article:"><button class="menuButton">{_templates.layout.articles}</button></a>
                                 <div class="dropdown-content">
                                         {if $user->isAllowed('article', 'add') || $user->isAllowed('article', 'addRequest')}
-                                        <a n:href="Article:add">Přidat článek</a>
+                                        <a n:href="Article:add">{_templates.layout.addArticle}</a>
                                         {/if}
 
-                                        <a n:href="Article:articleList">Seznam článků</a>
+                                        <a n:href="Article:articleList">{_templates.layout.articleList}</a>
 
                                         {if $user->isAllowed('translation', 'list')}
-                                        <a n:href="Article:translationList">Překlady</a>
+                                        <a n:href="Article:translationList">{_templates.layout.translations}</a>
                                         {/if}
                                 </div>
                         </div>
 
                         <div class="dropdownMenu">
-                                <a n:href="User:"><button class="menuButton">Uživatel</button></a>
+                                <a n:href="User:"><button class="menuButton">{_templates.layout.user}</button></a>
                                 <div class="dropdown-content">
                                         {if $user->isLoggedIn()}
-                                        <a n:href="User:showYourProfile">Profil uživatele</a>
+                                        <a n:href="User:showYourProfile">{_templates.layout.userProfile}</a>
                                         {/if}
-                                        <a n:href="User:userList">Seznam uživatelů</a>
+                                        <a n:href="User:userList">{_templates.layout.userList}</a>
                                 </div>
                         </div>
 
                         {if $user->isLoggedIn()}
                         <div class="dropdownMenu">
-                                <a n:href="Request:"><button class="menuButton">Požadavky</button></a>
+                                <a n:href="Request:"><button class="menuButton">{_templates.layout.requests}</button></a>
                                 <div class="dropdown-content">
-                                        <a n:href="Request:myRequests">Mé požadavky</a>
+                                        <a n:href="Request:myRequests">{_templates.layout.myRequests}</a>
                                         {if $user->isAllowed('request', 'list')}
-                                        <a n:href="Request:requestList">Seznam</a>
+                                        <a n:href="Request:requestList">{_templates.layout.requestList}</a>
                                         {/if}
                                 </div>
                         </div>

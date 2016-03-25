@@ -3,49 +3,49 @@
 {snippet requests}
     <div n:foreach="$requests as $request" class="request">
         <div class="header">
-        Požadavek: {$request->request_counter[$locale . '_request']}
+        {_templates.request.request}: {$request->request_counter[$locale . '_request']}
         </div>
         <table>
             <tr>
-                <td>Vytvořeno:</td>
+                <td>{_templates.article.created}:</td>
                 <td>{$request->created|date:"j.n. Y, H:i"}</td>
             </tr>
 
             <tr>
-                <td>Článek:</td>
+                <td>{_templates.article.article}:</td>
                 {if $request->request_counter['id'] === 1} {* Delete article *}
                     <td><a href="{link Article:show 'articleId'=>$request->article['id'], locale => $request->article->language['language']}" target="_blank">{$request->article['title']}</a></td>
                 {elseif $request->request_counter['id'] === 2} {* Add article *}
                     <td><a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']}</a></td>
                 {elseif $request->request_counter['id'] === 3} {* Edit article *}
-                    <td><a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']} (Upraveno)</a></td>
+                    <td><a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']} ({_templates.request.changed})</a></td>
                 {/if}
             </tr>
 
             <tr>
-                <td>Od uživatele:</td>
+                <td>{_templates.request.byUser}:</td>
                 <td>{$request->user['username']}</td>
             </tr>
 
             <tr>
                 {if $request->request_counter['id'] === 1} {* Delete article *}
-                    <td>Důvod smazání:</td>
+                    <td>{_templates.request.reasonOfDeleting}:</td>
                     <td>{!$request->message}</td>
                 {elseif $request->request_counter['id'] === 3} {* Edit article *}
-                    <td>Neupravený článek:</td>
+                    <td>{_templates.request.unchangedArticle}:</td>
                     <td><a n:href="Article:show $request->message" target="_blank">{$request->article['title']}</a></td>
                 {/if}
             </tr>
 
             <tr>
                 {if $request->request_counter['id'] === 1} {* Delete article *}
-                    <td><a n:href="acceptDelRequest! $request->article['id'], $request->id" class="ajax"><button>Potvrdit (smazat článek)</button></a></td>
+                    <td><a n:href="acceptDelRequest! $request->article['id'], $request->id" class="ajax"><button>{_templates.request.confirm} ({_templates.request.delArticle})</button></a></td>
                 {elseif $request->request_counter['id'] === 2} {* Add article *}
-                    <td><a n:href="acceptAddRequest! $request->article['id'], $request->id" class="ajax"><button>Potvrdit (přidat článek)</button></a></td>
+                    <td><a n:href="acceptAddRequest! $request->article['id'], $request->id" class="ajax"><button>{_templates.request.confirm} ({_templates.request.addArticle})</button></a></td>
                 {elseif $request->request_counter['id'] === 3} {* Edit article *}
-                    <td><a n:href="acceptEditRequest! $request->article['id'], $request->message, $request->id" class="ajax"><button>Potvrdit (upravit článek)</button></a></td>
+                    <td><a n:href="acceptEditRequest! $request->article['id'], $request->message, $request->id" class="ajax"><button>{_templates.request.confirm} ({_templates.request.editArticle})</button></a></td>
                 {/if}
-                <td><a n:href="rejectRequest! $request->id" class="ajax"><button>Zamítnout</button></a></td>
+                <td><a n:href="rejectRequest! $request->id" class="ajax"><button>{_templates.request.reject}</button></a></td>
             </tr>
         </table>
     </div>

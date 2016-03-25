@@ -42,7 +42,7 @@ class RequestPresenter extends BasePresenter
     public function handleRejectRequest($requestId){
         if($this->user->isAllowed('request', 'reject')) {
             $this->requestManager->rejectRequest($requestId);
-            $this->flashMessage('Požadavek byl zamítnut!');
+            $this->flashMessage('messages.flash.requestReject');
 
             if ($this->isAjax()) {
                 $this->redrawControl('requests');
@@ -57,7 +57,7 @@ class RequestPresenter extends BasePresenter
         if($this->user->isAllowed('request', 'accept')) {
             $this->requestManager->acceptDelRequest($requestId, $articleId);
             $this->articleManager->delArticle($articleId);
-            $this->flashMessage('Článek byl smazán!');
+            $this->flashMessage('messages.flash.deletedArticle');
 
             if ($this->isAjax()) {
                 $this->redrawControl('requests');
@@ -85,7 +85,7 @@ class RequestPresenter extends BasePresenter
         if($this->user->isAllowed('request', 'accept')){
             $this->requestManager->acceptRequest($requestId);
             $this->articleManager->visibleArticle($articleId);
-            $this->flashMessage('Článek byl přidán.');
+            $this->flashMessage('messages.flash.addedArticle');
 
             if($this->isAjax()){
                 $this->redrawControl('requests');
@@ -100,7 +100,7 @@ class RequestPresenter extends BasePresenter
         if($this->user->isAllowed('request', 'accept')){
             $this->requestManager->acceptRequest($requestId);
             $this->articleManager->acceptEditArticle($articleId, $originalArticleId);
-            $this->flashMessage('Článek byl upraven.');
+            $this->flashMessage('messages.flash.changedArticle');
 
             if($this->isAjax()){
                 $this->redrawControl('requests');
@@ -116,7 +116,7 @@ class RequestPresenter extends BasePresenter
         $requests = $this->requestManager->getRequests($this->user->getId());
         $this->template->requests = $requests;
         if(empty($requests)) {
-            $this->template->message = "Nemáš zatím žádné requesty!";
+            $this->template->message = $this->translator->translate("templates.request.noRequests");
         }
     }
 }

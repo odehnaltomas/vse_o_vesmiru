@@ -4,7 +4,7 @@
     {!$article->content}
 
     <div>
-        Autor: {$article->user['username']}
+        {_templates.article.author} {$article->user['username']}
     </div>
 
     {snippet articleRating}
@@ -38,17 +38,17 @@
                     {/foreach}
                 </div>
             {/if}
-            <div class="total_votes">Hodnotilo: {$articleRating['count']}, průměrné hodnocení: {$articleRating['value']|number:1}</div>
+            <div class="total_votes">{_templates.article.rated} {$articleRating['count']}, {_templates.article.averageRating} {$articleRating['value']|number:1}</div>
         </div>
     {/snippet}
 
     {if $user->isLoggedIn()}
-    <a n:href="Article:edit $article->id"><button>Upravit článek</button></a>
-    <a n:href="deleteArticle! $article->id" class="ajax"><button class="deleteArticle-show">Smazat článek</button></a>
+    <a n:href="Article:edit $article->id"><button>{_templates.article.editArticleButton}</button></a>
+    <a n:href="deleteArticle! $article->id" class="ajax"><button class="deleteArticle-show">{_templates.article.deleteArticle}</button></a>
     {/if}
 
     <hr>
-    <h2>Komentáře</h2>
+    <h2>{_templates.article.comments}</h2>
     {control commentForm}
     {if $comments}
         {snippet comments}
@@ -124,12 +124,12 @@
         <div class="popUp">
                 {snippet popUp}
                         {if $user->isAllowed('article', 'del')}
-                            Opravdu chcete tento článek smazat?
+                            {_templates.popUp.reallyDeleteArticle}
                             {control deleteArticleForm NULL, $articleId}
                         {elseif $user->isAllowed('article', 'delRequest')}
                             {control deleteArticleForm $userId, $articleId}
                         {/if}
                 {/snippet}
-                <button class="cancel">Cancel</button>
+                <button class="cancel">{_templates.popUp.cancel}</button>
         </div>
 </div>

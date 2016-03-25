@@ -2,13 +2,13 @@
 
 <table class="usersTable">
     <tr>
-        <th>ID</th>
-        <th>Username</th>
-        <th>Jméno</th>
-        <th>Email</th>
-        <th>Pohlaví</th>
-        <th>Role</th>
-        <th>Uzamčen</th>
+        <th>{_templates.user.id}</th>
+        <th>{_templates.user.username}</th>
+        <th>{_templates.user.name}</th>
+        <th>{_templates.user.email}</th>
+        <th>{_templates.user.sex}</th>
+        <th>{_templates.user.role}</th>
+        <th>{_templates.user.banned}</th>
     </tr>
     {foreach $usersData as $userData}
         <tr>
@@ -17,7 +17,7 @@
             <td>{$userData->first_name} {$userData->last_name}</td>
             <td>
             {if $userData->email === ""}
-            Nevyplněno
+            {_templates.user.empty}
             {else}
             {$userData->email}
             {/if}
@@ -38,18 +38,18 @@
                 <td class="td-ban">
                     <a n:href="changeBan! $userData->id, $userData->banned" class="ajax ban">
                         {if $userData->banned === 0}
-                            <button id="role">Ano</button>
+                            <button id="role">{_templates.user.yes}</button>
                             {else}
-                            <button id="role">Ne</button>
+                            <button id="role">{_templates.user.no}</button>
                         {/if}
                     </a>
                 </td>
                 {else}
                 <td>
                     {if $userData->banned === 0}
-                        Ano
+                        {_templates.user.yes}
                         {else}
-                        Ne
+                        {_templates.user.no}
                     {/if}
                 </td>
             {/if}
@@ -68,7 +68,7 @@
                             {control changeRole}
                         {/if}
                 {/snippet}
-                <button class="cancel">Cancel</button>
+                <button class="cancel">{_templates.popUp.cancel}</button>
         </div>
 
         <div class="popUpBan">
@@ -77,14 +77,14 @@
                             {if $userId !== 0}
                                 {$usersData[$userId]->username}
                                 {if $usersData[$userId]->banned === 0}
-                                    Ano
+                                    {_templates.user.yes}
                                 {else}
-                                    Ne
+                                    {_templates.user.no}
                                 {/if}
                             {/if}
                             {control changeBan}
                         {/if}
                 {/snippet}
-                <button class="cancelBan">Cancel</button>
+                <button class="cancelBan">{_templates.popUp.cancel}</button>
         </div>
 </div>

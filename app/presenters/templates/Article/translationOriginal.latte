@@ -1,22 +1,22 @@
 {block content}
 
-<h1>Originální článek</h1>
+<h1>{_templates.article.originalArticle}</h1>
 
-<h2>Titulek:</h2>
+<h2>{_templates.article.title}:</h2>
     <p>{$article->title}</p>
 <hr>
 
-<h2>Popisek:</h2>
+<h2>{_templates.article.caption}:</h2>
     <p>{!$article->caption}</p>
 <hr>
 
-<h2>Obsah:</h2>
+<h2>{_templates.article.content}:</h2>
     <p>{!$article->content}</p>
 <hr>
 
-<h2>Vytvořeno:</h2>
+<h2>{_templates.article.created}:</h2>
     <p>{$article->created|date:'j.n. Y'}</p>
 <hr>
 
-<h2>Napsal:</h2>
+<h2>{_templates.article.author}:</h2>
     <p>{$article->user['username']}</p>

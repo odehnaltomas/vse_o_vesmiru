@@ -1,6 +1,6 @@
 {block content}
-<h1>Překlad</h1>
-<a n:href="Article:translationOriginal $articleId" target="_blind">Původní článek</a>
+<h1>{_templates.article.translation}</h1>
+<a n:href="Article:translationOriginal $articleId" target="_blind">{_templates.article.originalArticle}</a>
 <div class="form">
     {form addTranslationForm}
 

@@ -26,13 +26,13 @@
         <div class="popUp">
                 {snippet popUp}
                         {if $user->isAllowed('article', 'del')}
-                            {_ templates.articleList.reallyDeleteArticle}
+                            {_templates.popUp.reallyDeleteArticle}
                             {control deleteArticleForm NULL, $articleId}
                         {elseif $user->isAllowed('article', 'delRequest')}
 
                             {control deleteArticleForm $userId, $articleId}
                         {/if}
                 {/snippet}
-                <button class="cancel">{_ templates.popUp.cancel}</button>
+                <button class="cancel">{_templates.popUp.cancel}</button>
         </div>
 </div>

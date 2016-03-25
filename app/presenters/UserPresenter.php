@@ -30,14 +30,14 @@ class UserPresenter extends BasePresenter
 
     /** @var array  */
     private $roles = array(
-        1 => 'Uživatel',
-        2 => 'Moderátor',
-        3 => 'Admin'
+        1 => 'forms.user.roleUser',
+        2 => 'forms.user.roleModerator',
+        3 => 'forms.user.roleAdmin'
     );
 
     private $ban = array(
-        0 => 'Yes',
-        1 => 'No'
+        0 => 'forms.user.yes',
+        1 => 'forms.user.no'
     );
 
     private $sex = array(
@@ -79,10 +79,10 @@ class UserPresenter extends BasePresenter
         $form = new Form;
 
         $form->setTranslator($this->translator);
-        $form->addSelect('role', 'Role:', $this->roles);
+        $form->addSelect('role', 'forms.user.role', $this->roles);
         $form->addHidden('userId');
 
-        $form->addSubmit('send', 'Změnit');
+        $form->addSubmit('send', 'forms.user.change');
 
         $form->onSuccess[] = array($this, 'changeRoleSucceeded');
 
@@ -93,7 +93,7 @@ class UserPresenter extends BasePresenter
     public function changeRoleSucceeded($form, $values){
         if($this->user->isAllowed('userSource', 'changeRoles')) {
             $this->userManager->changeUserRole($values->userId, $values->role);
-            $this->flashMessage('Role uživatele byla změněna.');
+            $this->flashMessage('messages.flash.roleChanged');
             $this->redirect('User:userList');
         } else
             throw new Nette\Application\UI\BadSignalException;
@@ -117,10 +117,10 @@ class UserPresenter extends BasePresenter
         $form = new Form;
 
         $form->setTranslator($this->translator);
-        $form->addSelect('banned', 'Ban:', $this->ban);
+        $form->addSelect('banned', 'forms.user.ban', $this->ban);
         $form->addHidden('userId');
 
-        $form->addSubmit('send', 'Změnit');
+        $form->addSubmit('send', 'forms.user.change');
 
         $form->onSuccess[] = array($this, 'changeBanSucceeded');
 
@@ -132,9 +132,9 @@ class UserPresenter extends BasePresenter
         if($this->user->isAllowed('userSource', 'ban')) {
             $this->userManager->changeUserBan($values->userId, $values->banned);
             if($values->banned !== 0)
-                $this->flashMessage('Účet uživatele byl odemčen.');
+                $this->flashMessage('messages.flash.accountUnlocked');
             else
-                $this->flashMessage('Účet uživatele byl zamčen.');
+                $this->flashMessage('messages.flash.locked');
             $this->redirect('User:userList');
         } else
             throw new Nette\Application\UI\BadSignalException;
@@ -183,15 +183,15 @@ class UserPresenter extends BasePresenter
 
         $form->setTranslator($this->translator);
 
-        $form->addText('first_name', 'Jméno:');
+        $form->addText('first_name', 'forms.user.firstName');
 
-        $form->addText('last_name', 'Příjmení:');
+        $form->addText('last_name', 'forms.user.lastName');
 
-        $form->addText('email', 'Email:');
+        $form->addText('email', 'forms.user.email');
 
-        $form->addRadioList('sex', 'Pohlaví', $this->sex);
+        $form->addRadioList('sex', 'forms.user.sex', $this->sex);
 
-        $form->addSubmit('send', 'Uložit');
+        $form->addSubmit('send', 'forms.user.save');
 
         $form->addHidden('userId');
 
@@ -204,7 +204,7 @@ class UserPresenter extends BasePresenter
     public function editProfileFormSucceeded($form, $values){
         if($this->user->isLoggedIn()){
             $this->userManager->changeUserData($values);
-            $this->flashMessage('Profil byl úspěšně změněn.');
+            $this->flashMessage('messages.flash.profileChanged');
             $this->redirect('User:showYourProfile');
         } else
             throw new Nette\Application\UI\BadSignalException;

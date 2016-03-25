@@ -10,8 +10,8 @@ sign:
     sex: "Pohlaví:"
     signUp: "Registrovat"
     signOut: "Odhlásit"
-    male: "muž"
-    female: "žena"
+    male: "Muž"
+    female: "Žena"
 
 article:
     czech: "Česky"
@@ -36,3 +36,18 @@ article:
     articleDeleteRequest: "Poslat žádost"
     purposeOfDeleting: "Důvod smazání:"
     articleDeleted: "Článek byl úspěšně vymazán."
+
+user:
+    roleUser: "Uživatel"
+    roleModerator: "Moderátor"
+    roleAdmin: "Admin"
+    yes: "Ano"
+    no: "Ne"
+    role: "Role:"
+    change: "Změnit"
+    ban: "Ban:"
+    firstName: "Jméno:"
+    lastName: "Příjmení:"
+    email: "Email:"
+    sex: "Pohlaví:"
+    save: "Uložit"

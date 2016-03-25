@@ -10,8 +10,8 @@ sign:
     sex: "Sex:"
     signUp: "Sign Up"
     signOut: "Logout"
-    male: "male"
-    female: "female"
+    male: "Male"
+    female: "Female"
 
 article:
     czech: "Czech"
@@ -37,3 +37,17 @@ article:
     purposeOfDeleting: "Purpose of deleting:"
     articleDeleted: "The article was successfully deleted."
 
+user:
+    roleUser: "User"
+    roleModerator: "Moderator"
+    roleAdmin: "Admin"
+    yes: "Yes"
+    no: "No"
+    role: "Role:"
+    change: "Change"
+    ban: "Ban:"
+    firstName: "First name:"
+    lastName: "Last name:"
+    email: "Email:"
+    sex: "Sex:"
+    save: "Save"

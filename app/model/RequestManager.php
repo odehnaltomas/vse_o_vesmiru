@@ -12,6 +12,7 @@ use Nette;
 
 class RequestManager extends BaseManager
 {
+    /** @var Nette\Database\Context  */
     private $database;
 
 

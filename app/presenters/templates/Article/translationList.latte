@@ -1,11 +1,11 @@
 {block content}
-<h1>Chybějící překlady článků</h1>
+<h1>{_templates.article.missingTranslations}</h1>
 <table id="translation_table">
     <tr>
-        <th>Článek</th>
+        <th>{_templates.article.article}</th>
         <th>CZ</th>
         <th>EN</th>
-        <th>Datum Přidání</th>
+        <th>{_templates.article.dateOfAddition}</th>
     </tr>
     {foreach $articles as $article}
         <tr class="row">
