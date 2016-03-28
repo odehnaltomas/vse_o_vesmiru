@@ -77,8 +77,9 @@ class UserPresenter extends BasePresenter
 
     protected function createComponentChangeRole(){
         $form = new Form;
-
         $form->setTranslator($this->translator);
+        $form->getElementPrototype()->novalidate('novalidate');
+
         $form->addSelect('role', 'forms.user.role', $this->roles);
         $form->addHidden('userId');
 
@@ -115,8 +116,9 @@ class UserPresenter extends BasePresenter
 
     protected function createComponentChangeBan(){
         $form = new Form;
-
         $form->setTranslator($this->translator);
+        $form->getElementPrototype()->novalidate('novalidate');
+
         $form->addSelect('banned', 'forms.user.ban', $this->ban);
         $form->addHidden('userId');
 
@@ -180,8 +182,8 @@ class UserPresenter extends BasePresenter
 
     protected function createComponentEditProfileForm(){
         $form = new Form;
-
         $form->setTranslator($this->translator);
+        $form->getElementPrototype()->novalidate('novalidate');
 
         $form->addText('first_name', 'forms.user.firstName');
 

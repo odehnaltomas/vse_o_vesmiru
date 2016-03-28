@@ -54,7 +54,9 @@ class SignPresenter extends BasePresenter
 	public function createComponentSignInForm()
 	{
 		$form = new Form;
+		$form->getElementPrototype()->novalidate('novalidate');
 		$form->setTranslator($this->translator);
+
 		$form->addText('username', 'forms.sign.username')
 			->setRequired('forms.sign.requiredUsername');
 
@@ -114,7 +116,9 @@ class SignPresenter extends BasePresenter
 	 */
 	protected function createComponentSignUpForm(){
 		$form = new Form;
+		$form->getElementPrototype()->novalidate('novalidate');
 		$form->setTranslator($this->translator);
+
 		$form->addText('username', 'forms.sign.username')
 			->setRequired('forms.sign.requiredUsername');
 

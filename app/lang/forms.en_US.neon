@@ -2,7 +2,7 @@ sign:
     username: "Login:"
     requiredUsername: "Please enter your username!"
     password: "Password:"
-    requiredPassword: "Please enter your username!"
+    requiredPassword: "Please enter your password!"
     remember: "Keep me signed in"
     signIn: "Sign in"
     first_name: "First name:"

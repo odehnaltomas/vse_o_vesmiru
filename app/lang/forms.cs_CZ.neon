@@ -2,7 +2,7 @@ sign:
     username: "Login:"
     requiredUsername: "Vyplňte své uživatelské jméno!"
     password: "Heslo:"
-    requiredPassword: "Vyplňte své uživatelské jméno!"
+    requiredPassword: "Vyplňte své heslo!"
     remember: "Zapamatovat"
     signIn: "Přihlásit"
     first_name: "Jméno:"

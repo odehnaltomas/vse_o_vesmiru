@@ -93,6 +93,7 @@ class ArticlePresenter extends BasePresenter
      */
     protected function createComponentAddArticleForm() {
         $form = new Form;
+        $form->getElementPrototype()->novalidate('novalidate');
         $form->setTranslator($this->translator);
 
         $form->addRadioList('language', 'forms.article.selectLanguage', $this->language)
@@ -165,6 +166,7 @@ class ArticlePresenter extends BasePresenter
 
     protected function createComponentCommentForm(){
         $form = new Form();
+        $form->getElementPrototype()->novalidate('novalidate');
         $form->setTranslator($this->translator);
 
         if($this->user->isAllowed('comment','write')){
@@ -347,6 +349,7 @@ class ArticlePresenter extends BasePresenter
     protected function createComponentAddTranslationForm()
     {
         $form = new Form;
+        $form->getElementPrototype()->novalidate('novalidate');
         $form->setTranslator($this->translator);
 
         $form->addRadioList('language', 'forms.article.selectLanguage', $this->language)
@@ -426,6 +429,7 @@ class ArticlePresenter extends BasePresenter
 
     protected function createComponentEditArticleForm() {
         $form = new Form;
+        $form->getElementPrototype()->novalidate('novalidate');
         $form->setTranslator($this->translator);
 
         $form->addRadioList('language', 'forms.article.selectLanguage', $this->language)
