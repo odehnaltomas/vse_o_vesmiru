@@ -4,6 +4,7 @@ html {
 	min-height: 100%;
 }
 body {
+	font-family: Arial;
 	min-height: 100%;
 	font-size: 15px;
 	line-height: 1.6;
@@ -72,10 +73,16 @@ body {
 }
 
 #footer {
+	box-sizing: border-box;
 	width: 960px;
-	height: 100px;
+	height: 60px;
 	margin: 20px 0 0 0;
 	background: white;
+	padding: 10px 15px;
+}
+
+#footer p {
+	margin: auto;
 }
 
 h1 {
@@ -555,11 +562,29 @@ form .error {
 	top: 50%;
 	background: #ffffff;
 	border: solid black 2px;
-	min-width: 150px;
-	min-height: 70px;
+	min-width: 300px;
+	min-height: 100px;
 	position: absolute;
 	margin-left: -75px;
 	margin-top: -35px;
+	padding: 10px;
+}
+
+.popUp .cancel {
+	float: right;
+}
+
+.popUp .button {
+	color: black;
+	background: #e6e6e6;
+	font-family: x360;
+	font-size: 0.9em;
+	border: solid black 1px;
+	padding: 5px 7px;
+}
+
+.popUp .button:hover {
+	background: #d1d1d1;
 }
 
 .popUpBan {
@@ -568,11 +593,16 @@ form .error {
 	top: 50%;
 	background: #ffffff;
 	border: solid black 2px;
-	min-width: 150px;
-	min-height: 70px;
+	min-width: 200px;
+	min-height: 80px;
 	position: absolute;
 	margin-left: -75px;
 	margin-top: -35px;
+	padding: 10px;
+}
+
+.popUpBan .cancel {
+	float: right;
 }
 
 .deleteArticle {
@@ -660,4 +690,79 @@ form .error {
 
 .requestState.state_4{
 	color: #7ad6ff;
+}
+
+button {
+	color: black;
+	background: #e6e6e6;
+	font-family: x360;
+	font-size: 0.9em;
+	border: solid black 1px;
+	padding: 5px 7px;
+}
+
+button:hover {
+	background: #d1d1d1;
+}
+
+.button {
+	color: black;
+	background: #e6e6e6;
+	font-family: x360;
+	font-size: 0.9em;
+	border: solid black 1px;
+	padding: 5px 7px;
+}
+
+.button:hover {
+	background: #d1d1d1;
+}
+
+input[type="submit"] {
+	color: black;
+	background: #e6e6e6;
+	font-family: x360;
+	font-size: 0.9em;
+	border: solid black 1px;
+	padding: 5px 7px;
+}
+
+input[type="submit"]:hover {
+	background: #d1d1d1;
+}
+
+form input{
+	border: solid black 1px;
+}
+
+form textarea{
+	border: solid black 1px;
+}
+
+.td-ban {
+	padding: 0 !important;
+}
+
+.td-ban button {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.td-ban button:hover {
+	background: #bbbbbb;
+}
+
+.td-role {
+	padding: 0 !important;
+}
+
+.td-role button {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.td-role button:hover {
+	background: #bbbbbb;
 }

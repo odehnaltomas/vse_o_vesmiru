@@ -28,19 +28,16 @@ $(document).ready(function(){
         $('.popUp').css('display', 'block');
     });
 
-    $('.cancelBan').click(function(){
-        $('.popUp-background').css('display', 'none');
-        $('.popUpBan').css('display', 'none');
-    });
-
     $('.cancel').click(function(){
         $('.popUp-background').css('display', 'none');
         $('.popUp').css('display', 'none');
+        $('.popUpBan').css('display', 'none');
     });
 
     $('.popUp-background').click(function(){
         $(this).css('display', 'none');
         $('.popUp').css('display', 'none');
+        $('.popUpBan').css('display', 'none');
     });
 
     $('.popUp').click(function(e){
@@ -71,6 +68,12 @@ tinyMCE.init({
  * Anglické formuláře, když je lokalizace anglická.
  */
 tinyMCE.init({
-    selector: ".mceEditor_en"
+    selector: ".mceEditor_en",
+    plugins: 'autoresize, link, emoticons, codesample',
+    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist numlist outdent indent code emoticons link codesample',
+    autoresize_min_width: '100%',
+    autoresize_min_height: 600,
+    autoresize_max_height: 1000,
+    max_height: 1000
 });
 

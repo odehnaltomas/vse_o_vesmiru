@@ -75,6 +75,7 @@ user:
     yes: "Ano"
     no: "Ne"
     name: "Jméno"
+    ban: "Ban"
 
 
 title:

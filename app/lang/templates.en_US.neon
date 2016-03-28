@@ -3,7 +3,7 @@ sign:
 
 article:
     titleAdd: "Add an article"
-    noComment: "Nobody commented this article!"
+    noComment: "Nobody wrote a comment at this article!"
     noTranslation: "The translation has not been added yet!"
     articleList: "Article List"
     editArticle: "Edit the article"
@@ -75,6 +75,7 @@ user:
     yes: "Yes"
     no: "No"
     name: "Name"
+    ban: "Ban"
 
 title:
     allAboutUniverse: "All about the universe"

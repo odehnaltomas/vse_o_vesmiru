@@ -62,8 +62,8 @@
                 {snippet popUp}
                         {if $user->isAllowed('popUp', 'userPopUp')}
                             {if $userId !== 0}
-                            {$usersData[$userId]->username}
-                            {$usersData[$userId]->role[$locale.'_role']}
+                            {_templates.user.username}: {$usersData[$userId]->username}<br/>
+                            {_templates.user.role}: {$usersData[$userId]->role[$locale.'_role']}
                             {/if}
                             {control changeRole}
                         {/if}
@@ -75,16 +75,16 @@
                 {snippet popUpBan}
                         {if $user->isAllowed('popUp', 'userPopUp')}
                             {if $userId !== 0}
-                                {$usersData[$userId]->username}
+                                {_templates.user.username}: {$usersData[$userId]->username}<br/>
                                 {if $usersData[$userId]->banned === 0}
-                                    {_templates.user.yes}
+                                    {_templates.user.ban}: {_templates.user.yes}
                                 {else}
-                                    {_templates.user.no}
+                                    {_templates.user.ban}: {_templates.user.no}
                                 {/if}
                             {/if}
                             {control changeBan}
                         {/if}
                 {/snippet}
-                <button class="cancelBan">{_templates.popUp.cancel}</button>
+                <button class="cancel">{_templates.popUp.cancel}</button>
         </div>
 </div>

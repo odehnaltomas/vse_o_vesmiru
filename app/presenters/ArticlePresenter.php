@@ -443,7 +443,7 @@ class ArticlePresenter extends BasePresenter
 
         $form->addHidden('articleId');
 
-        $form->addSubmit('send', 'forms.article.change ');
+        $form->addSubmit('send', 'forms.article.change');
 
         $form->onSuccess[] = array($this, 'editArticleFormSucceeded');
         return $form;
