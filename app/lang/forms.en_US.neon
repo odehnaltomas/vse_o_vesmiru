@@ -13,6 +13,22 @@ sign:
     male: "Male"
     female: "Female"
 
+    usernameMinLength: "Username must have at least %count% characters!"
+    usernameMaxLength: "Username must have maximally %count% characters!"
+
+    forbiddenChars: "Forbidden characters! Use only: .-_"
+
+    passwordMinLength: "Password must have at least %count% characters!"
+    passwordMaxLength: "Password must have maximally %count% characters!"
+
+    firstNameMinLength: "First name must have at least %count% characters!"
+    firstNameMaxLength: "First name must have maximally %count% characters!"
+
+    lastNameMinLength: "Last name must have at least %count% characters!"
+    lastNameMaxLength: "Last name must have maximally %count% characters!"
+
+    correctEmail: "You have to enter email in correct form!"
+
 article:
     czech: "Czech"
     english: "English"
@@ -36,6 +52,16 @@ article:
     articleDeleteRequest: "Send request"
     purposeOfDeleting: "Purpose of deleting:"
     articleDeleted: "The article was successfully deleted."
+
+    titleMinLength: "Title must have at least %count% characters!"
+    titleMaxLength: "Title must have maximally %count% characters!"
+
+    captionMinLength: "Caption must have at least %count% characters!"
+    captionMaxLength: "Caption must have maximally %count% characters!"
+
+    commentMinLength: "Comment must have at least %count% characters!"
+    commentMaxLength: "Comment must have maximally %count% characters!"
+
 
 user:
     roleUser: "User"

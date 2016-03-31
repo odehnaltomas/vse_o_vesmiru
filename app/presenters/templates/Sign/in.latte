@@ -2,5 +2,45 @@
 
 <h1 n:block="title">{_ templates.sign.title}</h1>
 
-{control signInForm}
 
+
+<div class="form">
+{form signInForm}
+
+    <div class="error" n:if="$form->hasErrors()">
+        <ul>
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                {label username /}
+            </td>
+            <td>
+                {input username}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label password /}
+            </td>
+            <td>
+                {input password}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                &nbsp
+            </td>
+            <td id="left">
+                {input send}
+            </td>
+        </tr>
+    </table>
+
+{/form}
+</div>

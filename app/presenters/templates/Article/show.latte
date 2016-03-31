@@ -49,7 +49,39 @@
 
     <hr>
     <h2>{_templates.article.comments}</h2>
-    {control commentForm}
+
+    <div class="form">
+    {form commentForm}
+
+        <div class="error" n:if="$form->hasErrors()">
+            <ul>
+                <li n:foreach="$form->errors as $error">{$error}</li>
+            </ul>
+        </div>
+
+        <table>
+            <tr>
+                <td>
+                    {label content /}
+                </td>
+                <td>
+                    {input content}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    &nbsp
+                </td>
+                <td id="left">
+                    {input submit}
+                </td>
+            </tr>
+        </table>
+
+    {/form}
+    </div>
+
     {if $comments}
         {snippet comments}
             {foreach $comments as $comment}

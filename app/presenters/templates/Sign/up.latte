@@ -1,8 +1,70 @@
 {block content}
 <h1 n:block="title">Registrace</h1>
 
-{control signUpForm}
-<br/>
-{ifset $hodnoty}{$hodnoty}{/ifset}
+<div class="form">
+{form signUpForm}
 
-{/block}
+    <div class="error" n:if="$form->hasErrors()">
+        <ul>
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                {label username /}
+            </td>
+            <td>
+                {input username}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label password /}
+            </td>
+            <td>
+                {input password}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label first_name /}
+            </td>
+            <td>
+                {input first_name}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label last_name /}
+            </td>
+            <td>
+                {input last_name}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label sex /}
+            </td>
+            <td id="left">
+                {input sex}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                &nbsp
+            </td>
+            <td id="left">
+                {input send}
+            </td>
+        </tr>
+    </table>
+
+{/form}
+</div>

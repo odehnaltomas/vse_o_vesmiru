@@ -94,7 +94,7 @@ class UserPresenter extends BasePresenter
     public function changeRoleSucceeded($form, $values){
         if($this->user->isAllowed('userSource', 'changeRoles')) {
             $this->userManager->changeUserRole($values->userId, $values->role);
-            $this->flashMessage('messages.flash.roleChanged');
+            $this->flashMessage($this->translator->translate('messages.flash.roleChanged'));
             $this->redirect('User:userList');
         } else
             throw new Nette\Application\UI\BadSignalException;
@@ -134,9 +134,9 @@ class UserPresenter extends BasePresenter
         if($this->user->isAllowed('userSource', 'ban')) {
             $this->userManager->changeUserBan($values->userId, $values->banned);
             if($values->banned !== 0)
-                $this->flashMessage('messages.flash.accountUnlocked');
+                $this->flashMessage($this->translator->translate('messages.flash.accountUnlocked'));
             else
-                $this->flashMessage('messages.flash.locked');
+                $this->flashMessage($this->translator->translate('messages.flash.accountLocked'));
             $this->redirect('User:userList');
         } else
             throw new Nette\Application\UI\BadSignalException;
@@ -185,13 +185,23 @@ class UserPresenter extends BasePresenter
         $form->setTranslator($this->translator);
         $form->getElementPrototype()->novalidate('novalidate');
 
-        $form->addText('first_name', 'forms.user.firstName');
+        $form->addText('first_name', 'forms.user.firstName')
+            ->addCondition(Form::FILLED)
+                ->addRule(FORM::MIN_LENGTH, "forms.sign.firstNameMinLength", 2)
+                ->addRule(FORM::MAX_LENGTH, "forms.sign.firstNameMaxLength", 50)
+                ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\/?!<>()]+");
 
-        $form->addText('last_name', 'forms.user.lastName');
+        $form->addText('last_name', 'forms.user.lastName')
+            ->addCondition(Form::FILLED)
+                ->addRule(FORM::MIN_LENGTH, "forms.sign.lastNameMinLength", 2)
+                ->addRule(FORM::MAX_LENGTH, "forms.sign.lastNameMaxLength", 50)
+                ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\/?!<>()]+");
 
-        $form->addText('email', 'forms.user.email');
+        $form->addText('email', 'forms.user.email')
+            ->addRule(FORM::EMAIL, "forms.sign.correctEmail");
 
-        $form->addRadioList('sex', 'forms.user.sex', $this->sex);
+        $form->addRadioList('sex', 'forms.user.sex', $this->sex)
+            ->getSeparatorPrototype()->setName(NULL);
 
         $form->addSubmit('send', 'forms.user.save');
 
@@ -206,7 +216,7 @@ class UserPresenter extends BasePresenter
     public function editProfileFormSucceeded($form, $values){
         if($this->user->isLoggedIn()){
             $this->userManager->changeUserData($values);
-            $this->flashMessage('messages.flash.profileChanged');
+            $this->flashMessage($this->translator->translate('messages.flash.profileChanged'));
             $this->redirect('User:showYourProfile');
         } else
             throw new Nette\Application\UI\BadSignalException;

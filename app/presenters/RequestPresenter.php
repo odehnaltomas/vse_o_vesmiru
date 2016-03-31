@@ -42,7 +42,7 @@ class RequestPresenter extends BasePresenter
     public function handleRejectRequest($requestId){
         if($this->user->isAllowed('request', 'reject')) {
             $this->requestManager->rejectRequest($requestId);
-            $this->flashMessage('messages.flash.requestReject');
+            $this->flashMessage($this->translator->translate('messages.flash.requestReject'));
 
             if ($this->isAjax()) {
                 $this->redrawControl('requests');
@@ -57,7 +57,7 @@ class RequestPresenter extends BasePresenter
         if($this->user->isAllowed('request', 'accept')) {
             $this->requestManager->acceptDelRequest($requestId, $articleId);
             $this->articleManager->delArticle($articleId);
-            $this->flashMessage('messages.flash.deletedArticle');
+            $this->flashMessage($this->translator->translate('messages.flash.deletedArticle'));
 
             if ($this->isAjax()) {
                 $this->redrawControl('requests');
@@ -85,7 +85,7 @@ class RequestPresenter extends BasePresenter
         if($this->user->isAllowed('request', 'accept')){
             $this->requestManager->acceptRequest($requestId);
             $this->articleManager->visibleArticle($articleId);
-            $this->flashMessage('messages.flash.addedArticle');
+            $this->flashMessage($this->translator->translate('messages.flash.addedArticle'));
 
             if($this->isAjax()){
                 $this->redrawControl('requests');
@@ -100,7 +100,7 @@ class RequestPresenter extends BasePresenter
         if($this->user->isAllowed('request', 'accept')){
             $this->requestManager->acceptRequest($requestId);
             $this->articleManager->acceptEditArticle($articleId, $originalArticleId);
-            $this->flashMessage('messages.flash.changedArticle');
+            $this->flashMessage($this->translator->translate('messages.flash.changedArticle'));
 
             if($this->isAjax()){
                 $this->redrawControl('requests');

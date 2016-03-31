@@ -13,6 +13,22 @@ sign:
     male: "Muž"
     female: "Žena"
 
+    usernameMinLength: "Uživatelské jméno musí mít minimálně %count% znaky!"
+    usernameMaxLength: "Uživatelské jméno může mít maximálne %count% znaků!"
+
+    forbiddenChars: "Nepovolené znaky! Používejte pouze: .-_"
+
+    passwordMinLength: "Heslo musí mít minimálně %count% znaky!"
+    passwordMaxLength: "Heslo může mít maximálne %count% znaků!"
+
+    firstNameMinLength: "Křestní jméno musí mít minimálně %count% znaky!"
+    firstNameMaxLength: "Křestní jméno může mít maximálne %count% znaků!"
+
+    lastNameMinLength: "Příjmení musí mít minimálně %count% znaky!"
+    lastNameMaxLength: "Příjmení může mít maximálne %count% znaků!"
+
+    correctEmail: "Musíte zadat email ve správném tvaru!"
+
 article:
     czech: "Česky"
     english: "Anglicky"
@@ -36,6 +52,15 @@ article:
     articleDeleteRequest: "Poslat žádost"
     purposeOfDeleting: "Důvod smazání:"
     articleDeleted: "Článek byl úspěšně vymazán."
+
+    titleMinLength: "Titulek musí mít minimálně %count% znaky!"
+    titleMaxLength: "Titulek může mít maximálne %count% znaků!"
+
+    captionMinLength: "Popisek musí mít minimálně %count% znaků!"
+    captionMaxLength: "Popisek může mít maximálne %count% znaků!"
+
+    commentMinLength: "Komentář musí mít minimálně %count% znaky!"
+    commentMaxLength: "Komentář může mít maximálne %count% znaků!"
 
 user:
     roleUser: "Uživatel"

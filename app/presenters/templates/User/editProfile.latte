@@ -1,3 +1,62 @@
 {block content}
 
-{control editProfileForm}
+<h1 n:block="title">{_ templates.user.yourProfile}</h1>
+
+<div class="form">
+{form editProfileForm}
+
+    <div class="error" n:if="$form->hasErrors()">
+        <ul>
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+
+    <table>
+        <tr>
+            <td>
+                {label first_name /}
+            </td>
+            <td>
+                {input first_name}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label last_name /}
+            </td>
+            <td>
+                {input last_name}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label email /}
+            </td>
+            <td>
+                {input email}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                {label sex /}
+            </td>
+            <td id="left">
+                {input sex}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                &nbsp
+            </td>
+            <td id="left">
+                {input send}
+            </td>
+        </tr>
+    </table>
+
+{/form}
+</div>

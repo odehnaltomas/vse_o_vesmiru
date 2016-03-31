@@ -101,9 +101,15 @@ class ArticlePresenter extends BasePresenter
             ->getSeparatorPrototype()->setName(null);
 
         $form->addText('title', 'forms.article.title')
+            ->addRule(FORM::MIN_LENGTH, "forms.article.titleMinLength", 3)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.titleMaxLength", 255)
+            ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredTitle');
 
         $form->addTextArea('caption', 'forms.article.caption')
+            ->addRule(FORM::MIN_LENGTH, "forms.article.captionMinLength", 5)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.captionMaxLength", 500)
+            ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredCaption');
 
         $form->addTextArea('content', 'forms.article.content')
@@ -170,7 +176,10 @@ class ArticlePresenter extends BasePresenter
         $form->setTranslator($this->translator);
 
         if($this->user->isAllowed('comment','write')){
-            $form->addTextArea('content', 'forms.article.commentWrite');
+            $form->addTextArea('content', 'forms.article.commentWrite')
+                ->addRule(FORM::MIN_LENGTH, "forms.article.commentMinLength", 3)
+                ->addRule(FORM::MAX_LENGTH, "forms.article.commentMaxLength", 500)
+                ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+");
 
             $form->addSubmit('submit', 'forms.article.publish');
 
@@ -357,9 +366,15 @@ class ArticlePresenter extends BasePresenter
             ->getSeparatorPrototype()->setName(null);
 
         $form->addText('title', 'forms.article.title')
+            ->addRule(FORM::MIN_LENGTH, "forms.article.titleMinLength", 3)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.titleMaxLength", 255)
+            ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredTitle');
 
         $form->addTextArea('caption', 'forms.article.caption')
+            ->addRule(FORM::MIN_LENGTH, "forms.article.captionMinLength", 5)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.captionMaxLength", 500)
+            ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredCaption');
 
         $form->addTextArea('content', 'forms.article.content')
@@ -436,9 +451,15 @@ class ArticlePresenter extends BasePresenter
             ->getSeparatorPrototype()->setName(null);
 
         $form->addText('title', 'forms.article.title')
+            ->addRule(FORM::MIN_LENGTH, "forms.article.titleMinLength", 3)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.titleMaxLength", 255)
+            ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredTitle');
 
         $form->addTextArea('caption', 'forms.article.caption')
+            ->addRule(FORM::MIN_LENGTH, "forms.article.captionMinLength", 5)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.captionMaxLength", 500)
+            ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredCaption');
 
         $form->addTextArea('content', 'forms.article.content')
