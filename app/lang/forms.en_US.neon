@@ -27,6 +27,9 @@ sign:
     lastNameMinLength: "Last name must have at least %count% characters!"
     lastNameMaxLength: "Last name must have maximally %count% characters!"
 
+    emailMinLength: "Email must have at least %count% characters!"
+    emailMaxLength: "Email must have maximally %count% characters!"
+
     correctEmail: "You have to enter email in correct form!"
 
 article:

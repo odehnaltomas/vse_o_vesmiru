@@ -198,6 +198,8 @@ class UserPresenter extends BasePresenter
                 ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\/?!<>()]+");
 
         $form->addText('email', 'forms.user.email')
+            ->addRule(FORM::MIN_LENGTH, "forms.sign.emailMinLength", 3)
+            ->addRule(FORM::MAX_LENGTH, "forms.sign.emailMaxLength", 64)
             ->addRule(FORM::EMAIL, "forms.sign.correctEmail");
 
         $form->addRadioList('sex', 'forms.user.sex', $this->sex)

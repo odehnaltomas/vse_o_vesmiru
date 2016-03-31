@@ -258,6 +258,7 @@ class ArticlePresenter extends BasePresenter
         $this->template->usersKarma = $this->articleManager->getUsersKarma($articleId);
         $this->template->articleId = $articleId;
         $this->template->userId = $this->user->getId();
+        $this->template->counter = count($this->articleManager->getComments($articleId));
     }
 
 

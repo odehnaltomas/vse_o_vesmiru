@@ -59,7 +59,7 @@ class SignPresenter extends BasePresenter
 
 		$form->addText('username', 'forms.sign.username')
 				->addRule(FORM::MIN_LENGTH, "forms.sign.usernameMinLength", 3)
-				->addRule(FORM::MAX_LENGTH, "forms.sign.usernameMaxLength", 50)
+				->addRule(FORM::MAX_LENGTH, "forms.sign.usernameMaxLength", 20)
 				->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\/?!><()']+")
 			->setRequired('forms.sign.requiredUsername');
 
@@ -127,7 +127,7 @@ class SignPresenter extends BasePresenter
 
 		$form->addText('username', 'forms.sign.username')
 				->addRule(FORM::MIN_LENGTH, "forms.sign.usernameMinLength", 3)
-				->addRule(FORM::MAX_LENGTH, "forms.sign.usernameMaxLength", 50)
+				->addRule(FORM::MAX_LENGTH, "forms.sign.usernameMaxLength", 20)
 				->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!><()']+")
 			->setRequired('forms.sign.requiredUsername');
 

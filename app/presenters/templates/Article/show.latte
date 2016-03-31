@@ -82,20 +82,15 @@
     {/form}
     </div>
 
+    <div class="comments">
     {if $comments}
         {snippet comments}
             {foreach $comments as $comment}
                 <div class="comment">
-                    <div class="info">
-                    {$comment->user['username']}
-                    <div>
-                        <div class="karma-plus">{$usersKarma[$comment->user_id]['plus']}|</div>
-                        <div class="karma-minus">{$usersKarma[$comment->user_id]['minus']}</div>
-                    </div>
-                    </div>
 
                     <div class="head">
-                        {$comment->created|date:"j.n. Y, H:i"}
+                        <div class="username">{$comment->user['username']}</div>
+
 
                         {ifset $user->identity->data['username']}
                             {if $user->identity->data['username'] === $comment->user['username'] || $user->isAllowed('comment', 'del')}
@@ -139,17 +134,33 @@
                         </div>
                     </div>
 
+                    <div class="info">
+
+                    <div>
+                        <div class="karma-plus">{$usersKarma[$comment->user_id]['plus']}|</div>
+                        <div class="karma-minus">{$usersKarma[$comment->user_id]['minus']}</div>
+                    </div>
+
+                    <div class="cleaner"></div>
+                    <div class="date">{$comment->created|date:"j.n. Y"} <br/> {$comment->created|date:" H:i"}</div>
+                    </div>
+
                     <div class="content">{!$comment->content|nl2br}</div>
                 </div>
+
+                {if $counter-- != 1}
+                    <hr />
+                {/if}
             {/foreach}
         {/snippet}
 
         {else}
         {_ templates.article.noComment}
     {/if}
+    </div>
 
-    {else}
-    {_ templates.article.noTranslation}
+{else}
+{_ templates.article.noTranslation}
 {/if}
 
 <div class="popUp-background">

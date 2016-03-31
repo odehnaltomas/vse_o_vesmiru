@@ -27,6 +27,9 @@ sign:
     lastNameMinLength: "Příjmení musí mít minimálně %count% znaky!"
     lastNameMaxLength: "Příjmení může mít maximálne %count% znaků!"
 
+    emailMinLength: "Email musí mít minimálně %count% znaky!"
+    emailMaxLength: "Email může mít maximálne %count% znaků!"
+
     correctEmail: "Musíte zadat email ve správném tvaru!"
 
 article:
