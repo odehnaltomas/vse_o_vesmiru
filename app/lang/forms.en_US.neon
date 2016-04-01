@@ -56,6 +56,7 @@ article:
     purposeOfDeleting: "Purpose of deleting:"
     articleDeleted: "The article was successfully deleted."
 
+
     titleMinLength: "Title must have at least %count% characters!"
     titleMaxLength: "Title must have maximally %count% characters!"
 

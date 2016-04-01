@@ -72,7 +72,10 @@ class UserPresenter extends BasePresenter
         if(!$user)
             throw new Nette\Application\BadRequestException;
 
-        $this->template->user = $user;
+        $this->template->userData = $user;
+        $this->template->locale = $this->locale;
+        $this->template->numberOfComments = $this->userManager->getUserComments($userId)->count($userId);
+        $this->template->userKarma = $this->userManager->getUserKarma($this->user->getId());
     }
 
     protected function createComponentChangeRole(){

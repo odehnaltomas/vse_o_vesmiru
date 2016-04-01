@@ -22,6 +22,7 @@ article:
     created: "Vytvořeno"
     title: "Titulek"
     caption: "Popisek"
+    wrote: "napsal:"
 
 visualPaginator:
     next: "Další"
@@ -76,6 +77,7 @@ user:
     no: "Ne"
     name: "Jméno"
     ban: "Ban"
+    userProfile: "Profil uživatele:"
 
 
 title:

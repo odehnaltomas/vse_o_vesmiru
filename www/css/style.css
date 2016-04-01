@@ -248,36 +248,62 @@ form .error ul li {
 	margin-top: 50px;
 }
 
+.form #comment {
+	width: 100%;
+	max-width: 100%;
+}
+
+.form textarea {
+	min-width: 100%;
+	max-width: 100%;
+	max-height: 200px;
+	width: 100%;
+	height: 100px;
+}
+
 .comment {
 	width: 100%;
 	min-height: 50px;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	display: block;
 	overflow: hidden;
+}
+
+.comment .info-content {
+	width: 100%;
+	min-height: 50px;
+	overflow: hidden;
+	background: #EAEAEA !important;
 }
 
 .comment .info {
 	box-sizing: border-box;
 	width: 10%;
 	float: left;
-	min-height: 40px;
-	padding-left: 6px;
+}
+
+.comment .info .box {
+	box-sizing: border-box;
+	width: 100%;
+	float: left;
+	height: 100%;
 }
 
 .comment .content {
 	box-sizing: border-box;
-	min-height: 40px;
+	min-height: 66px;
 	width: 90%;
 	float: left;
 	background: white;
 	padding: 5px;
+	border-left: solid #656565 1px;
 }
 
 .comment .delete {
 	height: 1.5em;
 	width: 32px;
 	float: right;
-	margin: 1px 3px 1px 3px;
+	margin: 1px 3px 1px 20px;
 }
 
 .del-obr {
@@ -297,9 +323,8 @@ form .error ul li {
 
 .comment .rating {
 	width: 160px;
-	height: 1.5em;
+	height: 1.4em;
 	float: right;
-	margin: 1px 3px 1px 3px;
 }
 
 .comment .rating .dislike {
@@ -375,6 +400,8 @@ form .error ul li {
 	font-size: 1.0em;
 	float: right;
 	margin-left: 10px;
+	min-width: 22px;
+	text-align: center;
 }
 
 .comment .rating .value1 {
@@ -383,6 +410,7 @@ form .error ul li {
 	font-size: 1.0em;
 	float: right;
 	margin-left: 10px;
+	min-width: 22px;
 }
 
 .comment .rating .value- {
@@ -391,15 +419,35 @@ form .error ul li {
 	font-size: 1.0em;
 	float: right;
 	margin-left: 10px;
+	min-width: 22px;
+	text-align: center;
 }
 
-.comment .head .username{
+.comment .head {
+	height: 1.5em !important;
+	line-height: normal;
+}
+
+.comment .username{
 	font-size: large;
+	min-width: 150px;
+	height: 1.5em;
+}
+
+.comment .username a{
+	text-decoration: none;
+	color: #006693;
+}
+
+.comment .username a:hover{
+	text-decoration: none;
+	color: #249da3;
 }
 
 .comment .info .date {
 	font-size: 77%;
 	text-align: right;
+	padding-right: 10px;
 }
 
 #translation_table {
@@ -504,16 +552,21 @@ form .error ul li {
 #form .component .inputLanguage_translation {
 }
 
+.karma {
+	width: 100%;
+	margin: auto;
+	text-align: center;
+	font-family: x360;
+}
+
 .karma-plus {
 	color: #00B004;
-	font-family: x360;
-	float: left;
+	margin: 1px 4px 0 4px;
 }
 
 .karma-minus {
 	color: #FF0000;
-	font-family: x360;
-	float: left;
+	margin: 1px 4px 0 4px;
 }
 
 /*=============================MENU*/

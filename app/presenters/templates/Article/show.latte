@@ -59,25 +59,21 @@
             </ul>
         </div>
 
-        <table>
-            <tr>
-                <td>
-                    {label content /}
-                </td>
-                <td>
-                    {input content}
-                </td>
-            </tr>
+        <div class="component">
+            <div class="label">
+                {label content /}
+            </div>
+            <div class="input" >
+                {input content}
+            </div>
+            <div class="cleaner"></div>
+        </div>
 
-            <tr>
-                <td>
-                    &nbsp
-                </td>
-                <td id="left">
-                    {input submit}
-                </td>
-            </tr>
-        </table>
+        <div class="component">
+            <div class="input">
+                {input submit}
+            </div>
+        </div>
 
     {/form}
     </div>
@@ -89,7 +85,6 @@
                 <div class="comment">
 
                     <div class="head">
-                        <div class="username">{$comment->user['username']}</div>
 
 
                         {ifset $user->identity->data['username']}
@@ -102,7 +97,6 @@
                         {/ifset}
 
                         <div class="rating">
-
                             {if isset($userRatings[$comment->id]) && $userRatings[$comment->id]['value'] === -1}
                                 <a n:href="dislike! $comment->id" class="ajax"><div class="dislike-pressed"></div></a>
                                 {else}
@@ -130,27 +124,37 @@
                                     <div class="like-gray"></div>
                                 {/if}
                             {/if}
-
                         </div>
+
+                        <div class="username"><a n:href="User:showProfile $comment->user['id']">{$comment->user['username']}</a> {_templates.article.wrote}</div>
+
                     </div>
 
-                    <div class="info">
+                    <div class="info-content">
+                        <div class="info">
+                            <div class="box">
+                                <div class="karma">
+                                    <span class="karma-plus">{$usersKarma[$comment->user_id]['plus']}</span>
+                                    <span>|</span>
+                                    <span class="karma-minus">{$usersKarma[$comment->user_id]['minus']}</span>
+                                    <div class="cleaner"></div>
+                                </div>
 
-                    <div>
-                        <div class="karma-plus">{$usersKarma[$comment->user_id]['plus']}|</div>
-                        <div class="karma-minus">{$usersKarma[$comment->user_id]['minus']}</div>
-                    </div>
+                                <div class="cleaner"></div>
+                                <div class="date">{$comment->created|date:"j.n. Y"}<br/> {$comment->created|date:" H:i"}</div>
+                            </div>
+                        </div>
 
-                    <div class="cleaner"></div>
-                    <div class="date">{$comment->created|date:"j.n. Y"} <br/> {$comment->created|date:" H:i"}</div>
-                    </div>
+                        <div class="content">
 
-                    <div class="content">{!$comment->content|nl2br}</div>
+                        {!$comment->content|nl2br}
+
+                    </div>              </div>
+
+                    {if $counter-- != 1}
+                        <hr />
+                    {/if}
                 </div>
-
-                {if $counter-- != 1}
-                    <hr />
-                {/if}
             {/foreach}
         {/snippet}
 
