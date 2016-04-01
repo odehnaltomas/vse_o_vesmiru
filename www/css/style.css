@@ -554,7 +554,6 @@ form .error ul li {
 
 .karma {
 	width: 100%;
-	margin: auto;
 	text-align: center;
 	font-family: x360;
 }
@@ -841,4 +840,13 @@ form textarea{
 
 .td-role button:hover {
 	background: #bbbbbb;
+}
+
+.usersTable .dash {
+	text-align: center;
+	font-size: large;
+}
+
+.usersTable .tdCenter {
+	text-align: center;
 }

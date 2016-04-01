@@ -22,7 +22,7 @@
             {$userData->email}
             {/if}
             </td>
-            <td>{$userData->sex[$locale.'_sex']}</td>
+            <td class="tdCenter">{$userData->sex[$locale.'_sex']}</td>
 
             {if $user->isAllowed('userSource', 'changeRoles') && $user->getId() !== $userData->id}
                 <td class="td-role">
@@ -31,7 +31,16 @@
                     </a>
                 </td>
                 {else}
-                <td>{$userData->role[$locale.'_role']}</td>
+
+                {if $userData->id != $thisUserId}
+                <td class="tdCenter">
+                    {if $userData->id != $thisUserId}
+                        {$userData->role[$locale.'_role']}
+                        {/if}
+                </td>
+                {else}
+                    <td class="dash">-</td>
+                {/if}
             {/if}
 
             {if $user->isAllowed('userSource', 'ban') && $user->getId() !== $userData->id}
@@ -45,13 +54,18 @@
                     </a>
                 </td>
                 {else}
-                <td>
+
+                {if $userData->id != $thisUserId}
+                <td class="tdCenter">
                     {if $userData->banned === 0}
                         {_templates.user.yes}
                         {else}
                         {_templates.user.no}
                     {/if}
                 </td>
+                {else}
+                    <td class="dash">-</td>
+                {/if}
             {/if}
         </tr>
     {/foreach}

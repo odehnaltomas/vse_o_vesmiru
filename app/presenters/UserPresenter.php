@@ -163,6 +163,7 @@ class UserPresenter extends BasePresenter
         $this->template->locale = $this->locale;
         $this->template->usersData = $this->userManager->getUsers();
         $this->template->userId = $this->userId;
+        $this->template->thisUserId = $this->user->getId();
     }
 
 
