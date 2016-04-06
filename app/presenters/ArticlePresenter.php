@@ -81,9 +81,7 @@ class ArticlePresenter extends BasePresenter
 
 
     public function actionAdd() {
-        if($this->user->isAllowed('article', 'add') || $this->user->isAllowed('article', 'addRequest')){
-
-        } else
+        if(!$this->user->isAllowed('article', 'add') AND !$this->user->isAllowed('article', 'addRequest'))
             throw new Nette\Application\UI\BadSignalException;
     }
 
@@ -179,7 +177,7 @@ class ArticlePresenter extends BasePresenter
             $form->addTextArea('content', 'forms.article.commentWrite')
                 ->addRule(FORM::MIN_LENGTH, "forms.article.commentMinLength", 3)
                 ->addRule(FORM::MAX_LENGTH, "forms.article.commentMaxLength", 500)
-                ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+");
+                ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\<>]+");
 
             $form->addSubmit('submit', 'forms.article.publish');
 

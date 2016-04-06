@@ -402,6 +402,7 @@ form .error ul li {
 	margin-left: 10px;
 	min-width: 22px;
 	text-align: center;
+	line-height: 21px;
 }
 
 .comment .rating .value1 {
@@ -411,6 +412,7 @@ form .error ul li {
 	float: right;
 	margin-left: 10px;
 	min-width: 22px;
+	line-height: 21px;
 }
 
 .comment .rating .value- {
@@ -421,6 +423,7 @@ form .error ul li {
 	margin-left: 10px;
 	min-width: 22px;
 	text-align: center;
+	line-height: 21px;
 }
 
 .comment .head {
@@ -448,6 +451,7 @@ form .error ul li {
 	font-size: 77%;
 	text-align: right;
 	padding-right: 10px;
+	margin-top: 6px;
 }
 
 #translation_table {
@@ -738,11 +742,16 @@ form .error ul li {
 	background: #525252;
 	color: #ffffff;
 	font-family: x360;
-	padding: 3px;
+	padding: 3px 3px 3px 12px;
 }
 
 .request table td {
-	padding: 3px;
+	padding: 3px 3px 3px 12px;
+}
+
+.request .articleName {
+	padding: 3px 3px 3px 12px;
+	font-size: large;
 }
 
 .requestState {
@@ -778,6 +787,7 @@ button {
 
 button:hover {
 	background: #d1d1d1;
+	cursor: pointer;
 }
 
 .button {
@@ -804,6 +814,7 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
 	background: #d1d1d1;
+	cursor: pointer;
 }
 
 form input{

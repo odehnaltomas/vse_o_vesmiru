@@ -8,26 +8,28 @@
         <span>{_templates.request.request}: {$request->request_counter[$locale . '_request']}</span>
         <span class="requestState state_{$request->request_state['id']}">{$request->request_state[$locale . '_state']}</span>
         </div>
-        <table>
-            <tr>
-                <td>{_templates.article.created}:</td>
-                <td>{$request->created|date:"j.n. Y, H:i"}</td>
-            </tr>
 
-            <tr>
-                <td>{_templates.article.article}:</td>
-                {if $request->request_counter['id'] === 1}
-                    <td><a n:href="Article:show $request->article['id']" target="_blank">{$request->article['title']}</a></td>
-                {elseif $request->request_counter['id'] === 2}
-                    <td><a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']}</a></td>
-                {elseif $request->request_counter['id'] === 3}
-                    <td><a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']} ({_templates.request.changed})</a></td>
-                {/if}
-            </tr>
+        <div class="articleName">
+            {_templates.article.article}:
+            {if $request->request_counter['id'] === 1} {* Delete article *}
+                <a href="{link Article:show 'articleId'=>$request->article['id'], locale => $request->article->language['language']}" target="_blank">{$request->article['title']}</a>
+            {elseif $request->request_counter['id'] === 2} {* Add article *}
+                <a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']}</a>
+            {elseif $request->request_counter['id'] === 3} {* Edit article *}
+                <a n:href="Request:showArticle $request->article['id']" target="_blank">{$request->article['title']} ({_templates.request.changed})</a>
+            {/if}
+        </div>
+
+        <table>
 
             <tr>
                 <td>{_templates.request.byUser}:</td>
                 <td>{$request->user['username']}</td>
+            </tr>
+
+            <tr>
+                <td>{_templates.article.created}:</td>
+                <td>{$request->created|date:"j.n. Y, H:i"}</td>
             </tr>
 
             <tr>

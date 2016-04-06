@@ -14,9 +14,11 @@ application:
 	mapping:
 		*: App\*Module\Presenters\*Presenter
 
+# Přidání překladače Kdyby/Translation do projektu
 extensions:
     translation: Kdyby\Translation\DI\TranslationExtension
 
+# Nastavení session
 session:
 	expiration: 14 days
 
