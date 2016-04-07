@@ -13,6 +13,21 @@ body {
 	margin: 0;
 }
 
+textarea {
+	padding: 6px !important;
+	box-sizing: border-box;
+}
+
+input[type="text"], input[type="password"] {
+	padding: 3px 5px !important;
+	box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+	background: rgb(237, 244, 253);
+	box-shadow: 0 0 5px rgb(0, 95, 150);
+}
+
 .center {
 	margin: auto;
 	width: 960px;
@@ -83,6 +98,7 @@ body {
 
 #footer p {
 	margin: auto;
+	font-size: small;
 }
 
 h1 {
@@ -318,7 +334,7 @@ form .error ul li {
 	height: 1.5em;
 	width: 32px;
 	float: right;
-	margin: 1px 3px 1px 3px;
+	margin: 1px 3px 1px 20px;
 }
 
 .comment .rating {
@@ -729,7 +745,7 @@ form .error ul li {
 	width: 100%;
 	border: solid black 1px;
 	margin: 2px;
-	margin-bottom: 10px !important;
+	margin-bottom: 20px !important;
 }
 
 .request:hover {
@@ -749,9 +765,27 @@ form .error ul li {
 	padding: 3px 3px 3px 12px;
 }
 
+.request table td a {
+	color: #00455e;
+	text-decoration: none;
+}
+
+.request table td a:hover {
+	color: #007e9d;
+}
+
 .request .articleName {
 	padding: 3px 3px 3px 12px;
 	font-size: large;
+}
+
+.request .articleName a {
+	color: #00455e;
+	text-decoration: none;
+}
+
+.request .articleName a:hover {
+	color: #007e9d;
 }
 
 .requestState {

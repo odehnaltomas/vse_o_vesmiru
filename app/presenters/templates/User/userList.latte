@@ -14,13 +14,19 @@
         <tr>
             <td class="id">{$userData->id}</td>
             <td>{$userData->username}</td>
-            <td>{$userData->first_name} {$userData->last_name}</td>
             <td>
-            {if $userData->email === ""}
-            {_templates.user.empty}
-            {else}
-            {$userData->email}
-            {/if}
+                {if $userData->first_name || $userData->last_name}
+                    {$userData->first_name} {$userData->last_name}
+                    {else}
+                    &lt{_templates.user.empty}&gt
+                {/if}
+            </td>
+            <td>
+                {if $userData->email === ""}
+                &lt{_templates.user.empty}&gt
+                {else}
+                {$userData->email}
+                {/if}
             </td>
             <td class="tdCenter">{$userData->sex[$locale.'_sex']}</td>
 
@@ -32,15 +38,9 @@
                 </td>
                 {else}
 
-                {if $userData->id != $thisUserId}
                 <td class="tdCenter">
-                    {if $userData->id != $thisUserId}
-                        {$userData->role[$locale.'_role']}
-                        {/if}
+                    {$userData->role[$locale.'_role']}
                 </td>
-                {else}
-                    <td class="dash">-</td>
-                {/if}
             {/if}
 
             {if $user->isAllowed('userSource', 'ban') && $user->getId() !== $userData->id}

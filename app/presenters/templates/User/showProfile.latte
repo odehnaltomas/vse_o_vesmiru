@@ -1,49 +1,61 @@
 {block content}
     <h1>{_templates.user.userProfile} {$userData->username}</h1>
-        <table>
-            <tr>
-                <td>{_templates.user.firstName}:</td>
-                <td>{$userData->first_name}</td>
-            </tr>
+    <table>
+        <tr>
+            <td>{_templates.user.firstName}:</td>
+            <td>
+                {if $userData->first_name}
+                    {$userData->first_name}
+                    {else}
+                    &lt{_templates.user.empty}&gt
+                {/if}
+            </td>
+        </tr>
 
-            <tr>
-                <td>{_templates.user.lastName}:</td>
-                <td>{$userData->last_name}</td>
-            </tr>
+        <tr>
+            <td>{_templates.user.lastName}:</td>
+            <td>
+                {if $userData->last_name}
+                    {$userData->last_name}
+                    {else}
+                    &lt{_templates.user.empty}&gt
+                {/if}
+            </td>
+        </tr>
 
-            <tr>
-                <td>{_templates.user.email}:</td>
-                <td>
+        <tr>
+            <td>{_templates.user.email}:</td>
+            <td>
                 {if $userData->email}
                     {$userData->email}
                     {else}
-                    {_templates.user.empty}
+                    &lt{_templates.user.empty}&gt
                 {/if}
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>{_templates.user.sex}:</td>
-                <td>{$userData->sex[$locale.'_sex']}</td>
-            </tr>
+        <tr>
+            <td>{_templates.user.sex}:</td>
+            <td>{$userData->sex[$locale.'_sex']}</td>
+        </tr>
 
-            <tr>
-                <td>{_templates.user.userType}:</td>
-                <td>{$userData->role[$locale.'_role']}</td>
-            </tr>
+        <tr>
+            <td>{_templates.user.userType}:</td>
+            <td>{$userData->role[$locale.'_role']}</td>
+        </tr>
 
-            <tr>
-                <td>{_templates.user.writtenComments}:</td>
-                <td>{$numberOfComments}</td>
-            </tr>
+        <tr>
+            <td>{_templates.user.writtenComments}:</td>
+            <td>{$numberOfComments}</td>
+        </tr>
 
-            <tr>
-                <td>{_templates.user.karma}:</td>
-                <td>
-                    <span class="karma-plus">{$userKarma['plus']}</span>
-                    <span>|</span>
-                    <span class="karma-minus">{$userKarma['minus']}</span>
-                </td>
-            </tr>
+        <tr>
+            <td>{_templates.user.karma}:</td>
+            <td>
+                <span class="karma-plus">{$userKarma['plus']}</span>
+                <span>|</span>
+                <span class="karma-minus">{$userKarma['minus']}</span>
+            </td>
+        </tr>
 
-        </table>
+    </table>

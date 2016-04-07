@@ -3,22 +3,34 @@
     <table>
         <tr>
             <td>{_templates.user.firstName}:</td>
-            <td>{$userData->first_name}</td>
+            <td>
+                {if $userData->first_name}
+                    {$userData->first_name}
+                    {else}
+                    &lt{_templates.user.empty}&gt
+                {/if}
+            </td>
         </tr>
 
         <tr>
             <td>{_templates.user.lastName}:</td>
-            <td>{$userData->last_name}</td>
+            <td>
+                {if $userData->last_name}
+                    {$userData->last_name}
+                    {else}
+                    &lt{_templates.user.empty}&gt
+                {/if}
+            </td>
         </tr>
 
         <tr>
             <td>{_templates.user.email}:</td>
             <td>
-            {if $userData->email}
-                {$userData->email}
-                {else}
-                {_templates.user.empty}
-            {/if}
+                {if $userData->email}
+                    {$userData->email}
+                    {else}
+                    &lt{_templates.user.empty}&gt
+                {/if}
             </td>
         </tr>
 
