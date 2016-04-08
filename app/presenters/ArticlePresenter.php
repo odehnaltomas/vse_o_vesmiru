@@ -17,14 +17,12 @@ use Nette\Security\User;
 use App\Model\LanguageManager;
 use App;
 use IPub\VisualPaginator\Components as VisualPaginator;
-use App\Forms\TCreateComponentDeleteArticleForm;
 use App\Model\RequestManager;
 
 
 class ArticlePresenter extends BasePresenter
 {
 
-    use TCreateComponentDeleteArticleForm;
 
 
     private $userId;
@@ -165,6 +163,9 @@ class ArticlePresenter extends BasePresenter
         $this->template->articles = $articles;
         $this->template->userId = $this->userId;
         $this->template->articleId = $this->articleId;
+        if($this->userId !== NULL)
+            $this['deleteArticleForm']['userId']->setDefaultValue($this->userId);
+        $this['deleteArticleForm']['articleId']->setDefaultValue($this->articleId);
     }
 
 
@@ -254,9 +255,12 @@ class ArticlePresenter extends BasePresenter
         $this->template->articleRating = $this->articleManager->getArticleRating($articleId);
         $this->template->userArticleRating = $this->articleManager->ratedArticle($this->user->getId(), $articleId);
         $this->template->usersKarma = $this->articleManager->getUsersKarma($articleId);
-        $this->template->articleId = $articleId;
-        $this->template->userId = $this->user->getId();
+        //$this->template->articleId = $articleId;
+        //$this->template->userId = $this->user->getId();
         $this->template->counter = count($this->articleManager->getComments($articleId));
+        if($this->userId !== NULL)
+            $this['deleteArticleForm']['userId']->setDefaultValue($this->userId);
+        $this['deleteArticleForm']['articleId']->setDefaultValue($articleId);
     }
 
 
@@ -487,5 +491,43 @@ class ArticlePresenter extends BasePresenter
             $this->redirect('Article:show', array('articleId' => $values->articleId));
         } else
             throw new Nette\Application\UI\BadSignalException;
+    }
+
+    protected function createComponentDeleteArticleForm(){
+        $form = new Form;
+        $form->setTranslator($this->translator);
+
+        if($this->user->isAllowed('article', 'delRequest')) {
+            $form->addTextArea('message', 'forms.article.purposeOfDeleting');
+
+            $form->addSubmit('send', 'forms.article.articleDeleteRequest');
+
+            $form->addHidden('userId');
+
+            $form->addHidden('requestCounterId', 1);
+        } elseif($this->user->isAllowed('article', 'del')) {
+            $form->addSubmit('send', 'forms.article.articleDelete');
+        }
+
+        $form->addHidden('articleId');
+
+        $form->onSuccess[] = array($this, "deleteArticleSucceeded");
+
+        return $form;
+    }
+
+    public function deleteArticleSucceeded($form, $values){
+        $result = NULL;
+        if($this->user->isAllowed('article', 'del')) {
+            $this->articleManager->delArticle($values->articleId);
+            $this->flashMessage($this->translator->translate('forms.article.articleDeleted'));
+        } elseif($this->user->isAllowed('article', 'delRequest')){
+            $result = $this->requestManager->addRequest($values->userId, 1, $values->articleId, $values->message);
+            if($result === 0) {
+                $this->flashMessage($this->translator->translate('messages.flash.alreadyDelRequest'));
+            } else
+                $this->flashMessage($this->translator->translate('messages.flash.requestDeleteArticle'));
+        }
+        $this->redirect('this');
     }
 }

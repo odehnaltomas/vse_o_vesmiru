@@ -171,9 +171,9 @@
                 {snippet popUp}
                         {if $user->isAllowed('article', 'del')}
                             {_templates.popUp.reallyDeleteArticle}
-                            {control deleteArticleForm NULL, $articleId}
+                            {control deleteArticleForm}
                         {elseif $user->isAllowed('article', 'delRequest')}
-                            {control deleteArticleForm $userId, $articleId}
+                            {control deleteArticleForm}
                         {/if}
                 {/snippet}
                 <button class="cancel">{_templates.popUp.cancel}</button>

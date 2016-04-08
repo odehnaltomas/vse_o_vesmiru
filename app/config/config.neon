@@ -25,7 +25,6 @@ session:
 
 services:
 	- App\Model\UserManager
-	- App\Forms\IDeleteArticleFormFactory
 	- App\Model\ArticleManager
 	- App\Model\LanguageManager
 	- App\Model\RequestManager
