@@ -2,23 +2,24 @@
 
 <h1 n:block="title">{_ templates.article.articleList}</h1>
 
+{snippet list}
+    <div class="list">
+        {foreach $articles as $article}
+                {if $user->isLoggedIn()}
+                <a n:href="deleteArticle! $article->id" class="ajax deleteArticle"><div class="del-obr"></div></a>
+                {/if}
+                <a n:href="Article:show $article->id">
+                        <div  class="article">
+                                <h2>{$article->title}</h2>
+                                <div class="date">{$article->created|date:'j.n. Y'}</div>
+                                <div class="caption">{$article->caption}</div>
+                        </div>
+                </a>
+        {/foreach}
+    </div>
 
-<div class="list">
-    {foreach $articles as $article}
-            {if $user->isLoggedIn()}
-            <a n:href="deleteArticle! $article->id" class="ajax deleteArticle"><div class="del-obr"></div></a>
-            {/if}
-            <a n:href="Article:show $article->id">
-                    <div  class="article">
-                            <h2>{$article->title}</h2>
-                            <div class="date">{$article->created|date:'j.n. Y'}</div>
-                            <div class="caption">{$article->caption}</div>
-                    </div>
-            </a>
-    {/foreach}
-</div>
-
-{control visualPaginator}
+    {control visualPaginator}
+{/snippet}
 
 
 

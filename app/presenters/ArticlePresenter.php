@@ -146,6 +146,13 @@ class ArticlePresenter extends BasePresenter
         $control = new VisualPaginator\Control;
         $control->setTemplateFile(__DIR__.'\templates\VisualPaginator\VPTemplate.latte');
         $control->disableAjax();
+
+        $that = $this;
+        $control->onShowPage[] = function($component, $page) use($that){
+            if(!$that->isAjax()) {
+                $that->redirect('this', ['visualPaginator-page' => $page]);
+            }
+        };
         return $control;
     }
 
