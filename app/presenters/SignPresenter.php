@@ -128,26 +128,26 @@ class SignPresenter extends BasePresenter
 		$form->addText('username', 'forms.sign.username')
 				->addRule(FORM::MIN_LENGTH, "forms.sign.usernameMinLength", 3)
 				->addRule(FORM::MAX_LENGTH, "forms.sign.usernameMaxLength", 20)
-				->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!><()']+")
+				->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!><() ']+")
 			->setRequired('forms.sign.requiredUsername');
 
 		$form->addPassword('password', 'forms.sign.password')
 				->addRule(FORM::MIN_LENGTH, "forms.sign.passwordMinLength", 3)
 				->addRule(FORM::MAX_LENGTH, "forms.sign.passwordMaxLength", 50)
-				->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!<>()']+")
+				->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!<>() ']+")
 			->setRequired('forms.sign.requiredPassword');
 
 		$form->addText('first_name', 'forms.sign.first_name')
 				->addCondition(Form::FILLED)
 					->addRule(FORM::MIN_LENGTH, "forms.sign.firstNameMinLength", 2)
 					->addRule(FORM::MAX_LENGTH, "forms.sign.firstNameMaxLength", 50)
-					->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!<>()']+");
+					->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!<>()]+");
 
 		$form->addText('last_name', 'forms.sign.last_name')
 				->addCondition(Form::FILLED)
 					->addRule(FORM::MIN_LENGTH, "forms.sign.lastNameMinLength", 2)
 					->addRule(FORM::MAX_LENGTH, "forms.sign.lastNameMaxLength", 50)
-					->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!<>()']+");
+					->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\\ /?!<>()]+");
 
 		$form->addRadioList('sex', 'forms.sign.sex', $this->sex)
 			->setDefaultValue(1)

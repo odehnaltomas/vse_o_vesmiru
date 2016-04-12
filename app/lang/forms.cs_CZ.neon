@@ -16,7 +16,7 @@ sign:
     usernameMinLength: "Uživatelské jméno musí mít minimálně %count% znaky!"
     usernameMaxLength: "Uživatelské jméno může mít maximálne %count% znaků!"
 
-    forbiddenChars: "Nepovolené znaky! Používejte pouze: .-_"
+    forbiddenChars: "Zadán nepovolený znak!"
 
     passwordMinLength: "Heslo musí mít minimálně %count% znaky!"
     passwordMaxLength: "Heslo může mít maximálne %count% znaků!"

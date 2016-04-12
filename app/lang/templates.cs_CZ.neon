@@ -24,6 +24,8 @@ article:
     caption: "Popisek"
     wrote: "napsal:"
 
+    noArticles: "Zatím nebyly přidány žádné články."
+
 visualPaginator:
     next: "Další"
     previous: "Předchozí"
@@ -57,6 +59,8 @@ request:
     delArticle: "smazat článek"
     editArticle: "upravit článek"
     reject: "Zamítnout"
+    requests: "Požadavky"
+    listNoRequests: "Zatím nebyly podány žádné požadavky."
 
 user:
     yourProfile: "Tvůj profil"

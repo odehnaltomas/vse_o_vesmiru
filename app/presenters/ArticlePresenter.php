@@ -98,7 +98,7 @@ class ArticlePresenter extends BasePresenter
 
         $form->addText('title', 'forms.article.title')
             ->addRule(FORM::MIN_LENGTH, "forms.article.titleMinLength", 3)
-            ->addRule(FORM::MAX_LENGTH, "forms.article.titleMaxLength", 255)
+            ->addRule(FORM::MAX_LENGTH, "forms.article.titleMaxLength", 100)
             ->addRule(FORM::PATTERN, "forms.sign.forbiddenChars", "[^\"\\<>]+")
             ->setRequired('forms.article.requiredTitle');
 
@@ -144,7 +144,7 @@ class ArticlePresenter extends BasePresenter
     protected function createComponentVisualPaginator()
     {
         $control = new VisualPaginator\Control;
-        $control->setTemplateFile(__DIR__.'\templates\VisualPaginator\VPTemplate.latte');
+        $control->setTemplateFile(__DIR__.'/templates/VisualPaginator/VPTemplate.latte');
         $control->disableAjax();
 
         $that = $this;
@@ -167,7 +167,8 @@ class ArticlePresenter extends BasePresenter
 
         $articles->limit($paginator->itemsPerPage, $paginator->offset);
 
-        $this->template->articles = $articles;
+        $this->template->articles = $articles->fetchAll();
+        $this->template->itemCount = $articles->count('*');
         $this->template->userId = $this->userId;
         $this->template->articleId = $this->articleId;
         if($this->userId !== NULL)

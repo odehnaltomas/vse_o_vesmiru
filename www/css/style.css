@@ -671,7 +671,7 @@ form .error ul li {
 	left: 50%;
 	top: 50%;
 	background: #ffffff;
-	border: solid black 2px;
+	border: solid #002d3e 4px;
 	min-width: 200px;
 	min-height: 80px;
 	position: absolute;

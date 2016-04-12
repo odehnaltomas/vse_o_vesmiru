@@ -16,6 +16,9 @@
                         </div>
                 </a>
         {/foreach}
+        {if $itemCount === 0}
+            {_templates.article.noArticles}
+        {/if}
     </div>
 
     {control visualPaginator}

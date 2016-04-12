@@ -16,7 +16,7 @@ sign:
     usernameMinLength: "Username must have at least %count% characters!"
     usernameMaxLength: "Username must have maximally %count% characters!"
 
-    forbiddenChars: "Forbidden characters! Use only: .-_"
+    forbiddenChars: "You've typed forbidden characters!"
 
     passwordMinLength: "Password must have at least %count% characters!"
     passwordMaxLength: "Password must have maximally %count% characters!"

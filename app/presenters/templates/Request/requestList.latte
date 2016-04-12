@@ -1,5 +1,9 @@
 {block content}
 
+<h1>{_templates.request.requests}</h1>
+
+{ifset $message}{$message}{/ifset}
+
 {snippet requests}
     <div n:foreach="$requests as $request" class="request">
         <div class="header">

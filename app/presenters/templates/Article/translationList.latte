@@ -1,6 +1,8 @@
 {block content}
 <h1>{_templates.article.missingTranslations}</h1>
 <table id="translation_table">
+    {ifset $articles}
+    {/ifset}
     <tr>
         <th>{_templates.article.article}</th>
         <th>CZ</th>

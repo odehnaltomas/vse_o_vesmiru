@@ -24,6 +24,8 @@ article:
     caption: "Caption"
     wrote: "wrote:"
 
+    noArticles: "Any articles has not been added yet."
+
 visualPaginator:
     next: "Next"
     previous: "Previous"
@@ -57,6 +59,8 @@ request:
     delArticle: "delete article"
     editArticle: "edit article"
     reject: "Reject"
+    requests: "Requests"
+    listNoRequests: "Any requests has been sent yet."
 
 user:
     yourProfile: "Your profile"

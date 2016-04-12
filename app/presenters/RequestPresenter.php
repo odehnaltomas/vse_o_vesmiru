@@ -32,8 +32,12 @@ class RequestPresenter extends BasePresenter
 
     public function renderRequestList(){
         if($this->user->isAllowed('request', 'list')) {
+            $requests = $this->requestManager->getRequests();
             $this->template->locale = $this->locale;
-            $this->template->requests = $this->requestManager->getRequests();
+            $this->template->requests = $requests;
+            if(empty($requests)) {
+                $this->template->message = $this->translator->translate("templates.request.listNoRequests");
+            }
         } else
             throw new BadSignalException;
     }
